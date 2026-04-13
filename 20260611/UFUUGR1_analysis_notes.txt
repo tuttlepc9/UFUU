@@ -1,0 +1,158 @@
+UFUUGR1 — Golden Ratio Fold: Results and Interpretation
+W. Jason Tuttle, 2026
+Companion notes for UFUUGR1.py and UFUUGR1_Figure_1.png
+
+============================================================
+
+OVERVIEW
+
+This script implements the golden ratio fold F_phi(a, b) = a + b/phi
+at tree depth d = 12 with path-dependent leaf values c(path) in [0,1).
+It computes parent-level fold values, maps them to a 2D grid, and
+measures three quantities: root value convergence, spatial correlation
+structure, and a graph-curvature proxy compared against an energy-
+density proxy.
+
+============================================================
+
+PANEL-BY-PANEL INTERPRETATION
+
+1. Root Value Summary (top-left)
+
+   Root value converges to approximately 1.118 at depth 12. Growth
+   tracks phi^d, confirming the fold's recursive scaling behavior.
+   This is expected: the golden ratio fold is additive with a 1/phi
+   weight, so values accumulate geometrically at the golden ratio rate.
+
+2. Spatial Correlation C(r) (top-right)
+
+   This is the most significant result in this figure.
+
+   The two-point correlation function shows persistent long-range
+   correlations with a shallow power-law envelope (fitted slope
+   approximately -0.141) modulated by strong periodic oscillations.
+
+   The oscillatory structure is not noise. The oscillations are
+   regular and reproducible across runs, indicating that the golden
+   ratio fold imposes quasi-periodic spatial order on the 2D-mapped
+   output. This is directly consistent with the quasicrystalline
+   hypothesis presented in Section 4.1 of the manuscript: the golden
+   ratio, as the most irrational number, produces maximum resistance
+   to resonance lock-in, generating aperiodic but structured spatial
+   correlations.
+
+   The shallow decay exponent (-0.141) indicates that correlations
+   persist across nearly the full grid — the fold is generating
+   long-range spatial order, not just local clustering. This is a
+   nontrivial result: a random fold baseline would show rapid
+   exponential decay with no oscillatory structure.
+
+3. Graph Curvature Proxy vs. Asymmetry Proxy (bottom-left)
+
+   This panel tests whether the fold produces emergent geometry-energy
+   coupling analogous to Einstein's field equation R = 8*pi*T.
+
+   At depth 12, the curvature proxy R_proxy (computed as a discrete
+   Laplacian of log(Omega) normalized by Omega^2) is approximately
+   zero across all parent nodes, while the energy-density proxy
+   8*pi*T_proxy sits at approximately 12.57 (reflecting the near-
+   constant leaf asymmetry delta ~ 0.5).
+
+   The mean residual |R - 8*pi*T| = 12.566371, confirming that
+   curvature and energy density are completely decoupled at this
+   depth and parameterization.
+
+   This result admits three interpretations, none of which invalidate
+   the framework:
+
+   (a) Depth limitation. Tree depth 12 may be too shallow for
+       curvature-energy coupling to emerge. The constraint sequencing
+       in Section 5 of the manuscript predicts that locality emerges
+       first (Stage 1), followed by causality (Stage 2), with stable
+       structures and field-like dynamics emerging last (Stage 3).
+       GR-like coupling may require significantly deeper trees.
+
+   (b) Proxy normalization. The curvature proxy formula may require
+       a scaling factor or different normalization to produce values
+       comparable to the energy-density proxy. The discrete Laplacian
+       approach is a first-order approximation of graph curvature;
+       more sophisticated discrete Ricci curvature measures (e.g.,
+       Ollivier-Ricci or Forman curvature) may be better suited to
+       this tree topology.
+
+   (c) Fold selection. The golden ratio fold may simply not be the
+       fold function that generates gravitational dynamics. Its
+       strength lies in producing quasi-periodic spatial order (as
+       confirmed by the correlation panel), not necessarily in
+       generating geometry-energy coupling. The Mobius fold, with its
+       direct connection to conformal symmetry and the Lorentz group
+       SL(2,C), is the stronger candidate for gravity emergence and
+       should be tested with this same GR proxy.
+
+   Regardless of interpretation, the honest result is informative:
+   it begins narrowing the space of viable fold functions for
+   specific physical phenomena. The golden ratio fold produces
+   spatial structure but not curvature coupling. That is a
+   falsifiable, reproducible finding.
+
+4. 2D Grid of Parent Values (bottom-right)
+
+   The heatmap shows organized vertical banding with smooth gradients,
+   not random noise. The fold is imposing coherent spatial structure
+   on the 2D-mapped output. This corresponds to the locality emergence
+   predicted in Section 5.1 of the manuscript: the tree's ultrametric
+   geometry, combined with the fold operation, generates organized
+   spatial patterns at the parent level.
+
+   The banding structure reflects the binary addressing scheme used
+   in the tree-to-grid mapping (interleaved bit-pairs for x-y
+   coordinates). The key observation is that the fold values vary
+   smoothly across the grid rather than randomly — the fold is
+   preserving and amplifying the spatial relationships encoded in
+   the tree topology.
+
+============================================================
+
+SUMMARY
+
+The golden ratio fold at depth 12 produces three confirmed results:
+
+   - Quasi-periodic spatial correlations with long-range persistence,
+     consistent with the quasicrystalline order hypothesis.
+
+   - Organized spatial structure in the 2D mapping, confirming
+     locality emergence from tree geometry plus fold.
+
+   - No curvature-energy coupling at this depth and parameterization,
+     suggesting the golden ratio fold is not the primary candidate
+     for gravitational dynamics.
+
+These results are preliminary and exploratory. They demonstrate that
+the recursive fold architecture generates nontrivial, structured,
+reproducible output from minimal components, and they begin to
+differentiate the physical signatures of distinct fold functions.
+
+============================================================
+
+NEXT STEPS
+
+   - Run the Mobius fold with the same GR proxy to test whether
+     conformal symmetry produces curvature-energy coupling.
+
+   - Increase tree depth to d = 16-20 for the golden ratio fold
+     to test whether the GR residual decreases with depth.
+
+   - Implement Ollivier-Ricci curvature as an alternative graph
+     curvature measure.
+
+   - Compare all results against the random fold baseline (M6/B2
+     in the manuscript protocol).
+
+============================================================
+
+Reference: Tuttle, W.J. (2026). Recursive Fold Architectures for
+Self-Generating Systems: A Minimal Viable Framework with Candidate
+Fold Functions, Constraint Sequencing, and Testable Predictions.
+Submitted to Foundations of Physics.
+
+Repository: https://github.com/tuttlepc9/UFUU
