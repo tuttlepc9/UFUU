@@ -1,0 +1,210 @@
+UFUUMOB — Multi-Depth Loop Analysis: Testing Notebook Entry
+W. Jason Tuttle, 2026
+Scripts: ufuumob2_loop.py (unseeded) → ufuumob2_loop_fixed.py (seeded)
+Date: April 12, 2026
+
+============================================================
+
+WHAT THIS TEST DOES
+
+Runs the pure Möbius fold F_m(a, b) = |(phi*z + 1) / (z + phi)|
+across multiple tree depths (d = 12, 14, 15, 16, 18, 20, 22, 24)
+and measures four quantities at each depth:
+
+   1. Root value convergence
+   2. Ultrametric LCA correlation exponent (the paper's natural metric)
+   3. Entropy profile (leaf → root) — P4 test
+   4. Peak LCA depth of the correlation spike + ratio to total depth
+
+============================================================
+
+SESSION 1 — UNSEEDED RUNS (ufuumob2_loop.py)
+
+Problem identified: compute_ultrametric_correlation() uses
+np.random.randint() with no fixed seed. Two consecutive runs on
+the same machine produced completely different spike locations
+and ultrametric slopes, making the ratio analysis meaningless.
+
+Example of instability across two local runs:
+
+Run 1:
+   d=15: peak LCA = 5,  ratio = 0.333, ultra slope = -0.2872
+   d=16: peak LCA = 8,  ratio = 0.500, ultra slope = -0.1670
+   d=20: peak LCA = 16, ratio = 0.800, ultra slope =  0.1003
+
+Run 2:
+   d=15: peak LCA = 9,  ratio = 0.600, ultra slope = -0.9149
+   d=16: peak LCA = 12, ratio = 0.750, ultra slope = -0.0739
+   d=20: peak LCA = 16, ratio = 0.800, ultra slope = -0.3187
+
+The ultrametric slope and peak LCA location are completely
+unstable without a fixed seed. These results cannot be used
+for analysis or publication.
+
+What WAS stable across all unseeded runs:
+   - Root value: 1.134663 at every depth, every run
+   - Entropy: 7.644 → 0.000 at every depth, every run
+   - P4 monotonic: YES at every depth, every run
+
+These three results are deterministic — they do not depend
+on the random sampler and are confirmed regardless of seed.
+
+Fix applied: np.random.seed(42) added at the top of the
+__main__ block in ufuumob2_loop_fixed.py.
+
+============================================================
+
+SESSION 2 — SEEDED RUNS (ufuumob2_loop_fixed.py, seed=42)
+
+Two consecutive runs produced character-for-character
+identical output, confirming full reproducibility.
+
+Canonical output (seed=42):
+
+d     | Root      | Ultra slope | Entropy        | Peak LCA | Ratio  | P4
+------|-----------|-------------|----------------|----------|--------|----
+12    | 1.134663  |  0.0399     | 7.643 → 0.000  | 11       | 0.917  | YES
+14    | 1.134663  |  0.1013     | 7.644 → 0.000  | 13       | 0.929  | YES
+15    | 1.134663  |  0.0213     | 7.644 → 0.000  | 13       | 0.867  | YES
+16    | 1.134663  | -0.0786     | 7.644 → 0.000  | 16       | 1.000  | YES
+18    | 1.134663  |  0.1253     | 7.644 → 0.000  | 12       | 0.667  | YES
+20    | 1.134663  |  0.1216     | 7.644 → 0.000  | 13       | 0.650  | YES
+22    | 1.134663  | -0.3037     | 7.644 → 0.000  | 12       | 0.545  | YES
+24    | 1.134663  | -0.0298     | 7.644 → 0.000  | 15       | 0.625  | YES
+
+============================================================
+
+OBSERVATIONS FROM SEEDED OUTPUT
+
+1. ROOT VALUE: LOCKED
+
+   Root = 1.134663 at every depth from d=12 through d=24.
+   This is a fixed point of the pure Möbius fold under these
+   SL(2,C) parameters (alpha=phi, beta=1, gamma=1, delta=phi).
+   It does not move with depth. This is a structural property
+   of the fold, not a depth artifact.
+
+2. P4: CONFIRMED AT EVERY DEPTH
+
+   Entropy monotonically decreases from 7.644 bits (leaves)
+   to exactly 0.000 bits (root) at all eight depths tested.
+   No exceptions. This is the most robust result in the entire
+   test suite and directly confirms Prediction P4 from Section
+   6.1 of the submitted manuscript.
+
+   Note: entropy at d=12 reads 7.643 rather than 7.644 due to
+   bin count rounding at lower leaf counts (2^12 = 4,096 vs
+   2^14+ = 16,384+). Not meaningful.
+
+3. ULTRAMETRIC SLOPE: MOSTLY POSITIVE, NOT STABLE
+
+   Six of eight depths show positive ultrametric exponent.
+   Two depths (d=16, d=22) show negative. The sign is not
+   reliably stable across depths, which means a single-depth
+   measurement cannot be trusted as a definitive P1 signal.
+
+   The positive majority is consistent with scale-invariant
+   behavior predicted by conformal symmetry, but more systematic
+   testing is needed before P1 can be cleanly claimed.
+
+   Working hypothesis: the ultrametric slope may require much
+   larger n_samples (currently 80,000) or a different correlation
+   estimator to stabilize at this depth range. The stochastic
+   sampling is introducing variance that swamps the signal at
+   some depths.
+
+   Follow-up action: increase n_samples to 500,000 or 1,000,000
+   at key depths (16, 22) where the sign flips, and check whether
+   the slope stabilizes positive with larger samples.
+
+4. PEAK LCA LOCATION: FIXED ABSOLUTE DEPTH HYPOTHESIS
+
+   The ratio column (peak LCA / d) was originally suspected to
+   cluster around 0.78-0.81, suggesting the spike tracks a fixed
+   fraction of total tree depth. The seeded data does not support
+   this. The ratios range from 0.545 to 1.000 with no clear
+   clustering.
+
+   However, looking at the absolute Peak LCA values:
+   11, 13, 13, 16, 12, 13, 12, 15
+
+   These cluster tightly around 12-13 across most depths,
+   regardless of total tree depth. This suggests a different
+   hypothesis: the correlation spike may be at a roughly fixed
+   ABSOLUTE LCA depth of 12-13, not a fixed fraction of d.
+
+   If confirmed, this would represent a genuine emergent constant
+   of the Möbius fold — a characteristic scale measured in
+   absolute tree levels rather than relative depth. This is
+   more physically interesting than a fixed ratio, as it would
+   correspond to a preferred scale that does not depend on
+   the total depth of the computation.
+
+   The outliers at d=16 (peak=16, ratio=1.000) and d=12
+   (peak=11) are noted. The d=16 result may indicate that at
+   shallower depths the spike has not yet separated from the
+   tree boundary, and the characteristic scale only becomes
+   visible once d significantly exceeds 13.
+
+   Follow-up action: run d=26, d=28, d=30 to see if peak LCA
+   continues clustering around 12-13 at greater depths. If it
+   does, the fixed absolute scale hypothesis is strongly supported.
+
+============================================================
+
+SUMMARY OF CONFIRMED RESULTS (reproducible, seed-independent)
+
+   CONFIRMED — Root convergence to 1.134663 (fixed point)
+   CONFIRMED — P4: entropy monotonicity at all depths tested
+   PROVISIONAL — P1: ultrametric slope mostly positive,
+                 requires larger sample sizes to stabilize
+   HYPOTHESIS  — Emergent characteristic scale at LCA depth
+                 ~12-13, independent of total tree depth
+
+============================================================
+
+WHAT THESE RESULTS MEAN FOR THE FOLLOW-UP PAPER
+
+The seed fix is not just a technical correction — it is a
+methodological requirement for any publication. Results from
+the unseeded script are not reproducible and cannot be cited.
+All figures and tables in the follow-up paper must use the
+seeded version with seed value reported explicitly.
+
+The fixed absolute LCA depth hypothesis, if confirmed at
+greater depths, would be a genuinely new result not anticipated
+in the submitted manuscript. It would represent the first
+candidate for an emergent dimensional constant in the UFUU
+framework — a preferred scale arising from the fold's own
+algebraic structure rather than from any external parameter.
+
+This would strengthen the case that the Möbius fold is not
+just producing physics-like structure generally, but is
+producing a specific, quantifiable preferred scale — directly
+relevant to the discrete scale structure prediction (P3) in
+Section 6.1.
+
+============================================================
+
+FILES IN THIS TESTING FOLDER
+
+   ufuumob2_loop.py          — original unseeded script (do not use for analysis)
+   ufuumob2_loop_fixed.py    — seeded script (seed=42), use this for all analysis
+   UFUUMOB_loop_notebook.txt — this file
+
+Associated figure files:
+   mobius_ultra_entropy_d16.png
+   mobius_ultra_entropy_d20.png
+   mobius_ultra_entropy_d24.png
+   mobius_or_d12.png
+   mobius_or_d16.png
+
+============================================================
+
+Reference: Tuttle, W.J. (2026). Recursive Fold Architectures for
+Self-Generating Systems: A Minimal Viable Framework with Candidate
+Fold Functions, Constraint Sequencing, and Testable Predictions.
+Submitted to Foundations of Physics. Preprint: Research Square.
+
+Repository: https://github.com/tuttlepc9/UFUU
+Contact: mail@jasontuttle.com

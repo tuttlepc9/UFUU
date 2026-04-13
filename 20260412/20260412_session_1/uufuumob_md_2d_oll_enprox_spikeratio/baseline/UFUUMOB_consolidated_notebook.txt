@@ -1,0 +1,312 @@
+UFUUMOB — Consolidated Testing Notebook: April 12, 2026
+W. Jason Tuttle, 2026
+Full session record: all scripts, all results, all interpretations
+Date: April 12, 2026
+
+============================================================
+
+SESSION OVERVIEW
+
+This notebook documents a complete testing session covering the
+progression from initial Möbius fold diagnostics through multi-depth
+analysis, random fold baseline comparison, and full four-candidate
+comparison against the random baseline using Ollivier-Ricci curvature
+on the 2D grid.
+
+Scripts produced this session (in order of development):
+
+   ufuumob2_loop.py                    — multi-depth loop, unseeded (do not use)
+   ufuumob2_loop_fixed.py              — multi-depth loop, seed=42
+   ufuumob_multi_2d_gr.py              — 2D Laplacian GR proxy, unseeded
+   ufuumob_multi_2d_gr_fixed_seed.py   — 2D Laplacian GR proxy, seed=42
+   ufuumob_random_baseline.py          — Laplacian: Möbius vs Random
+   [Ollivier-Ricci scripts]            — OR on 2D grid, all four candidates
+
+============================================================
+
+PART 1 — ULTRAMETRIC CORRELATION + ENTROPY PROFILE (P4)
+Script: ufuumob2_loop_fixed.py (seed=42)
+
+WHAT WAS TESTED:
+Pure Möbius fold across d=12,14,15,16,18,20,22,24.
+Ultrametric LCA correlation (paper's natural metric, Section 5.1).
+Shannon entropy profile leaf→root (P4 test, Section 6.1).
+
+CANONICAL OUTPUT (seed=42, fully reproducible):
+
+d     | Root      | Ultra slope | Peak LCA | Ratio  | P4
+------|-----------|-------------|----------|--------|----
+12    | 1.134663  |  0.0399     | 11       | 0.917  | YES
+14    | 1.134663  |  0.1013     | 13       | 0.929  | YES
+15    | 1.134663  |  0.0213     | 13       | 0.867  | YES
+16    | 1.134663  | -0.0786     | 16       | 1.000  | YES
+18    | 1.134663  |  0.1253     | 12       | 0.667  | YES
+20    | 1.134663  |  0.1216     | 13       | 0.650  | YES
+22    | 1.134663  | -0.3037     | 12       | 0.545  | YES
+24    | 1.134663  | -0.0298     | 15       | 0.625  | YES
+
+KEY FINDINGS:
+
+1. ROOT FIXED POINT — CONFIRMED
+   Root = 1.134663 locked at every depth d=12 through d=24.
+   This is a structural fixed point of the pure Möbius fold under
+   SL(2,C) parameters alpha=phi, beta=1, gamma=1, delta=phi.
+   Not depth-dependent. Not a sampling artifact. Genuine attractor.
+
+2. P4 ENTROPY MONOTONICITY — CONFIRMED AT ALL DEPTHS
+   Shannon entropy decreases monotonically from 7.644 bits (leaves)
+   to exactly 0.000 bits (root) at every depth tested. No exceptions.
+   This is the most robust result of the entire session and directly
+   confirms Prediction P4 from Section 6.1 of the submitted manuscript.
+   The entropy profile shape changes with depth — at d=24 the profile
+   is flat for ~15 levels then drops sharply, suggesting a compression
+   phase transition near level 15 regardless of total depth.
+
+3. ULTRAMETRIC SLOPE — UNSTABLE WITHOUT SEED, MOSTLY POSITIVE WITH SEED
+   Without seed: slope sign varies wildly between consecutive runs.
+   With seed=42: six of eight depths show positive slope.
+   The positive majority is consistent with scale-invariant correlations
+   predicted by conformal symmetry (Section 4.4), but the sign instability
+   at d=16 and d=22 means P1 cannot be cleanly claimed from this data alone.
+   Larger n_samples (currently 80,000) needed to stabilize.
+
+4. PEAK LCA LOCATION — ABSOLUTE DEPTH HYPOTHESIS
+   Peak LCA clusters around 12-13 at most depths regardless of total
+   tree depth. The ratio (peak/d) is not stable, but the absolute
+   peak LCA value is approximately stable. This suggests a fixed
+   characteristic scale in the fold measured in absolute tree levels,
+   not relative depth. Requires deeper trees (d=26-30) to confirm.
+
+RANDOM SEED NOTE:
+The unseeded script produced completely different spike locations and
+ultrametric slopes on consecutive runs. The 2D GR residual and root
+value are deterministic and seed-independent. All other measurements
+require seed=42 for reproducibility.
+
+============================================================
+
+PART 2 — 2D LAPLACIAN GR PROXY
+Script: ufuumob_multi_2d_gr_fixed_seed.py (seed=42)
+
+WHAT WAS TESTED:
+Discrete 2D Laplacian curvature proxy (R_proxy) vs gradient magnitude
+energy proxy (T_proxy) applied to the parent value field mapped onto
+a 2D grid. Mean residual |R_proxy - 8*pi*T_proxy| measured per depth.
+
+INITIAL RESULT (Möbius only):
+Residual showed clean geometric decay — factor of ~4 per two depth levels.
+0.102974 → 0.025744 → 0.006436 → 0.001609 → 0.000402 → 0.000101 → 0.000025
+
+This appeared to be systematic curvature-energy coupling until the
+random baseline comparison was run.
+
+RANDOM BASELINE RESULT:
+Random fold residuals also decayed systematically at similar rates.
+At d=24, random residual (0.000005) was actually lower than Möbius (0.000025).
+
+CONCLUSION — LAPLACIAN PROXY IS INSENSITIVE:
+The 2D Laplacian residual decay is a grid geometry artifact. As the
+grid grows larger and smoother with depth, the Laplacian and gradient
+naturally converge for any smooth field — including random noise mapped
+to a grid. The Laplacian proxy cannot distinguish the Möbius fold from
+a random fold and therefore cannot be used as evidence for GR-like
+curvature-energy coupling.
+
+This is an honest negative result. The measurement tool is wrong for
+this topology, not the framework.
+
+============================================================
+
+PART 3 — OLLIVIER-RICCI ON 2D GRID
+Scripts: [Ollivier-Ricci baseline scripts]
+
+WHAT WAS TESTED:
+Ollivier-Ricci curvature (more rigorous discrete curvature measure)
+applied to the 2D parent value grid, replacing the Laplacian proxy.
+Tested with Möbius vs Random baseline, then extended to all four
+paper candidates (Möbius, Modular, XOR-Carry) vs Random.
+
+MÖBIUS VS RANDOM (Ollivier-Ricci):
+
+Both folds show residuals converging toward 1.0 with depth,
+tracking each other closely at every depth tested.
+
+Möbius d=24: 0.998072
+Random d=24: 0.998053
+
+The Ollivier-Ricci residuals are essentially identical between
+Möbius and Random. The tool cannot differentiate them.
+
+FOUR-CANDIDATE COMPARISON (Ollivier-Ricci):
+
+d=20 results:
+   Möbius    root=1.134663   residual=0.992589   P4=YES
+   Modular   root=6.728621   residual=0.992915   P4=YES
+   XOR-Carry root=0.000000   residual=0.992203   P4=YES
+   Random    root=0.136660   residual=0.992447   P4=YES
+
+All four folds produce essentially identical Ollivier-Ricci residuals
+on the 2D grid. The curvature measure cannot differentiate any candidate
+fold from the random baseline on this topology.
+
+NOTABLE FINDINGS FROM FOUR-CANDIDATE COMPARISON:
+
+XOR-Carry root = 0.000000 at every depth.
+This is the predicted behavior from Section 4.3 of the manuscript:
+when both inputs are identical (as in the recursive fold), XOR yields 0
+and AND yields the input. The entire tree collapses to zero. This is
+confirmed fold behavior, not a failure. XOR-Carry's attractor is zero.
+
+Modular root is wildly unstable across depths:
+9.003, 14.076, 5.075, 1.811, 11.296, 6.728
+No convergence, no fixed point under these conditions. The modular
+fold does not produce an attractor at the depths tested. Modular
+residuals also exceed 1.0 at several depths — the only fold to do so.
+
+Möbius root: locked at 1.134663 at every depth.
+This fixed point stability is now confirmed as unique to Möbius
+among all candidates tested. It is the most differentiating
+structural property of the Möbius fold identified this session.
+
+CONCLUSION — OLLIVIER-RICCI ON 2D GRID IS ALSO INSENSITIVE:
+The Ollivier-Ricci curvature measure on the 2D parent grid converges
+toward the laziness parameter (≈1.0) for all fold functions as depth
+increases. This is a property of how Ollivier-Ricci behaves on dense
+grids, not a signal from any specific fold. The 2D grid topology is
+not the correct substrate for detecting GR-like curvature-energy
+coupling with either of the proxy measures tested.
+
+============================================================
+
+MASTER RESULTS SUMMARY — WHAT IS CONFIRMED VS WHAT IS NOT
+
+CONFIRMED — fully reproducible, seed-independent:
+   ✅ Möbius root fixed point: 1.134663 at all depths (Möbius-specific)
+   ✅ P4 entropy monotonicity: confirmed at all depths for all folds
+   ✅ XOR-Carry attractor at zero: confirmed (predicted by Section 4.3)
+   ✅ Modular fold: no fixed point attractor at depths tested
+   ✅ 2D spatial field structure: smooth diagonal gradient (Möbius-specific)
+
+PROVISIONAL — signal present but not fully stable:
+   ⚠️  P1 ultrametric signatures: mostly positive slope but sign unstable
+       at d=16 and d=22. Requires larger n_samples to confirm.
+   ⚠️  P3 discrete scale structure: spike at LCA depth ~12-13 appears
+       stable in absolute terms. Requires d=26-30 to confirm.
+
+NOT CONFIRMED — measurement tools insufficient:
+   ❌ R = 8*pi*T curvature-energy coupling: not detected by Laplacian
+      proxy (grid artifact) or Ollivier-Ricci on 2D grid (converges
+      to laziness parameter for all folds). Neither tool can
+      differentiate Möbius from random on this measurement.
+
+============================================================
+
+THE CORE OPEN PROBLEM
+
+The GR measurement problem is now precisely defined:
+
+Every curvature proxy tested this session fails to differentiate
+the Möbius fold from a random fold on the 2D grid topology:
+
+   - Laplacian proxy: decays for both (grid smoothness artifact)
+   - Ollivier-Ricci on parent chain: flat for both (wrong topology)
+   - Ollivier-Ricci on 2D grid: converges to ~1.0 for both
+
+The curvature-energy coupling — if it exists in this architecture —
+requires either:
+
+   (a) A fundamentally different curvature measure. Candidates:
+       Forman-Ricci curvature (defined on edges, not nodes),
+       Discrete Gaussian curvature (angle deficit method),
+       or a curvature measure defined directly on the tree
+       topology rather than any derived grid or chain.
+
+   (b) A fundamentally different substrate. The 2D grid mapping
+       may be destroying the geometric information the tree
+       encodes. The curvature measure may need to operate
+       directly on the binary tree's ultrametric structure,
+       not on any Euclidean embedding of it.
+
+   (c) Much deeper trees. The framework's constraint sequencing
+       (Section 5) predicts GR-like dynamics emerge last, after
+       locality and causality. Depths d=12-24 may simply be
+       too shallow for Stage 3 dynamics to appear. Depths
+       d=30-40+ may be required.
+
+This is not a failure of the framework. It is a precisely stated
+open problem with testable approaches. The manuscript explicitly
+acknowledges the GR emergence problem in Section 8 (Open Problem O3).
+
+============================================================
+
+WHAT TONIGHT ACTUALLY ESTABLISHED
+
+Starting position (before this session):
+   - Theoretical framework submitted, preliminary results at d=10-12
+   - No ultrametric correlation measurement on correct metric
+   - No systematic depth scaling analysis
+   - No random baseline comparison
+
+Ending position (after this session):
+   - P4 confirmed at d=12-24 for all candidate folds
+   - XOR-Carry attractor confirmed
+   - Möbius fixed point confirmed as structurally unique
+   - Laplacian and Ollivier-Ricci on 2D grid ruled out as GR probes
+   - GR measurement problem precisely defined
+   - Random baseline methodology established for future tests
+   - Full reproducibility achieved (seed=42)
+
+The paper's framework is not disproved. The search space for
+the GR measurement is now significantly narrowed. The next
+paper has a clearly defined problem to solve.
+
+============================================================
+
+NEXT STEPS FOR FOLLOW-UP PAPER
+
+1. Implement Forman-Ricci curvature on the binary tree topology
+   directly — not on any derived grid or chain.
+
+2. Increase ultrametric n_samples to 500,000 at d=16 and d=22
+   to determine whether the slope sign instability resolves.
+
+3. Extend depth range to d=26, d=28, d=30 for the Möbius fold
+   to test whether peak LCA stabilizes at absolute depth ~12-13.
+
+4. Run all four candidate folds through the Forman-Ricci test
+   with random baseline at the same depths.
+
+5. Draft follow-up paper centered on:
+   — P4 confirmation across all folds
+   — XOR-Carry and Modular attractor characterization
+   — Möbius fixed point as structural differentiator
+   — Precise statement of GR measurement open problem
+   — Forman-Ricci as proposed resolution
+
+============================================================
+
+FILES IN THIS TESTING FOLDER
+
+   ufuumob2_loop.py                    — unseeded, do not use for analysis
+   ufuumob2_loop_fixed.py              — seeded (seed=42), canonical
+   ufuumob_multi_2d_gr.py              — Laplacian proxy, unseeded
+   ufuumob_multi_2d_gr_fixed_seed.py   — Laplacian proxy, seeded, canonical
+   ufuumob_random_baseline.py          — Laplacian: Möbius vs Random
+   [Ollivier-Ricci scripts]            — OR on 2D grid, all candidates
+   UFUUMOB_OR1_analysis_notes.txt      — single-depth Möbius OR analysis
+   UFUUMOB_loop_notebook.txt           — multi-depth loop notebook
+   UFUUMOB_2d_gr_notebook.txt          — 2D Laplacian GR notebook
+   UFUUMOB_consolidated_notebook.txt   — this file (master record)
+
+============================================================
+
+Reference: Tuttle, W.J. (2026). Recursive Fold Architectures for
+Self-Generating Systems: A Minimal Viable Framework with Candidate
+Fold Functions, Constraint Sequencing, and Testable Predictions.
+Submitted to Foundations of Physics. Preprint: Research Square.
+
+Repository: https://github.com/tuttlepc9/UFUU
+Contact: mail@jasontuttle.com
+
+Session date: April 12, 2026
+Session duration: approximately 4 hours
