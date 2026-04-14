@@ -232,7 +232,7 @@ ufuu/
 
 ### Current state:
 - **Foundations of Physics:** Recursive Fold Architectures (under review, April 11 submission)
-- **PhilSci Archive:** U = F(U,U) foundational theory (queued for publication, April 18 submission)
+- **PhilSci Archive:** U = F(U,U) foundational theory (queued for publication, April 14 submission)
 
 ### Recommended next submissions:
 1. **Nature/Science:** "Universal 1.06 Scaling in Biological and Cosmological Systems" 
