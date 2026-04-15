@@ -1,0 +1,11 @@
+=== Phase term Taylor expansion around dtheta=0 ===
+-Δθ²·δ_R·exp(iδ)/2 + i·Δθ·δ_R·exp(iδ) + δ_R·exp(iδ)
+
+=== Second-order coefficient for ∇² term ===
+-δ_R·exp(iδ)/2
+
+=== Linearized fold U_d (symbolic) ===
+α·η·(δ_L + δ_R·exp(i(Δθ + δ)))/2 + ψ
+
+=== Solved fixed points δ* ===
+[0, (1 - 2ε)/(4λ)]

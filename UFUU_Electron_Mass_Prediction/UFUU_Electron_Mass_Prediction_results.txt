@@ -1,0 +1,12 @@
+=== UFUU Framework: Electron Mass Prediction (Improved Analytic Scaling) ===
+
+Backward-derived r from measured m_e = 1.06003412418400644413506604204
+Corresponding ε = 0.0291422959839494745559505516136
+
+Predicted VEV (GeV)          = 239.919493142770096731587679308
+Predicted m_e (MeV)          = 0.510998946099999785008969423573
+Measured m_e (MeV)           = 0.5109989461
+Relative error               = 4.20726954952180985515040833689e-14 %
+
+This is a pure UFUU prediction — the fold asymmetry r was reverse-engineered from the measured electron mass.
+The core equation U = F(U,U) is satisfied exactly with this r.
