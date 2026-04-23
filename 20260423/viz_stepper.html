@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U = F(U,U) • Manual Fold Stepper • Tuttle 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap');
+
+  :root {
+    --gold: #f59e0b;
+    --cyan: #06b6d4;
+    --higgs: #22c55e;
+    --fixed: #f43f5e;
+    --violet: #a78bfa;
+    --bg: #060b14;
+    --text: #e2e8f0;
+    --muted: #475569;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    padding: 18px 32px;
+    background: linear-gradient(90deg, #0a1120, #1e293b);
+    border-bottom: 1px solid #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #f1f5f9;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    position: relative;
+  }
+
+  /* Live Stats Sidebar */
+  .stats {
+    width: 280px;
+    background: rgba(10,17,32,0.95);
+    border-right: 1px solid #1e293b;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    overflow-y: auto;
+    font-size: 13px;
+  }
+  .stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .stat-label {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .stat-value {
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Rajdhani', sans-serif;
+    transition: all 0.3s ease;
+  }
+  .gold { color: var(--gold); }
+  .cyan { color: var(--cyan); }
+  .higgs { color: var(--higgs); animation: higgsPulse 1.8s ease-in-out infinite; }
+  @keyframes higgsPulse { 50% { opacity: 0.7; } }
+
+  /* Central Canvas – LIVE ANIMATION */
+  .canvas-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #060b14;
+    position: relative;
+    padding: 20px;
+  }
+  canvas {
+    border: 2px solid rgba(245,158,11,0.15);
+    box-shadow: 0 0 60px rgba(6,182,212,0.3);
+    image-rendering: crisp-edges;
+  }
+
+  /* Overlay */
+  .overlay {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(6,11,20,0.85);
+    padding: 8px 24px;
+    border-radius: 30px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    white-space: nowrap;
+    box-shadow: 0 0 30px rgba(34,197,94,0.4);
+  }
+  .depth {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    color: var(--higgs);
+  }
+
+  /* Controls – now with manual stepper */
+  .controls {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: rgba(10,17,32,0.95);
+    padding: 12px 18px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  }
+  button {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+  button:hover { background: rgba(245,158,11,0.2); }
+  .stepper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .depth-display {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--higgs);
+    min-width: 58px;
+    text-align: center;
+  }
+
+  footer {
+    padding: 12px 32px;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    background: #0a1120;
+    border-top: 1px solid #1e293b;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="title">U = F(U,U)</div>
+    <div class="subtitle">Recursive Fold Architecture • MANUAL FOLD STEPPER</div>
+  </div>
+  <div style="text-align:right">
+    <div style="color:#22c55e;font-size:13px;">POST-FOLD HIGGS-LIKE ENTANGLED PARTICLES</div>
+    <div style="color:#f59e0b;font-size:11px;">Tuttle 2026 • Golden × Möbius Fold • Step through each fold manually</div>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- Live Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div>
+        <div class="stat-label">CURRENT FOLD DEPTH</div>
+        <div id="depth-val" class="stat-value gold">04</div>
+      </div>
+    </div>
+    <div class="stat">
+      <div>
+        <div class="stat-label">φ GOLDEN ROOT VAL</div>
+        <div id="golden-root" class="stat-value gold">1.000</div>
+      </div>
+    </div>
+    <div class="stat">
+      <div>
+        <div class="stat-label">FIXED-POINT PARTICLES</div>
+        <div id="particle-count" class="stat-value higgs">42</div>
+      </div>
+    </div>
+    <div class="stat">
+      <div>
+        <div class="stat-label">ENTANGLED PAIRS</div>
+        <div id="entangled-count" class="stat-value violet">12</div>
+      </div>
+    </div>
+    <div class="stat">
+      <div>
+        <div class="stat-label">MÖBIUS HIGGS VEV</div>
+        <div id="higgs-vev" class="stat-value higgs">1.157</div>
+      </div>
+    </div>
+    <div class="stat">
+      <div>
+        <div class="stat-label">ENTROPY H(n)</div>
+        <div id="entropy-val" class="stat-value cyan">-0.142</div>
+      </div>
+    </div>
+    <div style="margin-top: auto; font-size: 10px; line-height: 1.4; color: #64748b;">
+      ← PREV / NEXT → folds manually<br>
+      Animation runs continuously<br>
+      Particles &amp; entanglement update per depth (§5.3)
+    </div>
+  </div>
+
+  <!-- The LIVE VIDEO Canvas -->
+  <div class="canvas-container">
+    <canvas id="main-canvas" width="920" height="620"></canvas>
+
+    <div class="overlay">
+      <span style="color:#f59e0b">CURRENT FOLD</span>
+      <span id="live-depth" class="depth">04</span>
+      <span style="color:#22c55e">• LIVE ANIMATION •</span>
+      <button onclick="togglePause()" id="pause-btn">⏸ PAUSE</button>
+    </div>
+
+    <!-- Manual controls -->
+    <div class="controls">
+      <button onclick="prevFold()">← PREV FOLD</button>
+      
+      <div class="stepper">
+        <span style="color:#f59e0b;font-size:13px;">DEPTH</span>
+        <span id="depth-display" class="depth-display">04</span>
+      </div>
+      
+      <button onclick="nextFold()">NEXT FOLD →</button>
+      
+      <button onclick="resetSimulation()" style="margin-left:12px;">RESET</button>
+      <button onclick="togglePause()" id="pause-btn2">⏸</button>
+      <button onclick="captureGif()" style="margin-left:8px;">📼 GIF</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  W. Jason Tuttle • Foundations of Physics 2026 • Minimal triad: recursion + termination + asymmetric fold<br>
+  Particles, entanglement &amp; Higgs-like VEV emerge spontaneously from U = F(U,U) • Manual fold navigation enabled
+</footer>
+
+<script>
+// =============== MANUAL FOLD STEPPER + LIVE ANIMATION ===============
+const canvas = document.getElementById('main-canvas');
+const ctx = canvas.getContext('2d');
+let WIDTH = 920, HEIGHT = 620;
+let time = 0;
+let isPaused = false;
+let speed = 1.2;
+let currentDepth = 4;
+const maxDepth = 12;
+
+let particles = [];
+let entangledPairs = [];
+let goldenRoot = 1.0;
+let higgsVEV = 1.0;
+let entropy = 0.0;
+let particleCount = 0;
+let entangledCount = 0;
+
+function spawnParticles(depth) {
+  particles = [];
+  entangledPairs = [];
+  
+  const gridSize = Math.pow(2, Math.floor(depth / 3));
+  const cellW = WIDTH / gridSize;
+  const cellH = HEIGHT / gridSize;
+
+  const numParticles = Math.min(220, Math.pow(2, Math.min(depth, 9)));
+
+  for (let i = 0; i < numParticles; i++) {
+    const x = Math.random() * WIDTH;
+    const y = Math.random() * HEIGHT;
+    const isFixed = Math.random() < (0.38 + depth * 0.04);
+    particles.push({
+      x, y,
+      size: isFixed ? 4.8 : 2.9,
+      hue: isFixed ? (Math.random() > 0.5 ? 45 : 195) : 260,
+      fixed: isFixed,
+      pulse: Math.random() * Math.PI * 2,
+      vx: (Math.random() - 0.5) * 0.8,
+      vy: (Math.random() - 0.5) * 0.8
+    });
+  }
+  particleCount = particles.filter(p => p.fixed).length;
+
+  // Create entangled pairs (ultrametric style)
+  for (let i = 0; i < particles.length && entangledPairs.length < 18; i++) {
+    if (particles[i].fixed && Math.random() < 0.35) {
+      const j = (i + 7 + Math.floor(Math.random() * 12)) % particles.length;
+      if (particles[j].fixed) entangledPairs.push([particles[i], particles[j]]);
+    }
+  }
+  entangledCount = entangledPairs.length;
+}
+
+function updateStats() {
+  document.getElementById('depth-val').textContent = String(currentDepth).padStart(2, '0');
+  document.getElementById('live-depth').textContent = String(currentDepth).padStart(2, '0');
+  document.getElementById('depth-display').textContent = String(currentDepth).padStart(2, '0');
+  
+  document.getElementById('golden-root').textContent = goldenRoot.toFixed(3);
+  document.getElementById('particle-count').textContent = particleCount;
+  document.getElementById('entangled-count').textContent = entangledCount;
+  document.getElementById('higgs-vev').textContent = higgsVEV.toFixed(3);
+  document.getElementById('entropy-val').textContent = entropy.toFixed(3);
+}
+
+function nextFold() {
+  if (currentDepth < maxDepth) {
+    currentDepth++;
+    // Simulate progression
+    goldenRoot = Math.min(17.89, goldenRoot + currentDepth * 1.15);
+    higgsVEV = Math.max(1.157, higgsVEV - (currentDepth > 7 ? 0.001 : 0));
+    entropy = Math.max(-0.168, entropy - 0.012);
+    spawnParticles(currentDepth);
+    updateStats();
+  }
+}
+
+function prevFold() {
+  if (currentDepth > 1) {
+    currentDepth--;
+    // Reverse simulation
+    goldenRoot = Math.max(1.0, goldenRoot - currentDepth * 0.9);
+    higgsVEV = Math.min(1.157, higgsVEV + 0.003);
+    entropy = Math.min(0.0, entropy + 0.008);
+    spawnParticles(currentDepth);
+    updateStats();
+  }
+}
+
+function resetSimulation() {
+  currentDepth = 4;
+  goldenRoot = 1.0;
+  higgsVEV = 1.157;
+  entropy = -0.05;
+  spawnParticles(currentDepth);
+  updateStats();
+  time = 0;
+}
+
+// Animation loop – runs continuously
+function draw() {
+  if (isPaused) {
+    requestAnimationFrame(draw);
+    return;
+  }
+
+  ctx.fillStyle = '#060b14';
+  ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+  // Background ultrametric grid
+  ctx.strokeStyle = 'rgba(6,182,212,0.09)';
+  const gridStep = Math.max(12, 52 - currentDepth * 3);
+  for (let x = 0; x < WIDTH; x += gridStep) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, HEIGHT); ctx.stroke();
+  }
+  for (let y = 0; y < HEIGHT; y += gridStep) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(WIDTH, y); ctx.stroke();
+  }
+
+  // Fold lines
+  ctx.strokeStyle = 'rgba(245,158,11,0.13)';
+  for (let i = 0; i < 28; i++) {
+    const offset = (time * 1.2 + i * 22) % (WIDTH * 1.6);
+    ctx.beginPath();
+    ctx.moveTo(offset - WIDTH, 0);
+    ctx.quadraticCurveTo(WIDTH/2, HEIGHT/2, WIDTH + offset, HEIGHT);
+    ctx.stroke();
+  }
+
+  // Particles
+  particles.forEach((p, i) => {
+    p.x += p.vx * speed;
+    p.y += p.vy * speed;
+    p.pulse += 0.14;
+
+    if (p.x < 0 || p.x > WIDTH) p.vx *= -1;
+    if (p.y < 0 || p.y > HEIGHT) p.vy *= -1;
+
+    const alpha = p.fixed ? 0.92 + Math.sin(p.pulse) * 0.35 : 0.65;
+    ctx.shadowBlur = p.fixed ? 22 : 10;
+    ctx.shadowColor = p.hue === 45 ? '#f59e0b' : (p.hue === 195 ? '#06b6d4' : '#a78bfa');
+
+    ctx.fillStyle = `hsla(${p.hue}, 98%, 90%, ${alpha})`;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (p.fixed) {
+      ctx.strokeStyle = '#f43f5e';
+      ctx.lineWidth = 2;
+      ctx.shadowBlur = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size + 7, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  });
+
+  // Entanglement lines
+  ctx.shadowBlur = 14;
+  ctx.shadowColor = '#a78bfa';
+  entangledPairs.forEach(([a, b]) => {
+    const alpha = 0.35 + Math.sin(time * 0.28) * 0.55;
+    ctx.strokeStyle = `rgba(167,139,250,${alpha})`;
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
+    ctx.stroke();
+  });
+
+  // Central Higgs VEV glow
+  const cx = WIDTH / 2;
+  const cy = HEIGHT / 2;
+  const pulse = Math.sin(time * 0.16) * 0.45 + 1.15;
+  const grad = ctx.createRadialGradient(cx, cy, 14, cx, cy, 130);
+  grad.addColorStop(0, `rgba(34,197,94,${pulse})`);
+  grad.addColorStop(1, 'transparent');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+  ctx.shadowBlur = 28;
+  ctx.shadowColor = '#22c55e';
+  ctx.fillStyle = '#22c55e';
+  ctx.font = 'bold 17px Share Tech Mono';
+  ctx.textAlign = 'center';
+  ctx.fillText('HIGGS VEV', cx, cy - 22);
+  ctx.fillText('◉', cx, cy + 12);
+
+  time += 0.9;
+  requestAnimationFrame(draw);
+}
+
+function togglePause() {
+  isPaused = !isPaused;
+  const txt = isPaused ? '▶ PLAY' : '⏸ PAUSE';
+  document.getElementById('pause-btn').textContent = txt;
+  document.getElementById('pause-btn2').textContent = isPaused ? '▶' : '⏸';
+}
+
+function captureGif() {
+  alert("🎥 Live animation is running!\n\nScreen-record this canvas for a perfect GIF of your chosen fold depth.\n(Real gif.js export can be added if needed)");
+}
+
+// INIT
+window.onload = () => {
+  spawnParticles(currentDepth);
+  updateStats();
+  draw();
+  console.log('%c✅ MANUAL FOLD STEPPER READY • Use ← PREV / NEXT → to step through depths while animation runs live', 'color:#22c55e;font-weight:bold');
+};
+</script>
+</body>
+</html>
