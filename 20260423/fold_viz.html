@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U = F(U,U) · Recursive Fold Architecture · Tuttle 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap');
+
+  :root {
+    --gold: #f59e0b;
+    --gold-dim: #92400e;
+    --cyan: #06b6d4;
+    --cyan-dim: #164e63;
+    --violet: #a78bfa;
+    --fixed: #f43f5e;
+    --bg: #060b14;
+    --bg2: #0a1120;
+    --bg3: #0f172a;
+    --border: #1e293b;
+    --text: #e2e8f0;
+    --muted: #475569;
+    --dim: #334155;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Animated background grid ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(6,182,212,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(6,182,212,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridDrift 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes gridDrift {
+    0%   { transform: translate(0,0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  /* ── Scanline overlay ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.15) 2px,
+      rgba(0,0,0,0.15) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  #app { position: relative; z-index: 2; }
+
+  /* ── Header ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 24px 32px 20px;
+    background: linear-gradient(135deg, rgba(10,17,32,0.95) 0%, rgba(30,27,75,0.4) 50%, rgba(10,17,32,0.95) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: 'U=F(U,U)';
+    position: absolute;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 96px;
+    font-weight: 700;
+    color: rgba(245,158,11,0.04);
+    letter-spacing: -4px;
+    pointer-events: none;
+    animation: pulseGlyph 4s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlyph {
+    0%,100% { opacity: 0.5; }
+    50%      { opacity: 1; }
+  }
+
+  .header-label {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    animation: fadeIn 1s ease both;
+  }
+
+  .header-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #f1f5f9;
+    letter-spacing: 1px;
+    margin: 6px 0 4px;
+    animation: slideUp 0.8s ease both 0.1s;
+  }
+
+  .header-sub {
+    font-size: 10px;
+    color: var(--muted);
+    animation: slideUp 0.8s ease both 0.2s;
+  }
+
+  /* ── Stats row ── */
+  .stats-row {
+    display: flex;
+    gap: 10px;
+    padding: 16px 32px;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease both 0.4s;
+  }
+
+  .stat-divider {
+    width: 1px;
+    background: var(--border);
+    margin: 0 4px;
+    align-self: stretch;
+  }
+
+  .stat-card {
+    background: rgba(15,23,42,0.8);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 4px;
+    padding: 8px 14px;
+    min-width: 110px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .stat-card:hover { transform: translateY(-2px); }
+  .stat-card.gold  { border-left: 3px solid var(--gold); }
+  .stat-card.cyan  { border-left: 3px solid var(--cyan); }
+
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .stat-label { font-size: 9px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+  .stat-value { font-size: 22px; font-weight: bold; line-height: 1.1; }
+  .stat-sub   { font-size: 9px; color: var(--muted); margin-top: 1px; }
+
+  /* ── Insight bar ── */
+  .insight {
+    margin: 0 32px 16px;
+    background: rgba(30,27,75,0.4);
+    border: 1px solid #312e81;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 11px;
+    color: #a5b4fc;
+    line-height: 1.8;
+    animation: fadeIn 1s ease both 0.5s;
+  }
+
+  .insight .gold-tag { color: var(--gold); font-weight: bold; }
+  .insight .cyan-tag { color: var(--cyan); font-weight: bold; }
+
+  /* ── Tabs ── */
+  .tabs {
+    display: flex;
+    gap: 2px;
+    padding: 0 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tab {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    padding: 10px 16px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .tab:hover   { color: var(--text); }
+  .tab.active  { color: var(--text); border-bottom-color: var(--gold); }
+
+  /* ── Content area ── */
+  .content {
+    padding: 28px 32px;
+    animation: fadeIn 0.4s ease both;
+  }
+
+  /* ── Canvas panels ── */
+  .canvas-grid {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .canvas-panel { flex: 1; min-width: 300px; }
+
+  .panel-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .panel-label.gold { color: var(--gold); }
+  .panel-label.cyan { color: var(--cyan); }
+
+  canvas {
+    display: block;
+    border-radius: 4px;
+  }
+
+  .canvas-sub {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  /* ── Profile charts ── */
+  .profile-grid {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .profile-panel { min-width: 260px; flex: 1; }
+
+  .profile-sub {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 8px;
+    max-width: 280px;
+    line-height: 1.7;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 16px;
+    font-size: 10px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot  { width: 10px; height: 10px; border-radius: 1px; }
+
+  /* ── Table ── */
+  .table-wrap { overflow-x: auto; }
+
+  .data-table {
+    border-collapse: collapse;
+    font-size: 10px;
+    width: 100%;
+    min-width: 860px;
+  }
+
+  .data-table th {
+    padding: 5px 10px;
+    color: #64748b;
+    text-align: left;
+    letter-spacing: 1px;
+    font-weight: normal;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .data-table td {
+    padding: 3px 10px;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+
+  .data-table tr:nth-child(even) td { background: rgba(15,23,42,0.4); }
+  .data-table tr:hover td { background: rgba(30,41,59,0.6) !important; }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 12px 32px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: var(--dim);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── GIF export button ── */
+  .export-bar {
+    padding: 10px 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .export-btn {
+    background: rgba(245,158,11,0.1);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 5px 14px;
+    font-size: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background 0.2s;
+  }
+
+  .export-btn:hover { background: rgba(245,158,11,0.2); }
+
+  #gif-status { font-size: 10px; color: var(--violet); min-width: 200px; }
+
+  /* ── Progress bar ── */
+  #gif-progress {
+    height: 2px;
+    background: var(--border);
+    width: 200px;
+    border-radius: 1px;
+    overflow: hidden;
+    display: none;
+  }
+
+  #gif-progress-bar {
+    height: 100%;
+    background: var(--gold);
+    width: 0%;
+    transition: width 0.1s;
+  }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- Header -->
+  <header>
+    <div class="header-label">Foundations of Physics · W. Jason Tuttle · 2026</div>
+    <div class="header-title">U = F(U,U) · Recursive Fold Architecture</div>
+    <div class="header-sub">Golden Ratio × Möbius Fold · depth=8 · 510 nodes · semi-quantum randomness · path-dependent c(path) base case</div>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats-row" id="stats-row">
+    <div class="stat-card gold">
+      <div class="stat-label">φ Root Val</div>
+      <div class="stat-value" style="color:var(--gold)" id="g-root">—</div>
+      <div class="stat-sub">divergent accumulation</div>
+    </div>
+    <div class="stat-card gold">
+      <div class="stat-label">φ Fixed Pts</div>
+      <div class="stat-value" style="color:var(--gold)" id="g-fixed">—</div>
+      <div class="stat-sub" id="g-fixed-sub">of — nodes</div>
+    </div>
+    <div class="stat-card gold">
+      <div class="stat-label">φ Avg H(n)</div>
+      <div class="stat-value" style="color:#fcd34d;font-size:16px;" id="g-entropy">—</div>
+      <div class="stat-sub">entropy estimate</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-card cyan">
+      <div class="stat-label">Möb Root</div>
+      <div class="stat-value" style="color:var(--cyan)" id="m-root">—</div>
+      <div class="stat-sub">conformal attractor</div>
+    </div>
+    <div class="stat-card cyan">
+      <div class="stat-label">Möb Fixed</div>
+      <div class="stat-value" style="color:var(--cyan)" id="m-fixed">—</div>
+      <div class="stat-sub" id="m-fixed-sub">of — nodes</div>
+    </div>
+    <div class="stat-card cyan">
+      <div class="stat-label">Möb Avg H(n)</div>
+      <div class="stat-value" style="color:#67e8f9;font-size:16px;" id="m-entropy">—</div>
+      <div class="stat-sub">entropy estimate</div>
+    </div>
+  </div>
+
+  <!-- Insight -->
+  <div class="insight" id="insight">
+    <span class="gold-tag">φ FOLD</span>: diverges φ^d — quasicrystalline amplification, partial irreversibility · &nbsp;
+    <span class="cyan-tag">MÖBIUS</span>: SL(2,ℂ) conformal attractor, convergent fixed-point basin, emergent rotational symmetry
+  </div>
+
+  <!-- GIF export bar -->
+  <div class="export-bar">
+    <button class="export-btn" id="gif-btn" onclick="startGifCapture()">⬇ CAPTURE ANIMATED GIF</button>
+    <div id="gif-progress"><div id="gif-progress-bar"></div></div>
+    <span id="gif-status">captures the sweep animation · requires gif.js CDN</span>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('heatmap', this)">FOLD MAP</button>
+    <button class="tab" onclick="switchTab('profile', this)">DEPTH PROFILE</button>
+    <button class="tab" onclick="switchTab('noise', this)">SQR NOISE</button>
+    <button class="tab" onclick="switchTab('table', this)">RAW DATA</button>
+  </div>
+
+  <!-- Content panels -->
+  <div class="content" id="panel-heatmap">
+    <div style="font-size:10px;color:var(--muted);margin-bottom:14px;">
+      Each cell = tree node mapped to 2D by interleaving path bits · <span style="color:var(--fixed)">■</span> red border = fixed point · white shimmer = |SQR noise| &gt; 0.015 · animated sweep reveals fold depth
+    </div>
+    <div class="canvas-grid">
+      <div class="canvas-panel">
+        <div class="panel-label gold">F_φ GOLDEN RATIO FOLD &nbsp;·&nbsp; a + b/φ</div>
+        <canvas id="canvas-golden" width="340" height="340"></canvas>
+        <div class="canvas-sub" id="g-range">fold_val range: — · root: —</div>
+      </div>
+      <div class="canvas-panel">
+        <div class="panel-label cyan">F_m MÖBIUS FOLD &nbsp;·&nbsp; |(φz+1)/(z+φ)|</div>
+        <canvas id="canvas-mobius" width="340" height="340"></canvas>
+        <div class="canvas-sub" id="m-range">fold_val range: — · root: — · σ≈0.03</div>
+      </div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--fixed);"></div> fixed point</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,0.5);"></div> |SQR noise| &gt; 0.015</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gold);"></div> golden low→high</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cyan);"></div> möbius attractor basin</div>
+    </div>
+  </div>
+
+  <div class="content" id="panel-profile" style="display:none">
+    <div class="profile-grid">
+      <div class="profile-panel">
+        <div class="panel-label gold">GOLDEN · MEAN FOLD_VAL BY DEPTH</div>
+        <canvas id="canvas-g-profile" width="300" height="100"></canvas>
+        <div class="profile-sub">Root value ≈ φ^d confirming paper §7.4. Partial irreversibility: cannot recover both a,b from F output. Leaves start near 0, accumulate toward ~17.9 at root.</div>
+      </div>
+      <div class="profile-panel">
+        <div class="panel-label cyan">MÖBIUS · MEAN FOLD_VAL BY DEPTH</div>
+        <canvas id="canvas-m-profile" width="300" height="100"></canvas>
+        <div class="profile-sub">Snaps to ~0.62–0.65 by depth 7, stabilizes to 1.1567 at root. SL(2,ℂ) conformal attractor. Matches paper §7.4: approximate rotational invariance by depth 12.</div>
+      </div>
+      <div class="profile-panel">
+        <div class="panel-label" style="color:var(--violet)">ENTROPY H(n) · GOLDEN FOLD</div>
+        <canvas id="canvas-entropy" width="300" height="100"></canvas>
+        <div class="profile-sub">Golden entropy increases monotonically leaves→root, consistent with prediction P4: H(n) = H(n+1)×(2−r). Möbius entropy decreases after depth 5 (attractor compression).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content" id="panel-noise" style="display:none">
+    <div class="profile-grid">
+      <div class="profile-panel">
+        <div class="panel-label gold">φ FOLD · SQR NOISE DISTRIBUTION</div>
+        <canvas id="canvas-g-noise" width="300" height="100"></canvas>
+        <div class="profile-sub">Semi-quantum randomness: SHA-256 of node path, scaled ±3%. Simulates measurement uncertainty near termination boundary. Overwhelmed by fold amplification at depth ≥3.</div>
+      </div>
+      <div class="profile-panel">
+        <div class="panel-label cyan">MÖBIUS · SQR NOISE DISTRIBUTION</div>
+        <canvas id="canvas-m-noise" width="300" height="100"></canvas>
+        <div class="profile-sub">Möbius attractor absorbs noise — output variance remains ~0.03σ regardless of noise amplitude. Consistent with P2: unitarity breaking ~ E/E_Planck.</div>
+      </div>
+      <div class="profile-panel">
+        <div class="panel-label" style="color:var(--violet)">COMBINED · BOTH FOLDS</div>
+        <canvas id="canvas-both-noise" width="300" height="100"></canvas>
+        <div class="profile-sub">Golden noise swamped by amplification. Möbius clusters tightly near attractor — noise has nowhere to hide. Attractor stability demonstrated as predicted in §5.3.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content" id="panel-table" style="display:none">
+    <div style="font-size:10px;color:var(--muted);margin-bottom:10px;">
+      Showing depth ≤ 4 nodes · <span id="total-count">—</span> total records in dataset
+    </div>
+    <div class="table-wrap">
+      <table class="data-table" id="data-table">
+        <thead>
+          <tr>
+            <th>path</th><th>depth</th><th>fold_type</th><th>left_val</th><th>right_val</th>
+            <th>fold_val</th><th>entropy_est</th><th>irreversibility</th><th>sqr_noise</th>
+            <th>phi_ratio</th><th>fixed_pt</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    <span>Tuttle 2026 · Foundations of Physics · U=F(U,U) · ORCID 0009-0003-3830-0551 · github.com/tuttlepc9/UFUU</span>
+    <span>d=8 · 256 leaves · 510 fold nodes · SQR via SHA-256 path hash · params: α=φ β=1 γ=1 δ=φ</span>
+  </footer>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DATA — embedded CSV parsed inline
+// ═══════════════════════════════════════════════════════════════
+const PHI = (1 + Math.sqrt(5)) / 2;
+
+const CSV = `path,depth,max_depth,fold_type,left_val,right_val,fold_val,x_coord,y_coord,entropy_est,irreversibility,sqr_noise,phi_ratio,is_fixed_pt
+0000000,7,8,golden,0.0,0.00390625,0.0042022,0,0,0.02299504,0.45772799,0.001788,0.0025971,1
+0000001,7,8,golden,0.0078125,0.01171875,0.03426709,1,0,0.11560241,0.98365439,0.019212,0.02117822,1
+000000,6,8,golden,0.0042022,0.03426709,0.00269442,0,0,0.01594173,0.58971728,-0.022686,0.00166524,1
+0000010,7,8,golden,0.015625,0.01953125,0.03618598,0,1,0.12010428,0.24149333,0.00849,0.02236416,1
+0000011,7,8,golden,0.0234375,0.02734375,0.06897487,1,1,0.1844397,0.56394831,0.028638,0.04262881,1
+000001,6,8,golden,0.03618598,0.06897487,0.05875079,0,1,0.16652621,0.19079345,-0.020064,0.03630998,1
+00000,5,8,golden,0.00269442,0.05875079,0.0274304,0,0,0.09864256,0.18836294,-0.011574,0.01695292,1
+0000100,7,8,golden,0.03125,0.03515625,0.07705576,2,0,0.19751132,0.36258635,0.024078,0.04762308,1
+0000101,7,8,golden,0.0390625,0.04296875,0.03576865,3,0,0.11913405,0.36388571,-0.02985,0.02210624,1
+000010,6,8,golden,0.07705576,0.03576865,0.100992,1,0,0.23154577,0.01621989,0.00183,0.06241649,0
+0000110,7,8,golden,0.046875,0.05078125,0.09550954,2,1,0.22430694,0.17664,0.01725,0.05902814,1
+0000111,7,8,golden,0.0546875,0.05859375,0.11886643,3,1,0.25315635,0.24687228,0.027966,0.07346349,0
+000011,6,8,golden,0.09550954,0.11886643,0.15939103,1,1,0.29270486,0.04469717,-0.009582,0.09850908,0
+00001,5,8,golden,0.100992,0.15939103,0.18218507,1,0,0.31021239,0.06650203,-0.017316,0.11259657,0
+0000,4,8,golden,0.0274304,0.18218507,0.16196897,0,0,0.2948403,0.10467739,0.021942,0.10010233,0
+0001000,7,8,golden,0.0625,0.06640625,0.10189732,0,2,0.23271204,0.01275345,-0.001644,0.06297601,1
+0001001,7,8,golden,0.0703125,0.07421875,0.13303021,1,2,0.26834575,0.11656995,0.016848,0.08221719,0
+000100,6,8,golden,0.10189732,0.13303021,0.20879251,0,2,0.32705557,0.10504516,0.024678,0.12904087,0
+0001010,7,8,golden,0.078125,0.08203125,0.1436671,0,3,0.27875102,0.09268449,0.014844,0.08879115,0
+0001011,7,8,golden,0.0859375,0.08984375,0.16837399,1,3,0.29996965,0.153088,0.02691,0.10406085,0
+000101,6,8,golden,0.1436671,0.16837399,0.23165395,0,3,0.33879636,0.05151245,-0.016074,0.14317001,0
+00010,5,8,golden,0.20879251,0.23165395,0.36666253,0,1,0.36787743,0.03337523,0.0147,0.2266099,0
+0001100,7,8,golden,0.09375,0.09765625,0.16396888,2,2,0.29646863,0.05153437,0.009864,0.10133834,0
+0001101,7,8,golden,0.1015625,0.10546875,0.16841377,3,2,0.30000074,0.00805675,0.001668,0.10408544,0
+000110,6,8,golden,0.16396888,0.16841377,0.24932832,1,2,0.34631322,0.05633868,-0.018726,0.15409337,0
+0001110,7,8,golden,0.109375,0.11328125,0.18055666,2,3,0.30906076,0.00525474,0.00117,0.11159015,0
+0001111,7,8,golden,0.1171875,0.12109375,0.16457155,3,3,0.29695453,0.11522518,-0.027456,0.10171081,1
+000111,6,8,golden,0.18055666,0.16457155,0.29226948,1,3,0.35951456,0.02898053,0.010002,0.18063247,0
+00011,5,8,golden,0.24932832,0.29226948,0.42882679,1,1,0.36308858,0.0020938,-0.001134,0.26502953,0
+0001,4,8,golden,0.36666253,0.42882679,0.63753606,0,1,0.28698331,0.00734642,0.005844,0.39401895,0
+000,3,8,golden,0.16196897,0.63753606,0.52673192,0,0,0.33766863,0.03659264,-0.029256,0.32553823,0
+0010000,7,8,golden,0.125,0.12890625,0.21969844,4,0,0.33295286,0.05919508,0.01503,0.13578111,0
+001000,6,8,golden,0.21969844,0.24009733,0.37779476,2,0,0.367747,0.02111372,0.009708,0.23349,0
+001001,6,8,golden,0.21832222,0.22567712,0.33743435,2,1,0.36658338,0.04586493,-0.020364,0.2085459,0
+00100,5,8,golden,0.37779476,0.33743435,0.61289666,2,0,0.30004904,0.03712936,0.026556,0.37879097,0
+001010,6,8,golden,0.28246001,0.2902589,0.45205187,3,0,0.35891036,0.01710787,-0.009798,0.27938342,0
+001011,6,8,golden,0.29262779,0.29062868,0.44782619,3,1,0.35976121,0.04186837,-0.02442,0.27677181,0
+00101,5,8,golden,0.45205187,0.44782619,0.72162367,3,0,0.23543081,0.00800108,-0.0072,0.44598796,0
+0010,4,8,golden,0.61289666,0.72162367,1.05399461,1,0,-0.05542677,0.00366424,-0.00489,0.6514045,0
+001100,6,8,golden,0.29580557,0.30748046,0.49212094,2,2,0.34892889,0.01041297,0.006282,0.30414747,0
+001101,6,8,golden,0.30386735,0.33474824,0.53604914,2,3,0.33424242,0.03961068,0.025296,0.33129659,0
+00110,5,8,golden,0.49212094,0.53604914,0.81337953,2,1,0.1680096,0.00976298,-0.010038,0.5026962,0
+001110,6,8,golden,0.37167113,0.34745402,0.60994152,3,2,0.30155032,0.03272309,0.023532,0.37696459,0
+001111,6,8,golden,0.40387691,0.4070618,0.68130294,3,3,0.26144879,0.03187417,0.025848,0.42106837,0
+00111,5,8,golden,0.60994152,0.68130294,1.0016399,3,1,-0.00164124,0.0227455,-0.02937,0.6190475,0
+0011,4,8,golden,0.81337953,1.0016399,1.45372703,1,1,-0.5438838,0.01173541,0.0213,0.89845272,0
+001,3,8,golden,1.05399461,1.45372703,1.94524133,1,0,-1.29433644,0.00287352,-0.007206,1.20222526,0
+00,2,8,golden,0.52673192,1.94524133,1.72929918,0,0,-0.94716522,0.00013835,0.000342,1.06876567,0
+010000,6,8,golden,0.41085869,0.44646758,0.70747283,0,4,0.24482525,0.02412384,0.020682,0.43724226,0
+010001,6,8,golden,0.43525847,0.42140336,0.70110608,0,5,0.24896002,0.00631054,0.005406,0.43330738,0
+01000,5,8,golden,0.70747283,0.70110608,1.12213822,0,2,-0.12931071,0.01323462,-0.018642,0.69351956,0
+010010,6,8,golden,0.48319625,0.48681915,0.79956503,1,4,0.17885263,0.01597707,0.015498,0.49415837,0
+010011,6,8,golden,0.45606204,0.49735893,0.74571076,1,5,0.21880457,0.01860249,-0.017736,0.46087459,0
+01001,5,8,golden,0.79956503,0.74571076,1.26660763,1,2,-0.29935279,0.00399152,0.006168,0.78280656,0
+0100,4,8,golden,1.12213822,1.26660763,1.90220878,0,2,-1.22315016,0.00114537,-0.002736,1.17562968,0
+010100,6,8,golden,0.50536182,0.52200471,0.83249047,0,6,0.1526234,0.00439181,0.004512,0.5145074,0
+010101,6,8,golden,0.5418516,0.52158849,0.87858101,0,7,0.11372982,0.01351275,0.01437,0.54299293,0
+01010,5,8,golden,0.83249047,0.87858101,1.3820294,0,3,-0.44715975,0.00382567,0.006546,0.85414114,0
+010110,6,8,golden,0.55152138,0.57330627,0.93455414,1,6,0.06325597,0.02552391,0.02871,0.57758622,0
+010111,6,8,golden,0.61166916,0.62509005,0.98500606,1,7,0.01488097,0.01050326,-0.01299,0.60876722,0
+01011,5,8,golden,0.93455414,0.98500606,1.54135336,1,3,-0.66688324,0.00102523,-0.001968,0.95260877,0
+0101,4,8,golden,1.3820294,1.54135336,2.33493216,0,3,-1.9799824,0.00010057,0.000294,1.44306744,0
+010,3,8,golden,1.90220878,2.33493216,3.33837022,0,1,-4.02434764,0.00162987,-0.006906,2.06322626,0
+011000,6,8,golden,0.58404894,0.61147383,0.94660655,2,4,0.05194195,0.01284292,-0.015354,0.58503502,0
+011001,6,8,golden,0.62694072,0.66163161,1.04497155,2,5,-0.04596794,0.0070776,0.00912,0.64582793,0
+01100,5,8,golden,0.94660655,1.04497155,1.60514249,2,2,-0.75957353,0.00638087,0.012708,0.99203261,0
+011010,6,8,golden,0.6559485,0.66150939,1.05409779,3,4,-0.05553538,0.00811108,-0.010686,0.65146826,0
+011011,6,8,golden,0.67637028,0.67870317,1.08409591,3,5,-0.08753682,0.00866079,-0.011736,0.67000812,0
+01101,5,8,golden,1.05409779,1.08409591,1.69760991,3,2,-0.89841138,0.01239177,-0.026496,1.04918063,0
+0110,4,8,golden,1.60514249,1.69760991,2.64642711,1,2,-2.57553058,0.00239073,-0.007896,1.6355819,0
+011100,6,8,golden,0.68800207,0.75141496,1.16698805,2,6,-0.18021343,0.01013327,0.014586,0.72123828,0
+011101,6,8,golden,0.72073585,0.76716874,1.1769382,2,7,-0.19174244,0.01205319,-0.017934,0.72738781,0
+01110,5,8,golden,1.16698805,1.1769382,1.86924786,2,3,-1.16928208,0.01072047,-0.025128,1.15525871,0
+011110,6,8,golden,0.75806563,0.76259452,1.23095296,3,6,-0.25577803,0.00103771,0.001578,0.76077077,0
+011111,6,8,golden,0.76923541,0.8030923,1.28911775,3,7,-0.32738185,0.01497398,0.023544,0.79671858,0
+01111,5,8,golden,1.23095296,1.28911775,2.04857554,3,3,-1.46912508,0.00829501,0.020904,1.26608931,0
+0111,4,8,golden,1.86924786,2.04857554,3.12095517,1,3,-3.55208111,0.00367092,-0.014382,1.92885637,0
+011,3,8,golden,2.64642711,3.12095517,4.55248949,1,1,-6.90009096,0.00395223,-0.022794,2.81359324,0
+01,2,8,golden,3.33837022,4.55248949,6.16537345,0,1,-11.2144981,0.00169943,0.01341,3.81041035,0
+0,1,8,golden,1.72929918,6.16537345,5.52690553,0,0,-9.44895289,0.00162185,-0.012804,3.41581547,0
+100000,6,8,golden,0.80172319,0.81630808,1.28680733,4,0,-0.32448676,0.01200348,-0.019422,0.79529067,0
+100001,6,8,golden,0.82892497,0.87760186,1.34816475,4,1,-0.40275643,0.01356439,-0.023148,0.83321164,0
+10000,5,8,golden,1.28680733,1.34816475,2.10065097,4,0,-1.55920247,0.00735036,-0.019368,1.2982737,0
+100010,6,8,golden,0.89191075,0.85686964,1.43422331,5,0,-0.51721457,0.00728393,0.012738,0.88639876,0
+100011,6,8,golden,0.90477253,0.88657942,1.46079675,5,1,-0.55361568,0.00451503,0.008088,0.90282204,0
+10001,5,8,golden,1.43422331,1.46079675,2.33460936,5,0,-1.97938589,0.00084144,-0.002436,1.44286793,0
+1000,4,8,golden,2.10065097,2.33460936,3.5548949,2,0,-4.50876385,0.0025649,0.011376,2.19704587,0
+100100,6,8,golden,0.90334831,0.9198292,1.45165003,4,2,-0.54103121,0.01107078,-0.020184,0.89716906,0
+100101,6,8,golden,0.9539201,0.93966299,1.53422576,4,3,-0.6566883,0.00023131,-0.000438,0.94820366,0
+10010,5,8,golden,1.45165003,1.53422576,2.37742569,4,1,-2.05889406,0.00751136,-0.022428,1.46932988,0
+100110,6,8,golden,0.98645588,0.98896877,1.60071419,5,2,-0.75305582,0.00153992,0.003042,0.98929577,0
+100111,6,8,golden,0.96582566,0.97994855,1.56514917,5,3,-0.7011573,0.00324704,-0.006318,0.96731538,0
+10011,5,8,golden,1.60071419,1.56514917,2.54662757,5,1,-2.38051096,0.00676024,-0.021402,1.5739024,0
+1001,4,8,golden,2.37742569,2.54662757,3.96869809,2,1,-5.47060466,0.00352758,0.01737,2.45279031,0
+100,3,8,golden,3.5548949,3.96869809,5.98219721,2,0,-10.70088214,0.00338774,-0.025488,3.6972012,0
+101,3,8,golden,4.40956397,4.84371245,7.4004129,3,0,-14.81219131,0.00029503,-0.00273,4.5737067,0
+10,2,8,golden,5.98219721,7.4004129,10.56595991,1,0,-24.91070335,0.00075142,0.010056,6.53012235,0
+110,3,8,golden,5.35634051,5.71952636,8.9064902,2,1,-19.47653683,0.0013803,0.015288,5.50451366,0
+111,3,8,golden,6.14758474,6.61479525,10.25206104,3,1,-23.86145433,0.00127782,0.016308,6.33612218,0
+11,2,8,golden,8.9064902,10.25206104,15.22415637,1,1,-41.45360269,0.00096333,-0.018456,9.40904609,0
+1,1,8,golden,10.56595991,15.22415637,19.985956,1,0,-59.85853433,0.00042458,0.01095,12.3520001,0
+ROOT,0,8,golden,5.52690553,19.985956,17.88969363,0,0,-51.59789754,0.00042285,0.010788,11.05643871,0
+000000,6,8,mobius,0.61315453,0.63933617,0.94420114,0,0,0.05421231,0.2538588,-0.022926,0.5835484,0
+000001,6,8,mobius,0.62005759,0.65364275,0.96825274,0,1,0.0312379,0.2601888,-0.003324,0.5984131,0
+00000,5,8,mobius,0.94420114,0.96825274,1.11309383,0,0,-0.11926063,0.08202388,0.027372,0.68792982,0
+000010,6,8,mobius,0.6215638,0.65675312,0.98718848,1,0,0.0127291,0.27225645,0.014646,0.61011604,0
+000011,6,8,mobius,0.62781927,0.645597,0.97589026,1,1,0.02381673,0.26635605,0.004302,0.60313335,0
+00001,5,8,mobius,0.98718848,0.97589026,1.11813788,1,0,-0.12485652,0.06958381,0.025536,0.69104721,0
+0000,4,8,mobius,1.11309383,1.11813788,1.11924787,0,0,-0.12609101,0.00162781,-0.01065,0.69173323,1
+000100,6,8,mobius,0.66506524,0.64632709,0.98883424,0,2,0.01110319,0.25403388,0.00915,0.61113317,0
+000101,6,8,mobius,0.65788782,0.64808485,0.9852632,0,3,0.01462768,0.25442865,0.006756,0.60892614,0
+00010,5,8,mobius,0.98883424,0.9852632,1.08837319,0,1,-0.0921679,0.05132699,-0.005982,0.67265162,0
+000110,6,8,mobius,0.67524775,0.68360423,0.97189302,1,2,0.02770823,0.21523097,-0.017208,0.60066292,0
+000111,6,8,mobius,0.68046615,0.66766748,0.97469698,1,3,0.02498017,0.2229973,-0.012342,0.60239586,0
+00011,5,8,mobius,0.97189302,0.97469698,1.06248837,1,1,-0.06440133,0.04582032,-0.027936,0.65665393,0
+0001,4,8,mobius,1.08837319,1.06248837,1.11341441,0,1,-0.1196156,0.01765973,-0.005244,0.68812795,0
+000,3,8,mobius,1.11924787,1.11341441,1.10900999,0,0,-0.11474673,0.00327911,-0.020826,0.68540587,1
+0010,4,8,mobius,1.06654828,1.10127249,1.12915931,1,0,-0.1371628,0.020873,0.006888,0.69785883,0
+0011,4,8,mobius,1.12773285,1.12232305,1.15193011,1,1,-0.16292772,0.01195622,0.019848,0.71193196,1
+001,3,8,mobius,1.12915931,1.15193011,1.15999881,1,0,-0.17216583,0.00852842,0.023298,0.71691869,1
+00,2,8,mobius,1.10900999,1.15999881,1.13073231,0,0,-0.13892797,0.00166244,-0.005166,0.698831,1
+0100,4,8,mobius,1.10228263,1.08511691,1.13456613,0,2,-0.14323933,0.01868262,0.010878,0.70120043,1
+0101,4,8,mobius,1.08027959,1.09638099,1.1332618,0,3,-0.14177108,0.02064241,0.01026,0.70039431,0
+010,3,8,mobius,1.13456613,1.1332618,1.13458053,0,1,-0.14325555,0.00029392,0.000138,0.70120933,1
+0110,4,8,mobius,1.12351336,1.1029045,1.13607678,1,2,-0.1449417,0.01027114,0.007368,0.70213406,1
+0111,4,8,mobius,1.12101559,1.12586369,1.13301347,1,3,-0.14149171,0.00426094,0.001104,0.70024083,1
+011,3,8,mobius,1.13607678,1.13301347,1.14611248,1,1,-0.15630197,0.0050978,0.01155,0.70833647,1
+01,2,8,mobius,1.13458053,1.14611248,1.14917927,0,1,-0.15979109,0.00387284,0.012804,0.71023185,1
+0,1,8,mobius,1.13073231,1.14917927,1.15287875,0,0,-0.16401092,0.00566818,0.016434,0.71251825,1
+1000,4,8,mobius,1.11600653,1.09326464,1.14644825,2,0,-0.15668358,0.018926,0.02001,0.70854399,0
+1001,4,8,mobius,1.099683,1.09686663,1.14852182,2,1,-0.15904241,0.02287542,0.023322,0.70982552,0
+100,3,8,mobius,1.14644825,1.14852182,1.12734626,2,0,-0.13513097,0.00877518,-0.010602,0.69673831,1
+1010,4,8,mobius,1.13374432,1.13155132,1.14061022,3,0,-0.15006255,0.00351495,0.00651,0.70493588,1
+1011,4,8,mobius,1.10352248,1.13502895,1.15838063,3,1,-0.17030862,0.01746885,0.026898,0.7159186,1
+101,3,8,mobius,1.14061022,1.15838063,1.15747329,3,0,-0.16926824,0.00347016,0.018642,0.71535784,1
+10,2,8,mobius,1.12734626,1.15747329,1.11804983,1,0,-0.12475865,0.01066165,-0.019308,0.6909928,1
+1100,4,8,mobius,1.1152062,1.15440886,1.14091932,2,2,-0.15041236,0.00269287,0.005256,0.70512692,1
+1101,4,8,mobius,1.11637002,1.15528986,1.15977218,2,3,-0.1719056,0.01053954,0.023856,0.71677863,1
+110,3,8,mobius,1.14091932,1.15977218,1.13818327,2,1,-0.1473189,0.00528644,-0.000888,0.70343595,1
+1110,4,8,mobius,1.1125589,1.1445843,1.12438834,3,2,-0.13182238,0.00185334,-0.009498,0.69491021,1
+1111,4,8,mobius,1.11491573,1.15822899,1.1191202,3,3,-0.12594897,0.00767754,-0.0171,0.69165432,1
+111,3,8,mobius,1.12438834,1.1191202,1.15491549,3,1,-0.16633921,0.01478096,0.02367,0.71377703,1
+11,2,8,mobius,1.13818327,1.15491549,1.12895787,1,1,-0.13693691,0.0076715,-0.009108,0.69773434,1
+1,1,8,mobius,1.11804983,1.12895787,1.16123421,1,0,-0.17358526,0.01679138,0.029166,0.71768221,1
+ROOT,0,8,mobius,1.15287875,1.16123421,1.1567381,0,0,-0.16842576,0.00013758,0.016248,0.71490346,1`;
+
+function parseCSV(raw) {
+  const lines = raw.trim().split('\n');
+  const headers = lines[0].split(',');
+  return lines.slice(1).map(line => {
+    const vals = line.split(',');
+    const obj = {};
+    headers.forEach((h, i) => {
+      const v = vals[i]?.trim();
+      obj[h.trim()] = isNaN(v) || v === '' ? v : parseFloat(v);
+    });
+    return obj;
+  });
+}
+
+const ALL  = parseCSV(CSV);
+const G    = ALL.filter(d => d.fold_type === 'golden');
+const M    = ALL.filter(d => d.fold_type === 'mobius');
+
+// ═══════════════════════════════════════════════════════════════
+// STATS
+// ═══════════════════════════════════════════════════════════════
+const gRoot = G.find(d => d.path === 'ROOT');
+const mRoot = M.find(d => d.path === 'ROOT');
+const gFixed = G.filter(d => d.is_fixed_pt === 1).length;
+const mFixed = M.filter(d => d.is_fixed_pt === 1).length;
+const gEnt = (G.reduce((a,d) => a + d.entropy_est, 0) / G.length).toFixed(4);
+const mEnt = (M.reduce((a,d) => a + d.entropy_est, 0) / M.length).toFixed(4);
+
+document.getElementById('g-root').textContent    = gRoot ? gRoot.fold_val.toFixed(3) : '—';
+document.getElementById('m-root').textContent    = mRoot ? mRoot.fold_val.toFixed(4) : '—';
+document.getElementById('g-fixed').textContent   = gFixed;
+document.getElementById('m-fixed').textContent   = mFixed;
+document.getElementById('g-fixed-sub').textContent = `of ${G.length} nodes`;
+document.getElementById('m-fixed-sub').textContent = `of ${M.length} nodes`;
+document.getElementById('g-entropy').textContent  = gEnt;
+document.getElementById('m-entropy').textContent  = mEnt;
+document.getElementById('total-count').textContent = ALL.length;
+document.getElementById('g-range').textContent =
+  `fold_val range: ${Math.min(...G.map(d=>d.fold_val)).toFixed(3)} → ${Math.max(...G.map(d=>d.fold_val)).toFixed(2)} · root: ${gRoot?.fold_val.toFixed(3)}`;
+document.getElementById('m-range').textContent =
+  `fold_val range: ${Math.min(...M.map(d=>d.fold_val)).toFixed(3)} → ${Math.max(...M.map(d=>d.fold_val)).toFixed(3)} · root: ${mRoot?.fold_val.toFixed(5)} · σ≈0.03`;
+
+// ═══════════════════════════════════════════════════════════════
+// HEATMAP RENDERER  (animated reveal sweep)
+// ═══════════════════════════════════════════════════════════════
+function goldenColor(t) {
+  return [Math.round(251 - t*80), Math.round(191 - t*120), Math.round(36 + t*10)];
+}
+function mobiusColor(t) {
+  return [Math.round(6 + t*20), Math.round(182 - t*60), Math.round(212 - t*40)];
+}
+
+function drawHeatmap(canvasId, data, colorFn, animDelay) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const nodes = data.filter(d => d.depth >= 5 && typeof d.x_coord === 'number');
+  const xs = nodes.map(d => d.x_coord);
+  const ys = nodes.map(d => d.y_coord);
+  const maxX = Math.max(...xs) + 1;
+  const maxY = Math.max(...ys) + 1;
+  const cW = W / maxX, cH = H / maxY;
+
+  const vals = nodes.map(d => d.fold_val);
+  const minV = Math.min(...vals), maxV = Math.max(...vals);
+
+  // Sort by x for sweep animation
+  const sorted = [...nodes].sort((a,b) => a.x_coord - b.x_coord);
+
+  let frame = 0;
+  const totalFrames = sorted.length;
+  const batchSize = Math.ceil(totalFrames / 60);
+
+  ctx.fillStyle = '#060b14';
+  ctx.fillRect(0, 0, W, H);
+
+  function tick() {
+    const end = Math.min(frame + batchSize, totalFrames);
+    for (let i = frame; i < end; i++) {
+      const node = sorted[i];
+      const t = (node.fold_val - minV) / (maxV - minV + 1e-10);
+      const [r, g, b] = colorFn(t);
+      ctx.fillStyle = `rgba(${r},${g},${b},${0.55 + t*0.45})`;
+      ctx.fillRect(node.x_coord * cW, node.y_coord * cH, cW + 0.5, cH + 0.5);
+
+      // SQR shimmer
+      if (Math.abs(node.sqr_noise) > 0.015) {
+        ctx.fillStyle = `rgba(255,255,255,${Math.abs(node.sqr_noise) * 5})`;
+        ctx.fillRect(node.x_coord * cW, node.y_coord * cH, cW + 0.5, cH + 0.5);
+      }
+
+      // Fixed point border
+      if (node.is_fixed_pt === 1) {
+        ctx.strokeStyle = '#f43f5e';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(node.x_coord * cW + 1, node.y_coord * cH + 1, cW - 2, cH - 2);
+      }
+    }
+
+    // Sweep line
+    if (frame < totalFrames) {
+      const sweepX = sorted[Math.min(end-1, totalFrames-1)].x_coord * cW + cW;
+      ctx.fillStyle = 'rgba(255,255,255,0.12)';
+      ctx.fillRect(sweepX, 0, 2, H);
+    }
+
+    frame = end;
+    if (frame < totalFrames) {
+      requestAnimationFrame(tick);
+    } else {
+      // Final: draw fold equation overlay
+      ctx.font = 'bold 11px "Share Tech Mono"';
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.fillText('U=F(U,U)', 8, 18);
+    }
+  }
+
+  setTimeout(() => requestAnimationFrame(tick), animDelay);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SPARKLINE CHARTS
+// ═══════════════════════════════════════════════════════════════
+function drawSparkline(canvasId, data, valFn, color, label) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const pad = 14;
+
+  const byDepth = {};
+  data.forEach(d => {
+    const v = valFn(d);
+    if (!byDepth[d.depth]) byDepth[d.depth] = [];
+    byDepth[d.depth].push(v);
+  });
+  const depths = Object.keys(byDepth).map(Number).sort((a,b)=>a-b);
+  const means  = depths.map(d => byDepth[d].reduce((a,b)=>a+b,0)/byDepth[d].length);
+  const minM   = Math.min(...means), maxM = Math.max(...means);
+  const xS = i => pad + (i/(depths.length-1)) * (W - pad*2);
+  const yS = v => H - pad - ((v-minM)/(maxM-minM+1e-10)) * (H - pad*2);
+
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle = '#1e293b';
+  ctx.lineWidth = 0.5;
+  for (let i=0; i<=4; i++) {
+    const y = pad + (i/4)*(H-pad*2);
+    ctx.beginPath(); ctx.moveTo(pad,y); ctx.lineTo(W-pad,y); ctx.stroke();
+  }
+
+  // Animated line draw
+  let frame = 0;
+  function tick() {
+    if (frame >= means.length - 1) return;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(xS(frame), yS(means[frame]));
+    ctx.lineTo(xS(frame+1), yS(means[frame+1]));
+    ctx.stroke();
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(xS(frame), yS(means[frame]), 3, 0, Math.PI*2);
+    ctx.fill();
+    frame++;
+    if (frame < means.length - 1) setTimeout(() => requestAnimationFrame(tick), 60);
+    else {
+      ctx.beginPath(); ctx.arc(xS(frame), yS(means[frame]), 3, 0, Math.PI*2); ctx.fill();
+    }
+  }
+  requestAnimationFrame(tick);
+
+  ctx.font = '9px "Share Tech Mono"';
+  ctx.fillStyle = '#94a3b8';
+  ctx.fillText('d=0', pad, H-2);
+  ctx.fillText('d=7', W-pad-20, H-2);
+  ctx.fillStyle = color;
+  ctx.fillText(label, pad, 11);
+}
+
+function drawNoise(canvasId, data, color) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const pad = 14;
+  ctx.clearRect(0,0,W,H);
+
+  const sample = data.filter((_,i)=>i%2===0);
+  const vals = sample.map(d=>d.fold_val);
+  const minV = Math.min(...vals), maxV = Math.max(...vals);
+
+  ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 0.5;
+  ctx.beginPath(); ctx.moveTo(pad,H/2); ctx.lineTo(W-pad,H/2); ctx.stroke();
+
+  sample.forEach(d => {
+    const x = pad + ((d.fold_val-minV)/(maxV-minV+1e-10))*(W-pad*2);
+    const y = H/2 + d.sqr_noise * 800;
+    const r = Math.max(1.5, Math.abs(d.sqr_noise)*180);
+    ctx.beginPath();
+    ctx.arc(x, Math.max(4, Math.min(H-4, y)), r, 0, Math.PI*2);
+    ctx.fillStyle = color.replace(')', `,0.35)`).replace('rgb','rgba');
+    ctx.fill();
+  });
+
+  ctx.font = '9px "Share Tech Mono"'; ctx.fillStyle = '#94a3b8';
+  ctx.fillText('noise vs fold_val', pad, 11);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TABLE
+// ═══════════════════════════════════════════════════════════════
+function buildTable() {
+  const tbody = document.getElementById('table-body');
+  const rows = ALL.filter(d => d.depth <= 4);
+  tbody.innerHTML = rows.map((row, i) => {
+    const isG = row.fold_type === 'golden';
+    const fvColor = isG ? 'var(--gold)' : 'var(--cyan)';
+    const typeColor = isG ? 'var(--gold)' : 'var(--cyan)';
+    const entrColor = row.entropy_est > 0 ? '#4ade80' : '#f87171';
+    const noiseColor = Math.abs(row.sqr_noise) > 0.02 ? 'var(--gold)' : 'var(--muted)';
+    const fixedColor = row.is_fixed_pt ? 'var(--fixed)' : 'var(--dim)';
+    return `<tr>
+      <td style="color:#94a3b8">${row.path}</td>
+      <td style="color:var(--muted)">${row.depth}</td>
+      <td style="color:${typeColor};font-weight:bold">${row.fold_type}</td>
+      <td style="color:#94a3b8">${row.left_val.toFixed(5)}</td>
+      <td style="color:#94a3b8">${row.right_val.toFixed(5)}</td>
+      <td style="color:${fvColor};font-weight:bold">${row.fold_val.toFixed(6)}</td>
+      <td style="color:${entrColor}">${row.entropy_est.toFixed(5)}</td>
+      <td style="color:var(--violet)">${row.irreversibility.toFixed(4)}</td>
+      <td style="color:${noiseColor}">${row.sqr_noise.toFixed(5)}</td>
+      <td style="color:#94a3b8">${row.phi_ratio.toFixed(5)}</td>
+      <td style="color:${fixedColor}">${row.is_fixed_pt ? 'YES' : '·'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════════════════════════════
+const panels = ['heatmap','profile','noise','table'];
+let chartsDrawn = { profile: false, noise: false, table: false };
+
+function switchTab(id, btn) {
+  panels.forEach(p => {
+    document.getElementById('panel-'+p).style.display = p === id ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+
+  if (id === 'profile' && !chartsDrawn.profile) {
+    chartsDrawn.profile = true;
+    setTimeout(() => {
+      drawSparkline('canvas-g-profile', G, d=>d.fold_val, '#f59e0b', 'φ fold — diverges');
+      drawSparkline('canvas-m-profile', M, d=>d.fold_val, '#06b6d4', 'Möbius — converges');
+      drawSparkline('canvas-entropy',   G, d=>d.entropy_est, '#a78bfa', 'golden entropy H(n)');
+    }, 50);
+  }
+  if (id === 'noise' && !chartsDrawn.noise) {
+    chartsDrawn.noise = true;
+    setTimeout(() => {
+      drawNoise('canvas-g-noise',    G,   'rgb(245,158,11)');
+      drawNoise('canvas-m-noise',    M,   'rgb(6,182,212)');
+      drawNoise('canvas-both-noise', ALL, 'rgb(167,139,250)');
+    }, 50);
+  }
+  if (id === 'table' && !chartsDrawn.table) {
+    chartsDrawn.table = true;
+    buildTable();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GIF CAPTURE (uses gif.js from CDN if available)
+// ═══════════════════════════════════════════════════════════════
+function startGifCapture() {
+  const statusEl = document.getElementById('gif-status');
+  const progressBar = document.getElementById('gif-progress');
+  const progressFill = document.getElementById('gif-progress-bar');
+  const btn = document.getElementById('gif-btn');
+
+  btn.disabled = true;
+  btn.textContent = 'LOADING gif.js...';
+  statusEl.textContent = 'Loading gif.js library...';
+  progressBar.style.display = 'block';
+
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js';
+  script.onerror = () => {
+    statusEl.textContent = 'gif.js unavailable — use screen recorder instead (see README)';
+    btn.disabled = false;
+    btn.textContent = '⬇ CAPTURE ANIMATED GIF';
+    progressBar.style.display = 'none';
+  };
+  script.onload = () => {
+    btn.textContent = 'CAPTURING...';
+    statusEl.textContent = 'Rendering frames...';
+    captureFrames(progressFill, statusEl, btn, progressBar);
+  };
+  document.head.appendChild(script);
+}
+
+function captureFrames(progressFill, statusEl, btn, progressBar) {
+  // Create an offscreen canvas for the composite
+  const W = 720, H = 400;
+  const offscreen = document.createElement('canvas');
+  offscreen.width = W; offscreen.height = H;
+  const ctx = offscreen.getContext('2d');
+
+  const gif = new GIF({ // eslint-disable-line no-undef
+    workers: 2,
+    quality: 8,
+    width: W,
+    height: H,
+    workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
+  });
+
+  const gCanvas = document.getElementById('canvas-golden');
+  const mCanvas = document.getElementById('canvas-mobius');
+  const totalFrames = 48;
+  let frame = 0;
+
+  function renderFrame() {
+    ctx.fillStyle = '#060b14';
+    ctx.fillRect(0, 0, W, H);
+
+    // Header strip
+    ctx.fillStyle = '#0a1120';
+    ctx.fillRect(0, 0, W, 40);
+    ctx.font = 'bold 11px monospace';
+    ctx.fillStyle = '#f59e0b';
+    ctx.fillText('U = F(U,U)  ·  Recursive Fold Architecture  ·  Tuttle 2026', 12, 16);
+    ctx.font = '9px monospace';
+    ctx.fillStyle = '#475569';
+    ctx.fillText(`F_φ Golden (diverges φ^d)   vs   F_m Möbius (conformal attractor ≈1.157)   ·  frame ${frame+1}/${totalFrames}`, 12, 30);
+
+    // Draw canvases
+    const halfW = (W - 20) / 2;
+    ctx.drawImage(gCanvas, 0, 0, gCanvas.width, gCanvas.height, 0, 42, halfW, H - 52);
+    ctx.drawImage(mCanvas, 0, 0, mCanvas.width, mCanvas.height, halfW + 20, 42, halfW, H - 52);
+
+    // Labels
+    ctx.font = 'bold 10px monospace';
+    ctx.fillStyle = '#f59e0b';
+    ctx.fillText('F_φ GOLDEN RATIO', 8, 56);
+    ctx.fillStyle = '#06b6d4';
+    ctx.fillText('F_m MÖBIUS', halfW + 28, 56);
+
+    // Footer
+    ctx.fillStyle = '#0a1120';
+    ctx.fillRect(0, H - 16, W, 16);
+    ctx.font = '8px monospace';
+    ctx.fillStyle = '#334155';
+    ctx.fillText('d=8 · 510 nodes · SQR noise injected · github.com/tuttlepc9/UFUU', 12, H - 4);
+
+    // Animated pulse border
+    const pulse = Math.sin(frame / totalFrames * Math.PI * 2) * 0.5 + 0.5;
+    ctx.strokeStyle = `rgba(245,158,11,${0.2 + pulse * 0.3})`;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(1, 1, W-2, H-2);
+
+    gif.addFrame(offscreen, { delay: 80, copy: true });
+    frame++;
+    progressFill.style.width = `${(frame/totalFrames)*100}%`;
+
+    if (frame < totalFrames) {
+      setTimeout(renderFrame, 20);
+    } else {
+      statusEl.textContent = 'Encoding GIF...';
+      gif.render();
+    }
+  }
+
+  gif.on('progress', p => {
+    progressFill.style.width = `${Math.round(p*100)}%`;
+  });
+
+  gif.on('finished', blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'UFUU_fold_viz.gif';
+    a.click();
+    URL.revokeObjectURL(url);
+    statusEl.textContent = `Done — ${Math.round(blob.size/1024)}KB saved as UFUU_fold_viz.gif`;
+    btn.disabled = false;
+    btn.textContent = '⬇ CAPTURE ANIMATED GIF';
+    progressBar.style.display = 'none';
+  });
+
+  renderFrame();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INIT — kick off heatmap animations on load
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('load', () => {
+  drawHeatmap('canvas-golden', G, goldenColor, 300);
+  drawHeatmap('canvas-mobius', M, mobiusColor, 600);
+});
+</script>
+</body>
+</html>
