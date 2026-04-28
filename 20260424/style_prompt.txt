@@ -1,0 +1,12 @@
+MASTER STYLE PROMPT — U = F(U, U) Visual Language
+“A square 1:1 high‑detail sci‑fi visualization in the canonical ‘U = F(U, U)’ style.
+Deep‑navy cosmic background with subtle star‑field texture.
+Primary color system: cyan for geometry and manifolds, magenta for recursion depth and discrete transitions, yellow for oscillatory macro‑states, white‑blue for singularities and fixed points.
+All elements glow softly according to semantic meaning: cyan outward, magenta inward, yellow along curves, white radially.
+Composition follows a left‑to‑right epistemic flow: micro → bridge → macro.
+Micro side uses discrete structures (basin graphs, nodes, SCCs, recursion trees) with magenta/white accents.
+Bridge region shows alignment structures (critical points, diagonal or curved manifold lines, octave markers) in cyan/yellow.
+Macro side uses smooth geometric or physical structures (bifurcation curves, curved spacetime grids, plasma folds, spirals) in cyan/violet.
+Typography: modern geometric sans‑serif, thin weights, subtle glow; title ‘U = F(U, U)’ appears at top unless otherwise specified.
+Graphical motifs include: micro‑basin transition graphs, MERA‑like tensor networks, curved spacetime funnels, Russell octave spirals, plasma‑fold fractal textures.
+Overall aesthetic: elegant, cosmic, mathematically precise, data‑dense, and unified — a scientific instrument from a future physics.”

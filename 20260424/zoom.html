@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFUU — U = F(U, U) • Recursive Binary Fold Universe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #0f0;
+            font-family: 'VT323', monospace;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px 20px;
+            border-bottom: 2px solid #0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 0 0 10px #0f0;
+        }
+        
+        .info {
+            font-size: 18px;
+            color: #ff0;
+        }
+        
+        canvas {
+            flex: 1;
+            image-rendering: pixelated;
+            cursor: crosshair;
+        }
+        
+        .controls {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 12px 20px;
+            border-top: 2px solid #0f0;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 16px;
+        }
+        
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        label {
+            min-width: 120px;
+            color: #0ff;
+        }
+        
+        input[type="range"] {
+            accent-color: #0f0;
+        }
+        
+        .value {
+            min-width: 50px;
+            font-family: monospace;
+            color: #ff0;
+        }
+        
+        .instructions {
+            font-size: 14px;
+            color: #0ff;
+            max-width: 420px;
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 8px;
+            left: 20px;
+            font-size: 13px;
+            color: #666;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>UFUU — U = F(U, U)</h1>
+            <div class="info" id="status">Recursive Binary Fold Universe • Tuttle’s Triad Live</div>
+        </div>
+        <div class="info" id="coords" style="text-align: right;">
+            Zoom ×<span id="zoom">1.00</span><br>
+            Center (<span id="cx">-0.300</span>, <span id="cy">0.000</span>)
+        </div>
+    </header>
+
+    <canvas id="canvas" width="1200" height="800"></canvas>
+
+    <div class="controls">
+        <div class="slider-group">
+            <label>ε (asymmetry)</label>
+            <input type="range" id="eps" min="0" max="2" step="0.001" value="0.618">
+            <span class="value" id="eps-val">0.618</span>
+        </div>
+        
+        <div class="slider-group">
+            <label>α (nonlinearity)</label>
+            <input type="range" id="alpha" min="0" max="2" step="0.001" value="0.420">
+            <span class="value" id="alpha-val">0.420</span>
+        </div>
+        
+        <div class="slider-group">
+            <label>β (irreversibility)</label>
+            <input type="range" id="beta" min="0" max="0.2" step="0.001" value="0.037">
+            <span class="value" id="beta-val">0.037</span>
+        </div>
+        
+        <button onclick="resetView()" style="background:#0f0;color:#000;font-family:VT323;padding:4px 16px;border:none;cursor:pointer;">RESET UNIVERSE</button>
+        
+        <div class="instructions">
+            🌀 MOUSE WHEEL = Zoom in/out<br>
+            DRAG = Pan<br>
+            CLICK = Recenter + zoom in<br>
+            RIGHT-CLICK = Zoom out<br>
+            Sliders = Live edit Tuttle’s Triad
+        </div>
+    </div>
+
+    <div class="footer">
+        U = F(U, U) • Non-commutative • Nonlinear • Partially Irreversible • Infinite depth
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width = canvas.width;
+        let height = canvas.height;
+        
+        // Tuttle’s Recursive Binary Fold
+        class RecursiveFold {
+            constructor() {
+                this.ε = 0.618;     // asymmetry / non-commutativity
+                this.α = 0.420;     // nonlinearity
+                this.β = 0.037;     // partial irreversibility
+            }
+            
+            F(a, b) {
+                const avg = (a + b) / 2;
+                const diff = a - b;
+                // Nonlinear term — creates rich emergent structures
+                const nl = this.α * Math.sin(a * b * 1.618 + a * a - b * b);
+                // Partial irreversibility (entropy)
+                const loss = this.β * (Math.random() * 0.02 - 0.01);
+                return avg + this.ε * diff + nl + loss;
+            }
+            
+            iterate(cx, cy, maxIter = 120) {
+                let zReal = 0;
+                let zImag = 0;
+                
+                for (let i = 0; i < maxIter; i++) {
+                    // Double-fold for richer recursion tree
+                    const z1Real = this.F(zReal, cx);
+                    const z1Imag = this.F(zImag, cy);
+                    
+                    const z2Real = this.F(cx, zReal) * 0.5;
+                    const z2Imag = this.F(cy, zImag) * 0.5;
+                    
+                    zReal = z1Real + z2Real;
+                    zImag = z1Imag + z2Imag;
+                    
+                    const magnitude = zReal * zReal + zImag * zImag;
+                    if (magnitude > 16) return i;  // escape
+                }
+                return maxIter; // stable fixed point
+            }
+        }
+        
+        let fold = new RecursiveFold();
+        let centerX = -0.3;
+        let centerY = 0.0;
+        let zoom = 1.0;
+        let maxIter = 120;
+        let isDragging = false;
+        let lastX = 0, lastY = 0;
+        
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight - 140; // header + controls
+            canvas.width = width;
+            canvas.height = height;
+        }
+        
+        function getPixelValue(px, py) {
+            // Convert screen coord to world coord
+            const worldX = centerX + (px - width / 2) / (zoom * 180);
+            const worldY = centerY + (py - height / 2) / (zoom * 180);
+            return fold.iterate(worldX, worldY, maxIter);
+        }
+        
+        function render() {
+            const imageData = ctx.createImageData(width, height);
+            const data = imageData.data;
+            
+            const startTime = performance.now();
+            
+            // Progress feedback
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = `GENERATING FOLD UNIVERSE @ ZOOM ×${zoom.toFixed(2)}...`;
+            
+            let index = 0;
+            for (let py = 0; py < height; py++) {
+                for (let px = 0; px < width; px++) {
+                    const iter = getPixelValue(px, py);
+                    
+                    // Cosmic coloring (inferno-inspired)
+                    let r, g, b;
+                    if (iter === maxIter) {
+                        // Stable structures = bright core
+                        r = g = b = 255;
+                    } else {
+                        const hue = (iter / maxIter) * 360;
+                        const brightness = 1 - (iter / maxIter);
+                        const color = hslToRgb(hue / 360, 1, brightness * 0.9);
+                        r = color[0];
+                        g = color[1];
+                        b = color[2];
+                    }
+                    
+                    data[index]     = r;
+                    data[index + 1] = g;
+                    data[index + 2] = b;
+                    data[index + 3] = 255;
+                    index += 4;
+                }
+                
+                // Occasional UI refresh so it doesn't freeze
+                if (py % 40 === 0) {
+                    ctx.putImageData(imageData, 0, 0);
+                }
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+            
+            // Update UI
+            const elapsed = (performance.now() - startTime).toFixed(0);
+            statusEl.textContent = `U = F(U, U) • Generated in ${elapsed}ms • Tuttle’s Triad`;
+            
+            document.getElementById('zoom').textContent = zoom.toFixed(2);
+            document.getElementById('cx').textContent = centerX.toFixed(4);
+            document.getElementById('cy').textContent = centerY.toFixed(4);
+        }
+        
+        // Simple HSL to RGB (for beautiful cosmic colors)
+        function hslToRgb(h, s, l) {
+            let r, g, b;
+            if (s === 0) {
+                r = g = b = l;
+            } else {
+                const hue2rgb = (p, q, t) => {
+                    if (t < 0) t += 1;
+                    if (t > 1) t -= 1;
+                    if (t < 1/6) return p + (q - p) * 6 * t;
+                    if (t < 1/2) return q;
+                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                    return p;
+                };
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+            return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+        }
+        
+        function worldToScreen(wx, wy) {
+            const sx = width / 2 + (wx - centerX) * zoom * 180;
+            const sy = height / 2 + (wy - centerY) * zoom * 180;
+            return {x: sx, y: sy};
+        }
+        
+        function handleZoom(delta, mouseX, mouseY) {
+            const factor = delta > 0 ? 1.8 : 1 / 1.8;
+            
+            // Zoom toward mouse position
+            const worldBefore = {
+                x: centerX + (mouseX - width / 2) / (zoom * 180),
+                y: centerY + (mouseY - height / 2) / (zoom * 180)
+            };
+            
+            zoom *= factor;
+            
+            centerX = worldBefore.x - (mouseX - width / 2) / (zoom * 180);
+            centerY = worldBefore.y - (mouseY - height / 2) / (zoom * 180);
+            
+            render();
+        }
+        
+        function resetView() {
+            centerX = -0.3;
+            centerY = 0.0;
+            zoom = 1.0;
+            render();
+        }
+        
+        // Mouse controls
+        canvas.addEventListener('wheel', e => {
+            e.preventDefault();
+            handleZoom(e.deltaY, e.offsetX, e.offsetY);
+        });
+        
+        canvas.addEventListener('mousedown', e => {
+            if (e.button === 0) { // left click = recenter + zoom in
+                const worldX = centerX + (e.offsetX - width / 2) / (zoom * 180);
+                const worldY = centerY + (e.offsetY - height / 2) / (zoom * 180);
+                centerX = worldX;
+                centerY = worldY;
+                zoom *= 1.8;
+                render();
+            } else if (e.button === 2) { // right click = zoom out
+                zoom /= 1.8;
+                render();
+            } else {
+                isDragging = true;
+                lastX = e.offsetX;
+                lastY = e.offsetY;
+            }
+        });
+        
+        canvas.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+            const dx = (e.offsetX - lastX) / (zoom * 180);
+            const dy = (e.offsetY - lastY) / (zoom * 180);
+            centerX -= dx;
+            centerY -= dy;
+            lastX = e.offsetX;
+            lastY = e.offsetY;
+            render();
+        });
+        
+        canvas.addEventListener('mouseup', () => isDragging = false);
+        canvas.addEventListener('mouseleave', () => isDragging = false);
+        
+        // Parameter sliders
+        function updateSliders() {
+            fold.ε = parseFloat(document.getElementById('eps').value);
+            fold.α = parseFloat(document.getElementById('alpha').value);
+            fold.β = parseFloat(document.getElementById('beta').value);
+            
+            document.getElementById('eps-val').textContent = fold.ε.toFixed(3);
+            document.getElementById('alpha-val').textContent = fold.α.toFixed(3);
+            document.getElementById('beta-val').textContent = fold.β.toFixed(3);
+            
+            render();
+        }
+        
+        document.getElementById('eps').addEventListener('input', updateSliders);
+        document.getElementById('alpha').addEventListener('input', updateSliders);
+        document.getElementById('beta').addEventListener('input', updateSliders);
+        
+        // Keyboard support
+        document.addEventListener('keydown', e => {
+            if (e.key === 'r' || e.key === 'R') resetView();
+        });
+        
+        // Initial render
+        window.onload = () => {
+            resizeCanvas();
+            render();
+            
+            // Make canvas responsive
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                render();
+            });
+            
+            console.log('%c🌌 UFUU HTML5 Canvas Explorer ready! U = F(U, U) is now running in your browser.', 'color:#0f0; font-size:16px;');
+        };
+    </script>
+</body>
+</html>
