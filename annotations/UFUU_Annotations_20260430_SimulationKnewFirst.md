@@ -97,7 +97,7 @@ That's worth writing down.
 
 ## ONE FINAL NOTE
 
-There is a version of this observation that goes further than any notebook in the annotations folder should go. It involves the word "consciousness," the word "substrate," and the word "observer." It connects to the simulation hypothesis companion paper already in the repo. It connects to the Next Phase Cabal Discord topics.
+There is a version of this observation that goes further than any notebook in the annotations folder should go. It involves the word "consciousness," the word "substrate," and the word "observer." It connects to the simulation hypothesis companion paper already in the repo.
 
 That version is not written here because this is a research notebook and that version needs its own space.
 
