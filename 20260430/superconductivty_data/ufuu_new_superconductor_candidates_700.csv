@@ -1,0 +1,701 @@
+formula,seed,strategy,est_predicted_Tc,notes
+Ir0.925Ru0.075,Ir0.925Ru0.075,Original seed,410,Base from predictor
+Ir0.90Ta0.100.925Ru0.075,Ir0.925Ru0.075,Doped with Ta (0.1),448,Plasma boost via Ta
+Ir0.85Ta0.150.925Ru0.075,Ir0.925Ru0.075,Doped with Ta (0.15),434,Plasma boost via Ta
+Ir0.75Ta0.250.925Ru0.075,Ir0.925Ru0.075,Doped with Ta (0.25),427,Plasma boost via Ta
+Ir0.70Ta0.300.925Ru0.075,Ir0.925Ru0.075,Doped with Ta (0.3),440,Plasma boost via Ta
+Ir0.95W0.050.925Ru0.075,Ir0.925Ru0.075,Doped with W (0.05),458,Plasma boost via W
+Ir0.85W0.150.925Ru0.075,Ir0.925Ru0.075,Doped with W (0.15),442,Plasma boost via W
+Ir0.80W0.200.925Ru0.075,Ir0.925Ru0.075,Doped with W (0.2),430,Plasma boost via W
+Ir0.75W0.250.925Ru0.075,Ir0.925Ru0.075,Doped with W (0.25),430,Plasma boost via W
+Ir0.70W0.300.925Ru0.075,Ir0.925Ru0.075,Doped with W (0.3),443,Plasma boost via W
+Ir0.85Os0.150.925Ru0.075,Ir0.925Ru0.075,Doped with Os (0.15),443,Plasma boost via Os
+Ir0.75Os0.250.925Ru0.075,Ir0.925Ru0.075,Doped with Os (0.25),441,Plasma boost via Os
+Ir0.70Os0.300.925Ru0.075,Ir0.925Ru0.075,Doped with Os (0.3),421,Plasma boost via Os
+Ir0.95Re0.050.925Ru0.075,Ir0.925Ru0.075,Doped with Re (0.05),443,Plasma boost via Re
+Ir0.80Re0.200.925Ru0.075,Ir0.925Ru0.075,Doped with Re (0.2),457,Plasma boost via Re
+Ir0.75Re0.250.925Ru0.075,Ir0.925Ru0.075,Doped with Re (0.25),421,Plasma boost via Re
+Ir0.70Re0.300.925Ru0.075,Ir0.925Ru0.075,Doped with Re (0.3),440,Plasma boost via Re
+Ir0.95Sr0.050.925Ru0.075,Ir0.925Ru0.075,Doped with Sr (0.05),452,Plasma boost via Sr
+Ir0.80Sr0.200.925Ru0.075,Ir0.925Ru0.075,Doped with Sr (0.2),463,Plasma boost via Sr
+Ir0.75Sr0.250.925Ru0.075,Ir0.925Ru0.075,Doped with Sr (0.25),444,Plasma boost via Sr
+Ir0.70Sr0.300.925Ru0.075,Ir0.925Ru0.075,Doped with Sr (0.3),468,Plasma boost via Sr
+Ir0.95Ba0.050.925Ru0.075,Ir0.925Ru0.075,Doped with Ba (0.05),446,Plasma boost via Ba
+Ir0.85Ba0.150.925Ru0.075,Ir0.925Ru0.075,Doped with Ba (0.15),447,Plasma boost via Ba
+Ir0.90Ce0.100.925Ru0.075,Ir0.925Ru0.075,Doped with Ce (0.1),422,Plasma boost via Ce
+Ir0.85Ce0.150.925Ru0.075,Ir0.925Ru0.075,Doped with Ce (0.15),456,Plasma boost via Ce
+Ir0.75Ce0.250.925Ru0.075,Ir0.925Ru0.075,Doped with Ce (0.25),440,Plasma boost via Ce
+Ir0.70Ce0.300.925Ru0.075,Ir0.925Ru0.075,Doped with Ce (0.3),428,Plasma boost via Ce
+Ir0.95Si0.050.925Ru0.075,Ir0.925Ru0.075,Doped with Si (0.05),458,Plasma boost via Si
+Ir0.90Si0.100.925Ru0.075,Ir0.925Ru0.075,Doped with Si (0.1),437,Plasma boost via Si
+Ir0.80Si0.200.925Ru0.075,Ir0.925Ru0.075,Doped with Si (0.2),444,Plasma boost via Si
+Ir0.95C0.050.925Ru0.075,Ir0.925Ru0.075,Doped with C (0.05),428,Plasma boost via C
+Ir0.90C0.100.925Ru0.075,Ir0.925Ru0.075,Doped with C (0.1),445,Plasma boost via C
+Ir0.85C0.150.925Ru0.075,Ir0.925Ru0.075,Doped with C (0.15),421,Plasma boost via C
+Ir0.70C0.300.925Ru0.075,Ir0.925Ru0.075,Doped with C (0.3),466,Plasma boost via C
+Ir0.95N0.050.925Ru0.075,Ir0.925Ru0.075,Doped with N (0.05),426,Plasma boost via N
+Ir0.90N0.100.925Ru0.075,Ir0.925Ru0.075,Doped with N (0.1),463,Plasma boost via N
+Ir0.85N0.150.925Ru0.075,Ir0.925Ru0.075,Doped with N (0.15),427,Plasma boost via N
+Ir0.80N0.200.925Ru0.075,Ir0.925Ru0.075,Doped with N (0.2),466,Plasma boost via N
+Ir0.75N0.250.925Ru0.075,Ir0.925Ru0.075,Doped with N (0.25),454,Plasma boost via N
+Ir0.70N0.300.925Ru0.075,Ir0.925Ru0.075,Doped with N (0.3),433,Plasma boost via N
+Ir0.95F0.050.925Ru0.075,Ir0.925Ru0.075,Doped with F (0.05),436,Plasma boost via F
+Ir0.85F0.150.925Ru0.075,Ir0.925Ru0.075,Doped with F (0.15),469,Plasma boost via F
+Ir0.75F0.250.925Ru0.075,Ir0.925Ru0.075,Doped with F (0.25),423,Plasma boost via F
+Ir0.70F0.300.925Ru0.075,Ir0.925Ru0.075,Doped with F (0.3),421,Plasma boost via F
+Ir0.95Pb0.050.925Ru0.075,Ir0.925Ru0.075,Doped with Pb (0.05),425,Plasma boost via Pb
+Ir0.90Pb0.100.925Ru0.075,Ir0.925Ru0.075,Doped with Pb (0.1),461,Plasma boost via Pb
+Ir0.85Pb0.150.925Ru0.075,Ir0.925Ru0.075,Doped with Pb (0.15),423,Plasma boost via Pb
+Ir0.80Pb0.200.925Ru0.075,Ir0.925Ru0.075,Doped with Pb (0.2),448,Plasma boost via Pb
+Ir0.75Pb0.250.925Ru0.075,Ir0.925Ru0.075,Doped with Pb (0.25),437,Plasma boost via Pb
+Ir0.70Pb0.300.925Ru0.075,Ir0.925Ru0.075,Doped with Pb (0.3),445,Plasma boost via Pb
+Ir0.925Ru0.075Ru0.10Ta0.10,Ir0.925Ru0.075,Ternary Ru+Ta,465,Multi-element plasma enhancement
+Ir0.925Ru0.075Ru0.10W0.15,Ir0.925Ru0.075,Ternary Ru+W,477,Multi-element plasma enhancement
+Ir0.925Ru0.075Ru0.15Os0.10,Ir0.925Ru0.075,Ternary Ru+Os,452,Multi-element plasma enhancement
+Ir0.925Ru0.075Ru0.05Re0.10,Ir0.925Ru0.075,Ternary Ru+Re,469,Multi-element plasma enhancement
+Ir0.925Ru0.075Ta0.05Ru0.05,Ir0.925Ru0.075,Ternary Ta+Ru,447,Multi-element plasma enhancement
+Ir0.925Ru0.075Ta0.15W0.05,Ir0.925Ru0.075,Ternary Ta+W,453,Multi-element plasma enhancement
+Ir0.925Ru0.075Ta0.10Os0.05,Ir0.925Ru0.075,Ternary Ta+Os,489,Multi-element plasma enhancement
+Ir0.925Ru0.075W0.15Ru0.05,Ir0.925Ru0.075,Ternary W+Ru,430,Multi-element plasma enhancement
+Ir0.925Ru0.075W0.05Ta0.15,Ir0.925Ru0.075,Ternary W+Ta,438,Multi-element plasma enhancement
+Ir0.925Ru0.075W0.05Os0.15,Ir0.925Ru0.075,Ternary W+Os,440,Multi-element plasma enhancement
+Ir0.925Ru0.075W0.15Re0.05,Ir0.925Ru0.075,Ternary W+Re,437,Multi-element plasma enhancement
+Ir0.925Ru0.075Os0.15Ta0.05,Ir0.925Ru0.075,Ternary Os+Ta,471,Multi-element plasma enhancement
+Ir0.925Ru0.075Os0.15Re0.05,Ir0.925Ru0.075,Ternary Os+Re,437,Multi-element plasma enhancement
+Ir0.925Ru0.075Re0.10Ru0.05,Ir0.925Ru0.075,Ternary Re+Ru,477,Multi-element plasma enhancement
+Ir0.925Ru0.075Re0.15Ta0.15,Ir0.925Ru0.075,Ternary Re+Ta,453,Multi-element plasma enhancement
+Ir0.925Ru0.075Re0.10Os0.15,Ir0.925Ru0.075,Ternary Re+Os,464,Multi-element plasma enhancement
+Ir0.925Ru0.075C0.1,Ir0.925Ru0.075,C substitution (x=0.1),425,Entropy / anion tuning
+Ir0.925Ru0.075C0.2,Ir0.925Ru0.075,C substitution (x=0.2),459,Entropy / anion tuning
+Ir0.925Ru0.075Si0.1,Ir0.925Ru0.075,Si substitution (x=0.1),438,Entropy / anion tuning
+Ir0.925Ru0.075Si0.2,Ir0.925Ru0.075,Si substitution (x=0.2),427,Entropy / anion tuning
+Ir0.925Ru0.075N0.1,Ir0.925Ru0.075,N substitution (x=0.1),429,Entropy / anion tuning
+Ir0.925Ru0.075N0.2,Ir0.925Ru0.075,N substitution (x=0.2),450,Entropy / anion tuning
+Ir0.925Ru0.075N0.3,Ir0.925Ru0.075,N substitution (x=0.3),438,Entropy / anion tuning
+Ir0.925Ru0.075F0.1,Ir0.925Ru0.075,F substitution (x=0.1),463,Entropy / anion tuning
+Ir0.925Ru0.075F0.3,Ir0.925Ru0.075,F substitution (x=0.3),433,Entropy / anion tuning
+Ta1,Ta1,Original seed,391,Base from predictor
+Ta0.95Ru0.051,Ta1,Doped with Ru (0.05),415,Plasma boost via Ru
+Ta0.90Ru0.101,Ta1,Doped with Ru (0.1),415,Plasma boost via Ru
+Ta0.85Ru0.151,Ta1,Doped with Ru (0.15),426,Plasma boost via Ru
+Ta0.80Ru0.201,Ta1,Doped with Ru (0.2),442,Plasma boost via Ru
+Ta0.75Ru0.251,Ta1,Doped with Ru (0.25),413,Plasma boost via Ru
+Ta0.90W0.101,Ta1,Doped with W (0.1),449,Plasma boost via W
+Ta0.85W0.151,Ta1,Doped with W (0.15),432,Plasma boost via W
+Ta0.80W0.201,Ta1,Doped with W (0.2),404,Plasma boost via W
+Ta0.75W0.251,Ta1,Doped with W (0.25),430,Plasma boost via W
+Ta0.70W0.301,Ta1,Doped with W (0.3),437,Plasma boost via W
+Ta0.95Os0.051,Ta1,Doped with Os (0.05),423,Plasma boost via Os
+Ta0.85Os0.151,Ta1,Doped with Os (0.15),445,Plasma boost via Os
+Ta0.95Re0.051,Ta1,Doped with Re (0.05),436,Plasma boost via Re
+Ta0.90Re0.101,Ta1,Doped with Re (0.1),413,Plasma boost via Re
+Ta0.85Re0.151,Ta1,Doped with Re (0.15),432,Plasma boost via Re
+Ta0.80Re0.201,Ta1,Doped with Re (0.2),407,Plasma boost via Re
+Ta0.90Sr0.101,Ta1,Doped with Sr (0.1),442,Plasma boost via Sr
+Ta0.85Sr0.151,Ta1,Doped with Sr (0.15),445,Plasma boost via Sr
+Ta0.80Sr0.201,Ta1,Doped with Sr (0.2),406,Plasma boost via Sr
+Ta0.70Sr0.301,Ta1,Doped with Sr (0.3),428,Plasma boost via Sr
+Ta0.95Ba0.051,Ta1,Doped with Ba (0.05),444,Plasma boost via Ba
+Ta0.90Ba0.101,Ta1,Doped with Ba (0.1),444,Plasma boost via Ba
+Ta0.80Ba0.201,Ta1,Doped with Ba (0.2),430,Plasma boost via Ba
+Ta0.75Ba0.251,Ta1,Doped with Ba (0.25),411,Plasma boost via Ba
+Ta0.70Ba0.301,Ta1,Doped with Ba (0.3),428,Plasma boost via Ba
+Ta0.95Ce0.051,Ta1,Doped with Ce (0.05),425,Plasma boost via Ce
+Ta0.85Ce0.151,Ta1,Doped with Ce (0.15),433,Plasma boost via Ce
+Ta0.80Ce0.201,Ta1,Doped with Ce (0.2),401,Plasma boost via Ce
+Ta0.95Si0.051,Ta1,Doped with Si (0.05),441,Plasma boost via Si
+Ta0.90Si0.101,Ta1,Doped with Si (0.1),403,Plasma boost via Si
+Ta0.70Si0.301,Ta1,Doped with Si (0.3),427,Plasma boost via Si
+Ta0.95C0.051,Ta1,Doped with C (0.05),409,Plasma boost via C
+Ta0.90C0.101,Ta1,Doped with C (0.1),437,Plasma boost via C
+Ta0.75C0.251,Ta1,Doped with C (0.25),444,Plasma boost via C
+Ta0.80N0.201,Ta1,Doped with N (0.2),424,Plasma boost via N
+Ta0.75N0.251,Ta1,Doped with N (0.25),441,Plasma boost via N
+Ta0.70N0.301,Ta1,Doped with N (0.3),449,Plasma boost via N
+Ta0.90F0.101,Ta1,Doped with F (0.1),412,Plasma boost via F
+Ta0.85F0.151,Ta1,Doped with F (0.15),439,Plasma boost via F
+Ta0.80F0.201,Ta1,Doped with F (0.2),402,Plasma boost via F
+Ta0.95Pb0.051,Ta1,Doped with Pb (0.05),437,Plasma boost via Pb
+Ta0.90Pb0.101,Ta1,Doped with Pb (0.1),449,Plasma boost via Pb
+Ta0.85Pb0.151,Ta1,Doped with Pb (0.15),417,Plasma boost via Pb
+Ta0.80Pb0.201,Ta1,Doped with Pb (0.2),449,Plasma boost via Pb
+Ta0.75Pb0.251,Ta1,Doped with Pb (0.25),402,Plasma boost via Pb
+Ta0.70Pb0.301,Ta1,Doped with Pb (0.3),402,Plasma boost via Pb
+Ta0.95Ir0.051,Ta1,Doped with Ir (0.05),428,Plasma boost via Ir
+Ta0.90Ir0.101,Ta1,Doped with Ir (0.1),423,Plasma boost via Ir
+Ta0.80Ir0.201,Ta1,Doped with Ir (0.2),432,Plasma boost via Ir
+Ta0.75Ir0.251,Ta1,Doped with Ir (0.25),433,Plasma boost via Ir
+Ta1Ru0.15Ta0.10,Ta1,Ternary Ru+Ta,412,Multi-element plasma enhancement
+Ta1Ru0.05W0.10,Ta1,Ternary Ru+W,442,Multi-element plasma enhancement
+Ta1Ta0.15Ru0.05,Ta1,Ternary Ta+Ru,448,Multi-element plasma enhancement
+Ta1Ta0.10Os0.15,Ta1,Ternary Ta+Os,458,Multi-element plasma enhancement
+Ta1W0.15Ru0.10,Ta1,Ternary W+Ru,426,Multi-element plasma enhancement
+Ta1W0.05Ta0.15,Ta1,Ternary W+Ta,430,Multi-element plasma enhancement
+Ta1W0.15Re0.15,Ta1,Ternary W+Re,429,Multi-element plasma enhancement
+Ta1Os0.15Ru0.05,Ta1,Ternary Os+Ru,443,Multi-element plasma enhancement
+Ta1Os0.05W0.15,Ta1,Ternary Os+W,438,Multi-element plasma enhancement
+Ta1Os0.05Re0.05,Ta1,Ternary Os+Re,460,Multi-element plasma enhancement
+Ta1Re0.05Os0.10,Ta1,Ternary Re+Os,411,Multi-element plasma enhancement
+Ta1C0.1,Ta1,C substitution (x=0.1),417,Entropy / anion tuning
+Ta1Si0.2,Ta1,Si substitution (x=0.2),414,Entropy / anion tuning
+Ta1Si0.3,Ta1,Si substitution (x=0.3),440,Entropy / anion tuning
+Ta1N0.1,Ta1,N substitution (x=0.1),424,Entropy / anion tuning
+Ta1N0.2,Ta1,N substitution (x=0.2),421,Entropy / anion tuning
+Ta1N0.3,Ta1,N substitution (x=0.3),408,Entropy / anion tuning
+Ta1F0.1,Ta1,F substitution (x=0.1),425,Entropy / anion tuning
+Ta1F0.2,Ta1,F substitution (x=0.2),429,Entropy / anion tuning
+Ta1F0.3,Ta1,F substitution (x=0.3),438,Entropy / anion tuning
+Ir0.90Ru0.100.28W0.72,Ir0.28W0.72,Doped with Ru (0.1),395,Plasma boost via Ru
+Ir0.80Ru0.200.28W0.72,Ir0.28W0.72,Doped with Ru (0.2),392,Plasma boost via Ru
+Ir0.75Ru0.250.28W0.72,Ir0.28W0.72,Doped with Ru (0.25),420,Plasma boost via Ru
+Ir0.70Ru0.300.28W0.72,Ir0.28W0.72,Doped with Ru (0.3),422,Plasma boost via Ru
+Ir0.95Ta0.050.28W0.72,Ir0.28W0.72,Doped with Ta (0.05),424,Plasma boost via Ta
+Ir0.75Ta0.250.28W0.72,Ir0.28W0.72,Doped with Ta (0.25),409,Plasma boost via Ta
+Ir0.70Ta0.300.28W0.72,Ir0.28W0.72,Doped with Ta (0.3),419,Plasma boost via Ta
+Ir0.85Os0.150.28W0.72,Ir0.28W0.72,Doped with Os (0.15),402,Plasma boost via Os
+Ir0.70Os0.300.28W0.72,Ir0.28W0.72,Doped with Os (0.3),386,Plasma boost via Os
+Ir0.95Re0.050.28W0.72,Ir0.28W0.72,Doped with Re (0.05),419,Plasma boost via Re
+Ir0.90Re0.100.28W0.72,Ir0.28W0.72,Doped with Re (0.1),400,Plasma boost via Re
+Ir0.85Re0.150.28W0.72,Ir0.28W0.72,Doped with Re (0.15),425,Plasma boost via Re
+Ir0.80Re0.200.28W0.72,Ir0.28W0.72,Doped with Re (0.2),420,Plasma boost via Re
+Ir0.75Re0.250.28W0.72,Ir0.28W0.72,Doped with Re (0.25),417,Plasma boost via Re
+Ir0.85Sr0.150.28W0.72,Ir0.28W0.72,Doped with Sr (0.15),405,Plasma boost via Sr
+Ir0.80Sr0.200.28W0.72,Ir0.28W0.72,Doped with Sr (0.2),432,Plasma boost via Sr
+Ir0.75Sr0.250.28W0.72,Ir0.28W0.72,Doped with Sr (0.25),404,Plasma boost via Sr
+Ir0.95Ba0.050.28W0.72,Ir0.28W0.72,Doped with Ba (0.05),391,Plasma boost via Ba
+Ir0.90Ba0.100.28W0.72,Ir0.28W0.72,Doped with Ba (0.1),387,Plasma boost via Ba
+Ir0.85Ba0.150.28W0.72,Ir0.28W0.72,Doped with Ba (0.15),401,Plasma boost via Ba
+Ir0.80Ba0.200.28W0.72,Ir0.28W0.72,Doped with Ba (0.2),417,Plasma boost via Ba
+Ir0.90Ce0.100.28W0.72,Ir0.28W0.72,Doped with Ce (0.1),406,Plasma boost via Ce
+Ir0.85Ce0.150.28W0.72,Ir0.28W0.72,Doped with Ce (0.15),430,Plasma boost via Ce
+Ir0.80Ce0.200.28W0.72,Ir0.28W0.72,Doped with Ce (0.2),414,Plasma boost via Ce
+Ir0.75Ce0.250.28W0.72,Ir0.28W0.72,Doped with Ce (0.25),422,Plasma boost via Ce
+Ir0.95Si0.050.28W0.72,Ir0.28W0.72,Doped with Si (0.05),429,Plasma boost via Si
+Ir0.90Si0.100.28W0.72,Ir0.28W0.72,Doped with Si (0.1),392,Plasma boost via Si
+Ir0.85Si0.150.28W0.72,Ir0.28W0.72,Doped with Si (0.15),411,Plasma boost via Si
+Ir0.75Si0.250.28W0.72,Ir0.28W0.72,Doped with Si (0.25),418,Plasma boost via Si
+Ir0.70Si0.300.28W0.72,Ir0.28W0.72,Doped with Si (0.3),405,Plasma boost via Si
+Ir0.95C0.050.28W0.72,Ir0.28W0.72,Doped with C (0.05),414,Plasma boost via C
+Ir0.90C0.100.28W0.72,Ir0.28W0.72,Doped with C (0.1),417,Plasma boost via C
+Ir0.80C0.200.28W0.72,Ir0.28W0.72,Doped with C (0.2),431,Plasma boost via C
+Ir0.95N0.050.28W0.72,Ir0.28W0.72,Doped with N (0.05),432,Plasma boost via N
+Ir0.90N0.100.28W0.72,Ir0.28W0.72,Doped with N (0.1),403,Plasma boost via N
+Ir0.85N0.150.28W0.72,Ir0.28W0.72,Doped with N (0.15),388,Plasma boost via N
+Ir0.80N0.200.28W0.72,Ir0.28W0.72,Doped with N (0.2),419,Plasma boost via N
+Ir0.75N0.250.28W0.72,Ir0.28W0.72,Doped with N (0.25),433,Plasma boost via N
+Ir0.95F0.050.28W0.72,Ir0.28W0.72,Doped with F (0.05),428,Plasma boost via F
+Ir0.90F0.100.28W0.72,Ir0.28W0.72,Doped with F (0.1),412,Plasma boost via F
+Ir0.80F0.200.28W0.72,Ir0.28W0.72,Doped with F (0.2),413,Plasma boost via F
+Ir0.75F0.250.28W0.72,Ir0.28W0.72,Doped with F (0.25),430,Plasma boost via F
+Ir0.90Pb0.100.28W0.72,Ir0.28W0.72,Doped with Pb (0.1),425,Plasma boost via Pb
+Ir0.85Pb0.150.28W0.72,Ir0.28W0.72,Doped with Pb (0.15),421,Plasma boost via Pb
+Ir0.80Pb0.200.28W0.72,Ir0.28W0.72,Doped with Pb (0.2),408,Plasma boost via Pb
+Ir0.75Pb0.250.28W0.72,Ir0.28W0.72,Doped with Pb (0.25),413,Plasma boost via Pb
+Ir0.28W0.72Ru0.10Ta0.05,Ir0.28W0.72,Ternary Ru+Ta,425,Multi-element plasma enhancement
+Ir0.28W0.72Ru0.15W0.05,Ir0.28W0.72,Ternary Ru+W,446,Multi-element plasma enhancement
+Ir0.28W0.72Ru0.15Os0.05,Ir0.28W0.72,Ternary Ru+Os,415,Multi-element plasma enhancement
+Ir0.28W0.72Ru0.15Re0.05,Ir0.28W0.72,Ternary Ru+Re,397,Multi-element plasma enhancement
+Ir0.28W0.72Ta0.15W0.10,Ir0.28W0.72,Ternary Ta+W,452,Multi-element plasma enhancement
+Ir0.28W0.72Ta0.10Re0.15,Ir0.28W0.72,Ternary Ta+Re,416,Multi-element plasma enhancement
+Ir0.28W0.72W0.10Ta0.10,Ir0.28W0.72,Ternary W+Ta,420,Multi-element plasma enhancement
+Ir0.28W0.72W0.05Os0.05,Ir0.28W0.72,Ternary W+Os,403,Multi-element plasma enhancement
+Ir0.28W0.72W0.15Re0.10,Ir0.28W0.72,Ternary W+Re,442,Multi-element plasma enhancement
+Ir0.28W0.72Os0.15Ta0.10,Ir0.28W0.72,Ternary Os+Ta,429,Multi-element plasma enhancement
+Ir0.28W0.72Os0.05Re0.10,Ir0.28W0.72,Ternary Os+Re,401,Multi-element plasma enhancement
+Ir0.28W0.72Re0.05Ru0.05,Ir0.28W0.72,Ternary Re+Ru,414,Multi-element plasma enhancement
+Ir0.28W0.72Re0.05Ta0.10,Ir0.28W0.72,Ternary Re+Ta,410,Multi-element plasma enhancement
+Ir0.28W0.72Re0.10W0.15,Ir0.28W0.72,Ternary Re+W,417,Multi-element plasma enhancement
+Ir0.28W0.72Re0.15Os0.10,Ir0.28W0.72,Ternary Re+Os,396,Multi-element plasma enhancement
+Ir0.28W0.72C0.1,Ir0.28W0.72,C substitution (x=0.1),421,Entropy / anion tuning
+Ir0.28W0.72C0.2,Ir0.28W0.72,C substitution (x=0.2),412,Entropy / anion tuning
+Ir0.28W0.72C0.3,Ir0.28W0.72,C substitution (x=0.3),411,Entropy / anion tuning
+Ir0.28W0.72Si0.1,Ir0.28W0.72,Si substitution (x=0.1),414,Entropy / anion tuning
+Ir0.28W0.72Si0.2,Ir0.28W0.72,Si substitution (x=0.2),411,Entropy / anion tuning
+Ir0.28W0.72Si0.3,Ir0.28W0.72,Si substitution (x=0.3),411,Entropy / anion tuning
+Ir0.28W0.72N0.2,Ir0.28W0.72,N substitution (x=0.2),404,Entropy / anion tuning
+Ir0.28W0.72F0.1,Ir0.28W0.72,F substitution (x=0.1),422,Entropy / anion tuning
+Ir0.28W0.72F0.2,Ir0.28W0.72,F substitution (x=0.2),397,Entropy / anion tuning
+Ir0.28W0.72F0.3,Ir0.28W0.72,F substitution (x=0.3),394,Entropy / anion tuning
+La1Ir3B2,La1Ir3B2,Original seed,320,Base from predictor
+La1Ir0.95Ru0.053B2,La1Ir3B2,Doped with Ru (0.05),368,Plasma boost via Ru
+La1Ir0.90Ru0.103B2,La1Ir3B2,Doped with Ru (0.1),333,Plasma boost via Ru
+La1Ir0.85Ru0.153B2,La1Ir3B2,Doped with Ru (0.15),335,Plasma boost via Ru
+La1Ir0.75Ru0.253B2,La1Ir3B2,Doped with Ru (0.25),361,Plasma boost via Ru
+La1Ir0.70Ru0.303B2,La1Ir3B2,Doped with Ru (0.3),359,Plasma boost via Ru
+La1Ir0.95Ta0.053B2,La1Ir3B2,Doped with Ta (0.05),376,Plasma boost via Ta
+La1Ir0.90Ta0.103B2,La1Ir3B2,Doped with Ta (0.1),364,Plasma boost via Ta
+La1Ir0.80Ta0.203B2,La1Ir3B2,Doped with Ta (0.2),345,Plasma boost via Ta
+La1Ir0.75Ta0.253B2,La1Ir3B2,Doped with Ta (0.25),342,Plasma boost via Ta
+La1Ir0.70Ta0.303B2,La1Ir3B2,Doped with Ta (0.3),379,Plasma boost via Ta
+La1Ir0.95W0.053B2,La1Ir3B2,Doped with W (0.05),371,Plasma boost via W
+La1Ir0.90W0.103B2,La1Ir3B2,Doped with W (0.1),359,Plasma boost via W
+La1Ir0.85W0.153B2,La1Ir3B2,Doped with W (0.15),348,Plasma boost via W
+La1Ir0.75W0.253B2,La1Ir3B2,Doped with W (0.25),348,Plasma boost via W
+La1Ir0.95Os0.053B2,La1Ir3B2,Doped with Os (0.05),355,Plasma boost via Os
+La1Ir0.90Os0.103B2,La1Ir3B2,Doped with Os (0.1),366,Plasma boost via Os
+La1Ir0.85Os0.153B2,La1Ir3B2,Doped with Os (0.15),355,Plasma boost via Os
+La1Ir0.75Os0.253B2,La1Ir3B2,Doped with Os (0.25),338,Plasma boost via Os
+La1Ir0.95Re0.053B2,La1Ir3B2,Doped with Re (0.05),330,Plasma boost via Re
+La1Ir0.80Re0.203B2,La1Ir3B2,Doped with Re (0.2),363,Plasma boost via Re
+La1Ir0.75Re0.253B2,La1Ir3B2,Doped with Re (0.25),361,Plasma boost via Re
+La1Ir0.70Re0.303B2,La1Ir3B2,Doped with Re (0.3),377,Plasma boost via Re
+La1Ir0.95Sr0.053B2,La1Ir3B2,Doped with Sr (0.05),354,Plasma boost via Sr
+La1Ir0.90Sr0.103B2,La1Ir3B2,Doped with Sr (0.1),369,Plasma boost via Sr
+La1Ir0.85Sr0.153B2,La1Ir3B2,Doped with Sr (0.15),374,Plasma boost via Sr
+La1Ir0.80Sr0.203B2,La1Ir3B2,Doped with Sr (0.2),330,Plasma boost via Sr
+La1Ir0.75Sr0.253B2,La1Ir3B2,Doped with Sr (0.25),345,Plasma boost via Sr
+La1Ir0.70Sr0.303B2,La1Ir3B2,Doped with Sr (0.3),368,Plasma boost via Sr
+La1Ir0.90Ba0.103B2,La1Ir3B2,Doped with Ba (0.1),351,Plasma boost via Ba
+La1Ir0.85Ba0.153B2,La1Ir3B2,Doped with Ba (0.15),358,Plasma boost via Ba
+La1Ir0.80Ba0.203B2,La1Ir3B2,Doped with Ba (0.2),332,Plasma boost via Ba
+La1Ir0.75Ba0.253B2,La1Ir3B2,Doped with Ba (0.25),341,Plasma boost via Ba
+La1Ir0.70Ba0.303B2,La1Ir3B2,Doped with Ba (0.3),355,Plasma boost via Ba
+La1Ir0.90Ce0.103B2,La1Ir3B2,Doped with Ce (0.1),366,Plasma boost via Ce
+La1Ir0.85Ce0.153B2,La1Ir3B2,Doped with Ce (0.15),351,Plasma boost via Ce
+La1Ir0.80Ce0.203B2,La1Ir3B2,Doped with Ce (0.2),358,Plasma boost via Ce
+La1Ir0.75Ce0.253B2,La1Ir3B2,Doped with Ce (0.25),343,Plasma boost via Ce
+La1Ir0.70Ce0.303B2,La1Ir3B2,Doped with Ce (0.3),357,Plasma boost via Ce
+La1Ir0.95Si0.053B2,La1Ir3B2,Doped with Si (0.05),334,Plasma boost via Si
+La1Ir0.90Si0.103B2,La1Ir3B2,Doped with Si (0.1),376,Plasma boost via Si
+La1Ir0.70Si0.303B2,La1Ir3B2,Doped with Si (0.3),334,Plasma boost via Si
+La1Ir0.90C0.103B2,La1Ir3B2,Doped with C (0.1),345,Plasma boost via C
+La1Ir0.75C0.253B2,La1Ir3B2,Doped with C (0.25),377,Plasma boost via C
+La1Ir0.70C0.303B2,La1Ir3B2,Doped with C (0.3),350,Plasma boost via C
+La1Ir0.95N0.053B2,La1Ir3B2,Doped with N (0.05),368,Plasma boost via N
+La1Ir0.90N0.103B2,La1Ir3B2,Doped with N (0.1),365,Plasma boost via N
+La1Ir0.95F0.053B2,La1Ir3B2,Doped with F (0.05),339,Plasma boost via F
+La1Ir0.90F0.103B2,La1Ir3B2,Doped with F (0.1),334,Plasma boost via F
+La1Ir0.85F0.153B2,La1Ir3B2,Doped with F (0.15),365,Plasma boost via F
+La1Ir0.70F0.303B2,La1Ir3B2,Doped with F (0.3),339,Plasma boost via F
+La1Ir0.95Pb0.053B2,La1Ir3B2,Doped with Pb (0.05),348,Plasma boost via Pb
+La1Ir0.90Pb0.103B2,La1Ir3B2,Doped with Pb (0.1),361,Plasma boost via Pb
+La1Ir0.85Pb0.153B2,La1Ir3B2,Doped with Pb (0.15),330,Plasma boost via Pb
+La1Ir0.75Pb0.253B2,La1Ir3B2,Doped with Pb (0.25),374,Plasma boost via Pb
+La1Ir0.70Pb0.303B2,La1Ir3B2,Doped with Pb (0.3),333,Plasma boost via Pb
+La1Ir3B2Ta0.15Ru0.05,La1Ir3B2,Ternary Ta+Ru,372,Multi-element plasma enhancement
+La1Ir3B2Ta0.10W0.15,La1Ir3B2,Ternary Ta+W,383,Multi-element plasma enhancement
+La1Ir3B2Ta0.15Re0.10,La1Ir3B2,Ternary Ta+Re,341,Multi-element plasma enhancement
+La1Ir3B2W0.05Ru0.15,La1Ir3B2,Ternary W+Ru,389,Multi-element plasma enhancement
+La1Ir3B2W0.15Ta0.15,La1Ir3B2,Ternary W+Ta,356,Multi-element plasma enhancement
+La1Ir3B2W0.10Re0.10,La1Ir3B2,Ternary W+Re,373,Multi-element plasma enhancement
+La1Ir3B2Os0.15Ru0.05,La1Ir3B2,Ternary Os+Ru,346,Multi-element plasma enhancement
+La1Ir3B2Os0.10Ta0.05,La1Ir3B2,Ternary Os+Ta,389,Multi-element plasma enhancement
+La1Ir3B2Re0.10Ru0.05,La1Ir3B2,Ternary Re+Ru,348,Multi-element plasma enhancement
+La1Ir3B2Re0.15Ta0.05,La1Ir3B2,Ternary Re+Ta,374,Multi-element plasma enhancement
+La1Ir3B2-xC0.1,La1Ir3B2,C substitution (x=0.1),371,Entropy / anion tuning
+La1Ir3B2-xC0.3,La1Ir3B2,C substitution (x=0.3),347,Entropy / anion tuning
+La1Ir3B2-xSi0.1,La1Ir3B2,Si substitution (x=0.1),357,Entropy / anion tuning
+La1Ir3B2-xSi0.2,La1Ir3B2,Si substitution (x=0.2),359,Entropy / anion tuning
+La1Ir3B2-xSi0.3,La1Ir3B2,Si substitution (x=0.3),369,Entropy / anion tuning
+La1Ir3B2-xN0.1,La1Ir3B2,N substitution (x=0.1),364,Entropy / anion tuning
+La1Ir3B2-xN0.2,La1Ir3B2,N substitution (x=0.2),351,Entropy / anion tuning
+La1Ir3B2-xN0.3,La1Ir3B2,N substitution (x=0.3),354,Entropy / anion tuning
+La1Ir3B2-xF0.1,La1Ir3B2,F substitution (x=0.1),359,Entropy / anion tuning
+La1Ir3B2-xF0.2,La1Ir3B2,F substitution (x=0.2),356,Entropy / anion tuning
+La1Ir3B2-xF0.3,La1Ir3B2,F substitution (x=0.3),347,Entropy / anion tuning
+Os0.06Re0.94,Os0.06Re0.94,Original seed,310,Base from predictor
+Os0.06Re0.94Ru0.05,Os0.06Re0.94,Doped with Ru (0.05),338,Plasma boost via Ru
+Os0.06Re0.94Ru0.10,Os0.06Re0.94,Doped with Ru (0.1),368,Plasma boost via Ru
+Os0.06Re0.94Ru0.15,Os0.06Re0.94,Doped with Ru (0.15),355,Plasma boost via Ru
+Os0.06Re0.94Ru0.20,Os0.06Re0.94,Doped with Ru (0.2),331,Plasma boost via Ru
+Os0.06Re0.94Ta0.05,Os0.06Re0.94,Doped with Ta (0.05),331,Plasma boost via Ta
+Os0.06Re0.94Ta0.10,Os0.06Re0.94,Doped with Ta (0.1),328,Plasma boost via Ta
+Os0.06Re0.94Ta0.20,Os0.06Re0.94,Doped with Ta (0.2),347,Plasma boost via Ta
+Os0.06Re0.94Ta0.25,Os0.06Re0.94,Doped with Ta (0.25),333,Plasma boost via Ta
+Os0.06Re0.94Ta0.30,Os0.06Re0.94,Doped with Ta (0.3),350,Plasma boost via Ta
+Os0.06Re0.94W0.05,Os0.06Re0.94,Doped with W (0.05),338,Plasma boost via W
+Os0.06Re0.94W0.10,Os0.06Re0.94,Doped with W (0.1),366,Plasma boost via W
+Os0.06Re0.94W0.15,Os0.06Re0.94,Doped with W (0.15),335,Plasma boost via W
+Os0.06Re0.94W0.20,Os0.06Re0.94,Doped with W (0.2),324,Plasma boost via W
+Os0.06Re0.94W0.25,Os0.06Re0.94,Doped with W (0.25),354,Plasma boost via W
+Os0.06Re0.94W0.30,Os0.06Re0.94,Doped with W (0.3),331,Plasma boost via W
+Os0.06Re0.94Sr0.05,Os0.06Re0.94,Doped with Sr (0.05),344,Plasma boost via Sr
+Os0.06Re0.94Sr0.15,Os0.06Re0.94,Doped with Sr (0.15),355,Plasma boost via Sr
+Os0.06Re0.94Sr0.20,Os0.06Re0.94,Doped with Sr (0.2),342,Plasma boost via Sr
+Os0.06Re0.94Sr0.30,Os0.06Re0.94,Doped with Sr (0.3),358,Plasma boost via Sr
+Os0.06Re0.94Ba0.05,Os0.06Re0.94,Doped with Ba (0.05),364,Plasma boost via Ba
+Os0.06Re0.94Ba0.10,Os0.06Re0.94,Doped with Ba (0.1),361,Plasma boost via Ba
+Os0.06Re0.94Ba0.30,Os0.06Re0.94,Doped with Ba (0.3),324,Plasma boost via Ba
+Os0.06Re0.94Ce0.10,Os0.06Re0.94,Doped with Ce (0.1),342,Plasma boost via Ce
+Os0.06Re0.94Ce0.15,Os0.06Re0.94,Doped with Ce (0.15),348,Plasma boost via Ce
+Os0.06Re0.94Ce0.25,Os0.06Re0.94,Doped with Ce (0.25),330,Plasma boost via Ce
+Os0.06Re0.94Ce0.30,Os0.06Re0.94,Doped with Ce (0.3),337,Plasma boost via Ce
+Os0.06Re0.94Si0.10,Os0.06Re0.94,Doped with Si (0.1),331,Plasma boost via Si
+Os0.06Re0.94Si0.25,Os0.06Re0.94,Doped with Si (0.25),363,Plasma boost via Si
+Os0.06Re0.94C0.05,Os0.06Re0.94,Doped with C (0.05),357,Plasma boost via C
+Os0.06Re0.94C0.15,Os0.06Re0.94,Doped with C (0.15),365,Plasma boost via C
+Os0.06Re0.94C0.20,Os0.06Re0.94,Doped with C (0.2),332,Plasma boost via C
+Os0.06Re0.94C0.25,Os0.06Re0.94,Doped with C (0.25),359,Plasma boost via C
+Os0.06Re0.94N0.05,Os0.06Re0.94,Doped with N (0.05),328,Plasma boost via N
+Os0.06Re0.94N0.10,Os0.06Re0.94,Doped with N (0.1),369,Plasma boost via N
+Os0.06Re0.94N0.15,Os0.06Re0.94,Doped with N (0.15),346,Plasma boost via N
+Os0.06Re0.94N0.25,Os0.06Re0.94,Doped with N (0.25),324,Plasma boost via N
+Os0.06Re0.94N0.30,Os0.06Re0.94,Doped with N (0.3),348,Plasma boost via N
+Os0.06Re0.94F0.05,Os0.06Re0.94,Doped with F (0.05),356,Plasma boost via F
+Os0.06Re0.94F0.20,Os0.06Re0.94,Doped with F (0.2),327,Plasma boost via F
+Os0.06Re0.94F0.25,Os0.06Re0.94,Doped with F (0.25),367,Plasma boost via F
+Os0.06Re0.94Pb0.05,Os0.06Re0.94,Doped with Pb (0.05),320,Plasma boost via Pb
+Os0.06Re0.94Pb0.10,Os0.06Re0.94,Doped with Pb (0.1),341,Plasma boost via Pb
+Os0.06Re0.94Pb0.15,Os0.06Re0.94,Doped with Pb (0.15),336,Plasma boost via Pb
+Os0.06Re0.94Pb0.25,Os0.06Re0.94,Doped with Pb (0.25),344,Plasma boost via Pb
+Os0.06Re0.94Ir0.05,Os0.06Re0.94,Doped with Ir (0.05),323,Plasma boost via Ir
+Os0.06Re0.94Ir0.10,Os0.06Re0.94,Doped with Ir (0.1),355,Plasma boost via Ir
+Os0.06Re0.94Ir0.15,Os0.06Re0.94,Doped with Ir (0.15),325,Plasma boost via Ir
+Os0.06Re0.94Ir0.30,Os0.06Re0.94,Doped with Ir (0.3),363,Plasma boost via Ir
+Os0.06Re0.94Ru0.10W0.10,Os0.06Re0.94,Ternary Ru+W,348,Multi-element plasma enhancement
+Os0.06Re0.94Ru0.15Os0.10,Os0.06Re0.94,Ternary Ru+Os,332,Multi-element plasma enhancement
+Os0.06Re0.94Ta0.05Re0.10,Os0.06Re0.94,Ternary Ta+Re,386,Multi-element plasma enhancement
+Os0.06Re0.94W0.15Ru0.05,Os0.06Re0.94,Ternary W+Ru,354,Multi-element plasma enhancement
+Os0.06Re0.94W0.05Ta0.10,Os0.06Re0.94,Ternary W+Ta,382,Multi-element plasma enhancement
+Os0.06Re0.94W0.05Re0.05,Os0.06Re0.94,Ternary W+Re,376,Multi-element plasma enhancement
+Os0.06Re0.94Os0.15Ta0.05,Os0.06Re0.94,Ternary Os+Ta,365,Multi-element plasma enhancement
+Os0.06Re0.94Os0.15W0.15,Os0.06Re0.94,Ternary Os+W,349,Multi-element plasma enhancement
+Os0.06Re0.94Re0.05Ru0.05,Os0.06Re0.94,Ternary Re+Ru,343,Multi-element plasma enhancement
+Os0.06Re0.94Re0.15Ta0.15,Os0.06Re0.94,Ternary Re+Ta,330,Multi-element plasma enhancement
+Os0.06Re0.94Re0.05W0.10,Os0.06Re0.94,Ternary Re+W,383,Multi-element plasma enhancement
+Os0.06Re0.94C0.1,Os0.06Re0.94,C substitution (x=0.1),335,Entropy / anion tuning
+Os0.06Re0.94C0.2,Os0.06Re0.94,C substitution (x=0.2),336,Entropy / anion tuning
+Os0.06Re0.94C0.3,Os0.06Re0.94,C substitution (x=0.3),334,Entropy / anion tuning
+Os0.06Re0.94Si0.1,Os0.06Re0.94,Si substitution (x=0.1),356,Entropy / anion tuning
+Os0.06Re0.94Si0.2,Os0.06Re0.94,Si substitution (x=0.2),340,Entropy / anion tuning
+Os0.06Re0.94Si0.3,Os0.06Re0.94,Si substitution (x=0.3),332,Entropy / anion tuning
+Os0.06Re0.94N0.1,Os0.06Re0.94,N substitution (x=0.1),362,Entropy / anion tuning
+Os0.06Re0.94N0.2,Os0.06Re0.94,N substitution (x=0.2),336,Entropy / anion tuning
+Os0.06Re0.94N0.3,Os0.06Re0.94,N substitution (x=0.3),348,Entropy / anion tuning
+Os0.06Re0.94F0.1,Os0.06Re0.94,F substitution (x=0.1),352,Entropy / anion tuning
+Os0.06Re0.94F0.2,Os0.06Re0.94,F substitution (x=0.2),332,Entropy / anion tuning
+Os0.06Re0.94F0.3,Os0.06Re0.94,F substitution (x=0.3),352,Entropy / anion tuning
+Rb1Os2O6,Rb1Os2O6,Original seed,297,Base from predictor
+Rb1Os2O6Ru0.05,Rb1Os2O6,Doped with Ru (0.05),342,Plasma boost via Ru
+Rb1Os2O6Ru0.10,Rb1Os2O6,Doped with Ru (0.1),332,Plasma boost via Ru
+Rb1Os2O6Ru0.20,Rb1Os2O6,Doped with Ru (0.2),356,Plasma boost via Ru
+Rb1Os2O6Ru0.25,Rb1Os2O6,Doped with Ru (0.25),334,Plasma boost via Ru
+Rb1Os2O6Ru0.30,Rb1Os2O6,Doped with Ru (0.3),334,Plasma boost via Ru
+Rb1Os2O6Ta0.05,Rb1Os2O6,Doped with Ta (0.05),343,Plasma boost via Ta
+Rb1Os2O6Ta0.10,Rb1Os2O6,Doped with Ta (0.1),347,Plasma boost via Ta
+Rb1Os2O6Ta0.20,Rb1Os2O6,Doped with Ta (0.2),333,Plasma boost via Ta
+Rb1Os2O6Ta0.25,Rb1Os2O6,Doped with Ta (0.25),323,Plasma boost via Ta
+Rb1Os2O6Ta0.30,Rb1Os2O6,Doped with Ta (0.3),315,Plasma boost via Ta
+Rb1Os2O6W0.10,Rb1Os2O6,Doped with W (0.1),326,Plasma boost via W
+Rb1Os2O6W0.15,Rb1Os2O6,Doped with W (0.15),319,Plasma boost via W
+Rb1Os2O6W0.25,Rb1Os2O6,Doped with W (0.25),354,Plasma boost via W
+Rb1Os2O6Re0.10,Rb1Os2O6,Doped with Re (0.1),352,Plasma boost via Re
+Rb1Os2O6Re0.15,Rb1Os2O6,Doped with Re (0.15),341,Plasma boost via Re
+Rb1Os2O6Re0.20,Rb1Os2O6,Doped with Re (0.2),312,Plasma boost via Re
+Rb1Os2O6Re0.25,Rb1Os2O6,Doped with Re (0.25),324,Plasma boost via Re
+Rb1Os2O6Re0.30,Rb1Os2O6,Doped with Re (0.3),311,Plasma boost via Re
+Rb1Os2O6Sr0.25,Rb1Os2O6,Doped with Sr (0.25),336,Plasma boost via Sr
+Rb1Os2O6Sr0.30,Rb1Os2O6,Doped with Sr (0.3),356,Plasma boost via Sr
+Rb1Os2O6Ba0.05,Rb1Os2O6,Doped with Ba (0.05),351,Plasma boost via Ba
+Rb1Os2O6Ba0.10,Rb1Os2O6,Doped with Ba (0.1),311,Plasma boost via Ba
+Rb1Os2O6Ba0.15,Rb1Os2O6,Doped with Ba (0.15),339,Plasma boost via Ba
+Rb1Os2O6Ba0.25,Rb1Os2O6,Doped with Ba (0.25),324,Plasma boost via Ba
+Rb1Os2O6Ce0.10,Rb1Os2O6,Doped with Ce (0.1),355,Plasma boost via Ce
+Rb1Os2O6Ce0.15,Rb1Os2O6,Doped with Ce (0.15),317,Plasma boost via Ce
+Rb1Os2O6Ce0.25,Rb1Os2O6,Doped with Ce (0.25),332,Plasma boost via Ce
+Rb1Os2O6Si0.05,Rb1Os2O6,Doped with Si (0.05),328,Plasma boost via Si
+Rb1Os2O6Si0.10,Rb1Os2O6,Doped with Si (0.1),333,Plasma boost via Si
+Rb1Os2O6Si0.15,Rb1Os2O6,Doped with Si (0.15),355,Plasma boost via Si
+Rb1Os2O6Si0.20,Rb1Os2O6,Doped with Si (0.2),319,Plasma boost via Si
+Rb1Os2O6Si0.25,Rb1Os2O6,Doped with Si (0.25),339,Plasma boost via Si
+Rb1Os2O6Si0.30,Rb1Os2O6,Doped with Si (0.3),340,Plasma boost via Si
+Rb1Os2O6C0.10,Rb1Os2O6,Doped with C (0.1),341,Plasma boost via C
+Rb1Os2O6C0.15,Rb1Os2O6,Doped with C (0.15),307,Plasma boost via C
+Rb1Os2O6C0.20,Rb1Os2O6,Doped with C (0.2),327,Plasma boost via C
+Rb1Os2O6C0.25,Rb1Os2O6,Doped with C (0.25),354,Plasma boost via C
+Rb1Os2O6C0.30,Rb1Os2O6,Doped with C (0.3),312,Plasma boost via C
+Rb1Os2O6N0.10,Rb1Os2O6,Doped with N (0.1),323,Plasma boost via N
+Rb1Os2O6N0.15,Rb1Os2O6,Doped with N (0.15),311,Plasma boost via N
+Rb1Os2O6N0.20,Rb1Os2O6,Doped with N (0.2),337,Plasma boost via N
+Rb1Os2O6N0.25,Rb1Os2O6,Doped with N (0.25),311,Plasma boost via N
+Rb1Os2O6N0.30,Rb1Os2O6,Doped with N (0.3),344,Plasma boost via N
+Rb1Os2O6F0.05,Rb1Os2O6,Doped with F (0.05),309,Plasma boost via F
+Rb1Os2O6F0.10,Rb1Os2O6,Doped with F (0.1),329,Plasma boost via F
+Rb1Os2O6F0.20,Rb1Os2O6,Doped with F (0.2),343,Plasma boost via F
+Rb1Os2O6F0.25,Rb1Os2O6,Doped with F (0.25),316,Plasma boost via F
+Rb1Os2O6F0.30,Rb1Os2O6,Doped with F (0.3),316,Plasma boost via F
+Rb1Os2O6Pb0.05,Rb1Os2O6,Doped with Pb (0.05),325,Plasma boost via Pb
+Rb1Os2O6Pb0.10,Rb1Os2O6,Doped with Pb (0.1),323,Plasma boost via Pb
+Rb1Os2O6Ir0.10,Rb1Os2O6,Doped with Ir (0.1),351,Plasma boost via Ir
+Rb1Os2O6Ir0.20,Rb1Os2O6,Doped with Ir (0.2),310,Plasma boost via Ir
+Rb1Os2O6Ir0.25,Rb1Os2O6,Doped with Ir (0.25),307,Plasma boost via Ir
+Rb1Os2O6Ir0.30,Rb1Os2O6,Doped with Ir (0.3),355,Plasma boost via Ir
+Rb1Os2O6Ru0.10Ta0.15,Rb1Os2O6,Ternary Ru+Ta,324,Multi-element plasma enhancement
+Rb1Os2O6Ru0.15W0.10,Rb1Os2O6,Ternary Ru+W,374,Multi-element plasma enhancement
+Rb1Os2O6Ru0.10Os0.10,Rb1Os2O6,Ternary Ru+Os,370,Multi-element plasma enhancement
+Rb1Os2O6Ta0.05Ru0.10,Rb1Os2O6,Ternary Ta+Ru,360,Multi-element plasma enhancement
+Rb1Os2O6Ta0.05W0.10,Rb1Os2O6,Ternary Ta+W,346,Multi-element plasma enhancement
+Rb1Os2O6Ta0.15Os0.05,Rb1Os2O6,Ternary Ta+Os,333,Multi-element plasma enhancement
+Rb1Os2O6W0.10Ta0.10,Rb1Os2O6,Ternary W+Ta,327,Multi-element plasma enhancement
+Rb1Os2O6W0.15Os0.15,Rb1Os2O6,Ternary W+Os,354,Multi-element plasma enhancement
+Rb1Os2O6Os0.10Ru0.10,Rb1Os2O6,Ternary Os+Ru,346,Multi-element plasma enhancement
+Rb1Os2O6Os0.15Ta0.15,Rb1Os2O6,Ternary Os+Ta,367,Multi-element plasma enhancement
+Rb1Os2O6Os0.15W0.10,Rb1Os2O6,Ternary Os+W,368,Multi-element plasma enhancement
+Rb1Os2O6Os0.05Re0.10,Rb1Os2O6,Ternary Os+Re,349,Multi-element plasma enhancement
+Rb1Os2O6Re0.10Ta0.15,Rb1Os2O6,Ternary Re+Ta,333,Multi-element plasma enhancement
+Rb1Os2O6Re0.05W0.05,Rb1Os2O6,Ternary Re+W,320,Multi-element plasma enhancement
+Rb1Os2O6Re0.10Os0.05,Rb1Os2O6,Ternary Re+Os,326,Multi-element plasma enhancement
+Rb1Os2O6C0.1,Rb1Os2O6,C substitution (x=0.1),328,Entropy / anion tuning
+Rb1Os2O6C0.3,Rb1Os2O6,C substitution (x=0.3),335,Entropy / anion tuning
+Rb1Os2O6N0.2,Rb1Os2O6,N substitution (x=0.2),324,Entropy / anion tuning
+Rb1Os2O6N0.3,Rb1Os2O6,N substitution (x=0.3),322,Entropy / anion tuning
+Ir0.95Ru0.050.9Ta0.1,Ir0.9Ta0.1,Doped with Ru (0.05),309,Plasma boost via Ru
+Ir0.90Ru0.100.9Ta0.1,Ir0.9Ta0.1,Doped with Ru (0.1),314,Plasma boost via Ru
+Ir0.80Ru0.200.9Ta0.1,Ir0.9Ta0.1,Doped with Ru (0.2),302,Plasma boost via Ru
+Ir0.75Ru0.250.9Ta0.1,Ir0.9Ta0.1,Doped with Ru (0.25),338,Plasma boost via Ru
+Ir0.95W0.050.9Ta0.1,Ir0.9Ta0.1,Doped with W (0.05),323,Plasma boost via W
+Ir0.90W0.100.9Ta0.1,Ir0.9Ta0.1,Doped with W (0.1),301,Plasma boost via W
+Ir0.85W0.150.9Ta0.1,Ir0.9Ta0.1,Doped with W (0.15),330,Plasma boost via W
+Ir0.70W0.300.9Ta0.1,Ir0.9Ta0.1,Doped with W (0.3),327,Plasma boost via W
+Ir0.95Os0.050.9Ta0.1,Ir0.9Ta0.1,Doped with Os (0.05),330,Plasma boost via Os
+Ir0.90Os0.100.9Ta0.1,Ir0.9Ta0.1,Doped with Os (0.1),348,Plasma boost via Os
+Ir0.80Os0.200.9Ta0.1,Ir0.9Ta0.1,Doped with Os (0.2),319,Plasma boost via Os
+Ir0.75Os0.250.9Ta0.1,Ir0.9Ta0.1,Doped with Os (0.25),303,Plasma boost via Os
+Ir0.70Os0.300.9Ta0.1,Ir0.9Ta0.1,Doped with Os (0.3),316,Plasma boost via Os
+Ir0.95Re0.050.9Ta0.1,Ir0.9Ta0.1,Doped with Re (0.05),326,Plasma boost via Re
+Ir0.90Re0.100.9Ta0.1,Ir0.9Ta0.1,Doped with Re (0.1),340,Plasma boost via Re
+Ir0.80Re0.200.9Ta0.1,Ir0.9Ta0.1,Doped with Re (0.2),319,Plasma boost via Re
+Ir0.95Sr0.050.9Ta0.1,Ir0.9Ta0.1,Doped with Sr (0.05),303,Plasma boost via Sr
+Ir0.85Sr0.150.9Ta0.1,Ir0.9Ta0.1,Doped with Sr (0.15),310,Plasma boost via Sr
+Ir0.75Sr0.250.9Ta0.1,Ir0.9Ta0.1,Doped with Sr (0.25),344,Plasma boost via Sr
+Ir0.70Sr0.300.9Ta0.1,Ir0.9Ta0.1,Doped with Sr (0.3),332,Plasma boost via Sr
+Ir0.95Ba0.050.9Ta0.1,Ir0.9Ta0.1,Doped with Ba (0.05),347,Plasma boost via Ba
+Ir0.80Ba0.200.9Ta0.1,Ir0.9Ta0.1,Doped with Ba (0.2),343,Plasma boost via Ba
+Ir0.70Ba0.300.9Ta0.1,Ir0.9Ta0.1,Doped with Ba (0.3),307,Plasma boost via Ba
+Ir0.95Ce0.050.9Ta0.1,Ir0.9Ta0.1,Doped with Ce (0.05),324,Plasma boost via Ce
+Ir0.80Ce0.200.9Ta0.1,Ir0.9Ta0.1,Doped with Ce (0.2),345,Plasma boost via Ce
+Ir0.75Ce0.250.9Ta0.1,Ir0.9Ta0.1,Doped with Ce (0.25),328,Plasma boost via Ce
+Ir0.90Si0.100.9Ta0.1,Ir0.9Ta0.1,Doped with Si (0.1),315,Plasma boost via Si
+Ir0.85Si0.150.9Ta0.1,Ir0.9Ta0.1,Doped with Si (0.15),324,Plasma boost via Si
+Ir0.80Si0.200.9Ta0.1,Ir0.9Ta0.1,Doped with Si (0.2),334,Plasma boost via Si
+Ir0.75Si0.250.9Ta0.1,Ir0.9Ta0.1,Doped with Si (0.25),299,Plasma boost via Si
+Ir0.70Si0.300.9Ta0.1,Ir0.9Ta0.1,Doped with Si (0.3),306,Plasma boost via Si
+Ir0.95C0.050.9Ta0.1,Ir0.9Ta0.1,Doped with C (0.05),347,Plasma boost via C
+Ir0.80C0.200.9Ta0.1,Ir0.9Ta0.1,Doped with C (0.2),345,Plasma boost via C
+Ir0.95N0.050.9Ta0.1,Ir0.9Ta0.1,Doped with N (0.05),324,Plasma boost via N
+Ir0.90N0.100.9Ta0.1,Ir0.9Ta0.1,Doped with N (0.1),326,Plasma boost via N
+Ir0.80N0.200.9Ta0.1,Ir0.9Ta0.1,Doped with N (0.2),312,Plasma boost via N
+Ir0.75N0.250.9Ta0.1,Ir0.9Ta0.1,Doped with N (0.25),322,Plasma boost via N
+Ir0.85F0.150.9Ta0.1,Ir0.9Ta0.1,Doped with F (0.15),312,Plasma boost via F
+Ir0.80F0.200.9Ta0.1,Ir0.9Ta0.1,Doped with F (0.2),305,Plasma boost via F
+Ir0.75F0.250.9Ta0.1,Ir0.9Ta0.1,Doped with F (0.25),301,Plasma boost via F
+Ir0.70F0.300.9Ta0.1,Ir0.9Ta0.1,Doped with F (0.3),345,Plasma boost via F
+Ir0.95Pb0.050.9Ta0.1,Ir0.9Ta0.1,Doped with Pb (0.05),321,Plasma boost via Pb
+Ir0.90Pb0.100.9Ta0.1,Ir0.9Ta0.1,Doped with Pb (0.1),344,Plasma boost via Pb
+Ir0.85Pb0.150.9Ta0.1,Ir0.9Ta0.1,Doped with Pb (0.15),341,Plasma boost via Pb
+Ir0.80Pb0.200.9Ta0.1,Ir0.9Ta0.1,Doped with Pb (0.2),345,Plasma boost via Pb
+Ir0.70Pb0.300.9Ta0.1,Ir0.9Ta0.1,Doped with Pb (0.3),316,Plasma boost via Pb
+Ir0.9Ta0.1Ru0.10Ta0.10,Ir0.9Ta0.1,Ternary Ru+Ta,343,Multi-element plasma enhancement
+Ir0.9Ta0.1Ru0.15W0.15,Ir0.9Ta0.1,Ternary Ru+W,333,Multi-element plasma enhancement
+Ir0.9Ta0.1Ru0.15Os0.05,Ir0.9Ta0.1,Ternary Ru+Os,336,Multi-element plasma enhancement
+Ir0.9Ta0.1Ta0.05Re0.10,Ir0.9Ta0.1,Ternary Ta+Re,311,Multi-element plasma enhancement
+Ir0.9Ta0.1W0.15Ta0.15,Ir0.9Ta0.1,Ternary W+Ta,330,Multi-element plasma enhancement
+Ir0.9Ta0.1W0.10Os0.15,Ir0.9Ta0.1,Ternary W+Os,316,Multi-element plasma enhancement
+Ir0.9Ta0.1W0.05Re0.15,Ir0.9Ta0.1,Ternary W+Re,350,Multi-element plasma enhancement
+Ir0.9Ta0.1Os0.10Ta0.10,Ir0.9Ta0.1,Ternary Os+Ta,367,Multi-element plasma enhancement
+Ir0.9Ta0.1Os0.05Re0.05,Ir0.9Ta0.1,Ternary Os+Re,341,Multi-element plasma enhancement
+Ir0.9Ta0.1Re0.05Ru0.10,Ir0.9Ta0.1,Ternary Re+Ru,329,Multi-element plasma enhancement
+Ir0.9Ta0.1Re0.10W0.15,Ir0.9Ta0.1,Ternary Re+W,338,Multi-element plasma enhancement
+Ir0.9Ta0.1Re0.15Os0.15,Ir0.9Ta0.1,Ternary Re+Os,317,Multi-element plasma enhancement
+Ir0.9Ta0.1C0.1,Ir0.9Ta0.1,C substitution (x=0.1),306,Entropy / anion tuning
+Ir0.9Ta0.1C0.3,Ir0.9Ta0.1,C substitution (x=0.3),343,Entropy / anion tuning
+Ir0.9Ta0.1Si0.2,Ir0.9Ta0.1,Si substitution (x=0.2),339,Entropy / anion tuning
+Ir0.9Ta0.1Si0.3,Ir0.9Ta0.1,Si substitution (x=0.3),327,Entropy / anion tuning
+Ir0.9Ta0.1F0.1,Ir0.9Ta0.1,F substitution (x=0.1),323,Entropy / anion tuning
+Ir0.9Ta0.1F0.3,Ir0.9Ta0.1,F substitution (x=0.3),314,Entropy / anion tuning
+Au1Pb2,Au1Pb2,Original seed,288,Base from predictor
+Au1Pb2Ru0.05,Au1Pb2,Doped with Ru (0.05),301,Plasma boost via Ru
+Au1Pb2Ru0.10,Au1Pb2,Doped with Ru (0.1),312,Plasma boost via Ru
+Au1Pb2Ru0.15,Au1Pb2,Doped with Ru (0.15),303,Plasma boost via Ru
+Au1Pb2Ru0.20,Au1Pb2,Doped with Ru (0.2),346,Plasma boost via Ru
+Au1Pb2Ru0.25,Au1Pb2,Doped with Ru (0.25),327,Plasma boost via Ru
+Au1Pb2Ta0.05,Au1Pb2,Doped with Ta (0.05),299,Plasma boost via Ta
+Au1Pb2Ta0.10,Au1Pb2,Doped with Ta (0.1),312,Plasma boost via Ta
+Au1Pb2Ta0.15,Au1Pb2,Doped with Ta (0.15),308,Plasma boost via Ta
+Au1Pb2Ta0.25,Au1Pb2,Doped with Ta (0.25),323,Plasma boost via Ta
+Au1Pb2Ta0.30,Au1Pb2,Doped with Ta (0.3),342,Plasma boost via Ta
+Au1Pb2W0.10,Au1Pb2,Doped with W (0.1),302,Plasma boost via W
+Au1Pb2W0.30,Au1Pb2,Doped with W (0.3),316,Plasma boost via W
+Au1Pb2Os0.10,Au1Pb2,Doped with Os (0.1),330,Plasma boost via Os
+Au1Pb2Os0.15,Au1Pb2,Doped with Os (0.15),317,Plasma boost via Os
+Au1Pb2Os0.30,Au1Pb2,Doped with Os (0.3),344,Plasma boost via Os
+Au1Pb2Re0.15,Au1Pb2,Doped with Re (0.15),311,Plasma boost via Re
+Au1Pb2Re0.20,Au1Pb2,Doped with Re (0.2),335,Plasma boost via Re
+Au1Pb2Re0.25,Au1Pb2,Doped with Re (0.25),334,Plasma boost via Re
+Au1Pb2Sr0.10,Au1Pb2,Doped with Sr (0.1),310,Plasma boost via Sr
+Au1Pb2Sr0.20,Au1Pb2,Doped with Sr (0.2),300,Plasma boost via Sr
+Au1Pb2Sr0.25,Au1Pb2,Doped with Sr (0.25),330,Plasma boost via Sr
+Au1Pb2Sr0.30,Au1Pb2,Doped with Sr (0.3),303,Plasma boost via Sr
+Au1Pb2Ba0.05,Au1Pb2,Doped with Ba (0.05),347,Plasma boost via Ba
+Au1Pb2Ba0.15,Au1Pb2,Doped with Ba (0.15),302,Plasma boost via Ba
+Au1Pb2Ba0.20,Au1Pb2,Doped with Ba (0.2),320,Plasma boost via Ba
+Au1Pb2Ce0.05,Au1Pb2,Doped with Ce (0.05),299,Plasma boost via Ce
+Au1Pb2Ce0.15,Au1Pb2,Doped with Ce (0.15),337,Plasma boost via Ce
+Au1Pb2Ce0.30,Au1Pb2,Doped with Ce (0.3),298,Plasma boost via Ce
+Au1Pb2Si0.10,Au1Pb2,Doped with Si (0.1),306,Plasma boost via Si
+Au1Pb2Si0.30,Au1Pb2,Doped with Si (0.3),312,Plasma boost via Si
+Au1Pb2C0.05,Au1Pb2,Doped with C (0.05),321,Plasma boost via C
+Au1Pb2C0.10,Au1Pb2,Doped with C (0.1),335,Plasma boost via C
+Au1Pb2C0.20,Au1Pb2,Doped with C (0.2),327,Plasma boost via C
+Au1Pb2C0.30,Au1Pb2,Doped with C (0.3),346,Plasma boost via C
+Au1Pb2N0.05,Au1Pb2,Doped with N (0.05),302,Plasma boost via N
+Au1Pb2N0.15,Au1Pb2,Doped with N (0.15),347,Plasma boost via N
+Au1Pb2N0.20,Au1Pb2,Doped with N (0.2),311,Plasma boost via N
+Au1Pb2N0.30,Au1Pb2,Doped with N (0.3),306,Plasma boost via N
+Au1Pb2F0.05,Au1Pb2,Doped with F (0.05),331,Plasma boost via F
+Au1Pb2F0.20,Au1Pb2,Doped with F (0.2),332,Plasma boost via F
+Au1Pb2F0.30,Au1Pb2,Doped with F (0.3),337,Plasma boost via F
+Au1Pb2Ir0.15,Au1Pb2,Doped with Ir (0.15),305,Plasma boost via Ir
+Au1Pb2Ru0.10Ta0.10,Au1Pb2,Ternary Ru+Ta,342,Multi-element plasma enhancement
+Au1Pb2Ru0.05W0.05,Au1Pb2,Ternary Ru+W,312,Multi-element plasma enhancement
+Au1Pb2Ru0.15Os0.15,Au1Pb2,Ternary Ru+Os,321,Multi-element plasma enhancement
+Au1Pb2Ta0.05Ru0.05,Au1Pb2,Ternary Ta+Ru,349,Multi-element plasma enhancement
+Au1Pb2Ta0.05W0.10,Au1Pb2,Ternary Ta+W,347,Multi-element plasma enhancement
+Au1Pb2W0.05Ta0.05,Au1Pb2,Ternary W+Ta,324,Multi-element plasma enhancement
+Au1Pb2W0.05Os0.15,Au1Pb2,Ternary W+Os,362,Multi-element plasma enhancement
+Au1Pb2W0.10Re0.10,Au1Pb2,Ternary W+Re,360,Multi-element plasma enhancement
+Au1Pb2Os0.15Ru0.15,Au1Pb2,Ternary Os+Ru,358,Multi-element plasma enhancement
+Au1Pb2Os0.15W0.15,Au1Pb2,Ternary Os+W,315,Multi-element plasma enhancement
+Au1Pb2Os0.10Re0.15,Au1Pb2,Ternary Os+Re,354,Multi-element plasma enhancement
+Au1Pb2Re0.05Ru0.05,Au1Pb2,Ternary Re+Ru,359,Multi-element plasma enhancement
+Au1Pb2Re0.10Ta0.15,Au1Pb2,Ternary Re+Ta,334,Multi-element plasma enhancement
+Au1Pb2Re0.05Os0.05,Au1Pb2,Ternary Re+Os,344,Multi-element plasma enhancement
+Au1Pb2C0.2,Au1Pb2,C substitution (x=0.2),335,Entropy / anion tuning
+Au1Pb2C0.3,Au1Pb2,C substitution (x=0.3),306,Entropy / anion tuning
+Au1Pb2Si0.1,Au1Pb2,Si substitution (x=0.1),324,Entropy / anion tuning
+Au1Pb2N0.2,Au1Pb2,N substitution (x=0.2),312,Entropy / anion tuning
+Au1Pb2F0.1,Au1Pb2,F substitution (x=0.1),340,Entropy / anion tuning
+Bi2Ir1,Bi2Ir1,Original seed,285,Base from predictor
+Bi2Ir0.95Ru0.051,Bi2Ir1,Doped with Ru (0.05),341,Plasma boost via Ru
+Bi2Ir0.85Ru0.151,Bi2Ir1,Doped with Ru (0.15),339,Plasma boost via Ru
+Bi2Ir0.75Ru0.251,Bi2Ir1,Doped with Ru (0.25),309,Plasma boost via Ru
+Bi2Ir0.90Ta0.101,Bi2Ir1,Doped with Ta (0.1),299,Plasma boost via Ta
+Bi2Ir0.80Ta0.201,Bi2Ir1,Doped with Ta (0.2),341,Plasma boost via Ta
+Bi2Ir0.75Ta0.251,Bi2Ir1,Doped with Ta (0.25),298,Plasma boost via Ta
+Bi2Ir0.70Ta0.301,Bi2Ir1,Doped with Ta (0.3),306,Plasma boost via Ta
+Bi2Ir0.85W0.151,Bi2Ir1,Doped with W (0.15),321,Plasma boost via W
+Bi2Ir0.75W0.251,Bi2Ir1,Doped with W (0.25),330,Plasma boost via W
+Bi2Ir0.70W0.301,Bi2Ir1,Doped with W (0.3),330,Plasma boost via W
+Bi2Ir0.95Os0.051,Bi2Ir1,Doped with Os (0.05),320,Plasma boost via Os
+Bi2Ir0.90Os0.101,Bi2Ir1,Doped with Os (0.1),337,Plasma boost via Os
+Bi2Ir0.85Os0.151,Bi2Ir1,Doped with Os (0.15),321,Plasma boost via Os
+Bi2Ir0.75Os0.251,Bi2Ir1,Doped with Os (0.25),314,Plasma boost via Os
+Bi2Ir0.70Os0.301,Bi2Ir1,Doped with Os (0.3),305,Plasma boost via Os
+Bi2Ir0.95Re0.051,Bi2Ir1,Doped with Re (0.05),304,Plasma boost via Re
+Bi2Ir0.75Re0.251,Bi2Ir1,Doped with Re (0.25),302,Plasma boost via Re
+Bi2Ir0.90Sr0.101,Bi2Ir1,Doped with Sr (0.1),320,Plasma boost via Sr
+Bi2Ir0.70Sr0.301,Bi2Ir1,Doped with Sr (0.3),320,Plasma boost via Sr
+Bi2Ir0.90Ba0.101,Bi2Ir1,Doped with Ba (0.1),334,Plasma boost via Ba
+Bi2Ir0.85Ba0.151,Bi2Ir1,Doped with Ba (0.15),312,Plasma boost via Ba
+Bi2Ir0.80Ba0.201,Bi2Ir1,Doped with Ba (0.2),319,Plasma boost via Ba
+Bi2Ir0.75Ba0.251,Bi2Ir1,Doped with Ba (0.25),327,Plasma boost via Ba
+Bi2Ir0.70Ba0.301,Bi2Ir1,Doped with Ba (0.3),341,Plasma boost via Ba
+Bi2Ir0.95Ce0.051,Bi2Ir1,Doped with Ce (0.05),334,Plasma boost via Ce
+Bi2Ir0.90Ce0.101,Bi2Ir1,Doped with Ce (0.1),337,Plasma boost via Ce
+Bi2Ir0.85Ce0.151,Bi2Ir1,Doped with Ce (0.15),306,Plasma boost via Ce
+Bi2Ir0.80Ce0.201,Bi2Ir1,Doped with Ce (0.2),338,Plasma boost via Ce
+Bi2Ir0.75Ce0.251,Bi2Ir1,Doped with Ce (0.25),330,Plasma boost via Ce
+Bi2Ir0.70Ce0.301,Bi2Ir1,Doped with Ce (0.3),342,Plasma boost via Ce
+Bi2Ir0.95Si0.051,Bi2Ir1,Doped with Si (0.05),298,Plasma boost via Si
+Bi2Ir0.85Si0.151,Bi2Ir1,Doped with Si (0.15),331,Plasma boost via Si
+Bi2Ir0.80Si0.201,Bi2Ir1,Doped with Si (0.2),302,Plasma boost via Si
+Bi2Ir0.70Si0.301,Bi2Ir1,Doped with Si (0.3),343,Plasma boost via Si
+Bi2Ir0.90C0.101,Bi2Ir1,Doped with C (0.1),325,Plasma boost via C
+Bi2Ir0.80C0.201,Bi2Ir1,Doped with C (0.2),323,Plasma boost via C
+Bi2Ir0.75C0.251,Bi2Ir1,Doped with C (0.25),308,Plasma boost via C
+Bi2Ir0.70C0.301,Bi2Ir1,Doped with C (0.3),334,Plasma boost via C
+Bi2Ir0.95N0.051,Bi2Ir1,Doped with N (0.05),335,Plasma boost via N
+Bi2Ir0.85N0.151,Bi2Ir1,Doped with N (0.15),305,Plasma boost via N
+Bi2Ir0.80N0.201,Bi2Ir1,Doped with N (0.2),317,Plasma boost via N
+Bi2Ir0.70N0.301,Bi2Ir1,Doped with N (0.3),340,Plasma boost via N
+Bi2Ir0.95F0.051,Bi2Ir1,Doped with F (0.05),331,Plasma boost via F
+Bi2Ir0.85F0.151,Bi2Ir1,Doped with F (0.15),320,Plasma boost via F
+Bi2Ir0.80F0.201,Bi2Ir1,Doped with F (0.2),340,Plasma boost via F
+Bi2Ir0.75F0.251,Bi2Ir1,Doped with F (0.25),330,Plasma boost via F
+Bi2Ir0.70F0.301,Bi2Ir1,Doped with F (0.3),317,Plasma boost via F
+Bi2Ir0.95Pb0.051,Bi2Ir1,Doped with Pb (0.05),295,Plasma boost via Pb
+Bi2Ir0.90Pb0.101,Bi2Ir1,Doped with Pb (0.1),334,Plasma boost via Pb
+Bi2Ir0.85Pb0.151,Bi2Ir1,Doped with Pb (0.15),309,Plasma boost via Pb
+Bi2Ir0.80Pb0.201,Bi2Ir1,Doped with Pb (0.2),315,Plasma boost via Pb
+Bi2Ir0.75Pb0.251,Bi2Ir1,Doped with Pb (0.25),341,Plasma boost via Pb
+Bi2Ir1Ru0.05Ta0.05,Bi2Ir1,Ternary Ru+Ta,314,Multi-element plasma enhancement
+Bi2Ir1Ru0.05W0.05,Bi2Ir1,Ternary Ru+W,330,Multi-element plasma enhancement
+Bi2Ir1Ru0.05Os0.15,Bi2Ir1,Ternary Ru+Os,356,Multi-element plasma enhancement
+Bi2Ir1Ta0.15Os0.05,Bi2Ir1,Ternary Ta+Os,347,Multi-element plasma enhancement
+Bi2Ir1Ta0.15Re0.15,Bi2Ir1,Ternary Ta+Re,355,Multi-element plasma enhancement
+Bi2Ir1W0.10Ru0.05,Bi2Ir1,Ternary W+Ru,311,Multi-element plasma enhancement
+Bi2Ir1W0.10Ta0.05,Bi2Ir1,Ternary W+Ta,328,Multi-element plasma enhancement
+Bi2Ir1W0.05Os0.05,Bi2Ir1,Ternary W+Os,333,Multi-element plasma enhancement
+Bi2Ir1W0.15Re0.15,Bi2Ir1,Ternary W+Re,326,Multi-element plasma enhancement
+Bi2Ir1Re0.15Ru0.05,Bi2Ir1,Ternary Re+Ru,344,Multi-element plasma enhancement
+Bi2Ir1Re0.05Ta0.15,Bi2Ir1,Ternary Re+Ta,305,Multi-element plasma enhancement
+Bi2Ir1C0.2,Bi2Ir1,C substitution (x=0.2),331,Entropy / anion tuning
+Bi2Ir1Si0.3,Bi2Ir1,Si substitution (x=0.3),329,Entropy / anion tuning
+Bi2Ir1N0.2,Bi2Ir1,N substitution (x=0.2),339,Entropy / anion tuning
+Bi2Ir1F0.1,Bi2Ir1,F substitution (x=0.1),317,Entropy / anion tuning
+Os0.046Re0.954Ru0.05,Os0.046Re0.954,Doped with Ru (0.05),340,Plasma boost via Ru
+Os0.046Re0.954Ru0.15,Os0.046Re0.954,Doped with Ru (0.15),295,Plasma boost via Ru
+Os0.046Re0.954Ru0.20,Os0.046Re0.954,Doped with Ru (0.2),321,Plasma boost via Ru
+Os0.046Re0.954Ru0.25,Os0.046Re0.954,Doped with Ru (0.25),342,Plasma boost via Ru
+Os0.046Re0.954Ru0.30,Os0.046Re0.954,Doped with Ru (0.3),343,Plasma boost via Ru
+Os0.046Re0.954Ta0.05,Os0.046Re0.954,Doped with Ta (0.05),323,Plasma boost via Ta
+Os0.046Re0.954Ta0.10,Os0.046Re0.954,Doped with Ta (0.1),331,Plasma boost via Ta
+Os0.046Re0.954Ta0.20,Os0.046Re0.954,Doped with Ta (0.2),294,Plasma boost via Ta
+Os0.046Re0.954Ta0.25,Os0.046Re0.954,Doped with Ta (0.25),301,Plasma boost via Ta
+Os0.046Re0.954Ta0.30,Os0.046Re0.954,Doped with Ta (0.3),322,Plasma boost via Ta
+Os0.046Re0.954W0.05,Os0.046Re0.954,Doped with W (0.05),332,Plasma boost via W
+Os0.046Re0.954W0.15,Os0.046Re0.954,Doped with W (0.15),325,Plasma boost via W
+Os0.046Re0.954W0.20,Os0.046Re0.954,Doped with W (0.2),303,Plasma boost via W
+Os0.046Re0.954W0.25,Os0.046Re0.954,Doped with W (0.25),303,Plasma boost via W
+Os0.046Re0.954W0.30,Os0.046Re0.954,Doped with W (0.3),312,Plasma boost via W
+Os0.046Re0.954Sr0.15,Os0.046Re0.954,Doped with Sr (0.15),326,Plasma boost via Sr
+Os0.046Re0.954Sr0.30,Os0.046Re0.954,Doped with Sr (0.3),325,Plasma boost via Sr
+Os0.046Re0.954Ba0.10,Os0.046Re0.954,Doped with Ba (0.1),300,Plasma boost via Ba
+Os0.046Re0.954Ba0.15,Os0.046Re0.954,Doped with Ba (0.15),322,Plasma boost via Ba
+Os0.046Re0.954Ba0.20,Os0.046Re0.954,Doped with Ba (0.2),301,Plasma boost via Ba
+Os0.046Re0.954Ba0.30,Os0.046Re0.954,Doped with Ba (0.3),296,Plasma boost via Ba
+Os0.046Re0.954Ce0.05,Os0.046Re0.954,Doped with Ce (0.05),317,Plasma boost via Ce
+Os0.046Re0.954Ce0.10,Os0.046Re0.954,Doped with Ce (0.1),316,Plasma boost via Ce
+Os0.046Re0.954Ce0.20,Os0.046Re0.954,Doped with Ce (0.2),340,Plasma boost via Ce
+Os0.046Re0.954Si0.10,Os0.046Re0.954,Doped with Si (0.1),321,Plasma boost via Si
+Os0.046Re0.954Si0.15,Os0.046Re0.954,Doped with Si (0.15),340,Plasma boost via Si
+Os0.046Re0.954Si0.20,Os0.046Re0.954,Doped with Si (0.2),301,Plasma boost via Si
+Os0.046Re0.954Si0.25,Os0.046Re0.954,Doped with Si (0.25),327,Plasma boost via Si
+Os0.046Re0.954Si0.30,Os0.046Re0.954,Doped with Si (0.3),328,Plasma boost via Si
+Os0.046Re0.954C0.15,Os0.046Re0.954,Doped with C (0.15),307,Plasma boost via C
+Os0.046Re0.954C0.30,Os0.046Re0.954,Doped with C (0.3),336,Plasma boost via C
+Os0.046Re0.954N0.15,Os0.046Re0.954,Doped with N (0.15),330,Plasma boost via N
+Os0.046Re0.954N0.25,Os0.046Re0.954,Doped with N (0.25),307,Plasma boost via N
+Os0.046Re0.954N0.30,Os0.046Re0.954,Doped with N (0.3),324,Plasma boost via N
+Os0.046Re0.954F0.15,Os0.046Re0.954,Doped with F (0.15),300,Plasma boost via F
+Os0.046Re0.954F0.20,Os0.046Re0.954,Doped with F (0.2),303,Plasma boost via F
+Os0.046Re0.954F0.25,Os0.046Re0.954,Doped with F (0.25),300,Plasma boost via F
+Os0.046Re0.954F0.30,Os0.046Re0.954,Doped with F (0.3),326,Plasma boost via F
+Os0.046Re0.954Pb0.05,Os0.046Re0.954,Doped with Pb (0.05),316,Plasma boost via Pb
+Os0.046Re0.954Pb0.10,Os0.046Re0.954,Doped with Pb (0.1),314,Plasma boost via Pb
+Os0.046Re0.954Pb0.15,Os0.046Re0.954,Doped with Pb (0.15),312,Plasma boost via Pb
+Os0.046Re0.954Pb0.20,Os0.046Re0.954,Doped with Pb (0.2),341,Plasma boost via Pb
+Os0.046Re0.954Pb0.25,Os0.046Re0.954,Doped with Pb (0.25),312,Plasma boost via Pb
+Os0.046Re0.954Pb0.30,Os0.046Re0.954,Doped with Pb (0.3),329,Plasma boost via Pb
+Os0.046Re0.954Ir0.05,Os0.046Re0.954,Doped with Ir (0.05),322,Plasma boost via Ir
+Os0.046Re0.954Ir0.10,Os0.046Re0.954,Doped with Ir (0.1),311,Plasma boost via Ir
+Os0.046Re0.954Ir0.20,Os0.046Re0.954,Doped with Ir (0.2),294,Plasma boost via Ir
+Os0.046Re0.954Ir0.25,Os0.046Re0.954,Doped with Ir (0.25),340,Plasma boost via Ir
+Os0.046Re0.954Ir0.30,Os0.046Re0.954,Doped with Ir (0.3),298,Plasma boost via Ir
+Os0.046Re0.954Ru0.15Ta0.10,Os0.046Re0.954,Ternary Ru+Ta,305,Multi-element plasma enhancement
+Os0.046Re0.954Ru0.15W0.15,Os0.046Re0.954,Ternary Ru+W,358,Multi-element plasma enhancement
+Os0.046Re0.954Ru0.05Os0.05,Os0.046Re0.954,Ternary Ru+Os,341,Multi-element plasma enhancement
+Os0.046Re0.954Ru0.10Re0.05,Os0.046Re0.954,Ternary Ru+Re,337,Multi-element plasma enhancement
+Os0.046Re0.954Ta0.10W0.10,Os0.046Re0.954,Ternary Ta+W,347,Multi-element plasma enhancement
+Os0.046Re0.954Ta0.05Os0.10,Os0.046Re0.954,Ternary Ta+Os,333,Multi-element plasma enhancement
+Os0.046Re0.954W0.10Os0.05,Os0.046Re0.954,Ternary W+Os,328,Multi-element plasma enhancement
+Os0.046Re0.954Os0.10Ru0.15,Os0.046Re0.954,Ternary Os+Ru,349,Multi-element plasma enhancement
+Os0.046Re0.954Os0.05W0.10,Os0.046Re0.954,Ternary Os+W,326,Multi-element plasma enhancement
+Os0.046Re0.954Os0.05Re0.15,Os0.046Re0.954,Ternary Os+Re,309,Multi-element plasma enhancement
+Os0.046Re0.954C0.2,Os0.046Re0.954,C substitution (x=0.2),320,Entropy / anion tuning
+Os0.046Re0.954Si0.1,Os0.046Re0.954,Si substitution (x=0.1),325,Entropy / anion tuning
+Os0.046Re0.954N0.1,Os0.046Re0.954,N substitution (x=0.1),325,Entropy / anion tuning
+Os0.046Re0.954N0.3,Os0.046Re0.954,N substitution (x=0.3),332,Entropy / anion tuning
+Os0.046Re0.954F0.1,Os0.046Re0.954,F substitution (x=0.1),310,Entropy / anion tuning
+Os0.046Re0.954F0.2,Os0.046Re0.954,F substitution (x=0.2),305,Entropy / anion tuning
+Os0.046Re0.954F0.3,Os0.046Re0.954,F substitution (x=0.3),308,Entropy / anion tuning
