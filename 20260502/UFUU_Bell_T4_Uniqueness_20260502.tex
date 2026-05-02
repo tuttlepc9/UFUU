@@ -1,0 +1,275 @@
+% ============================================================
+% UFUU Bell Paper — T4 Uniqueness Supplement
+% File: UFUU_Bell_T4_Uniqueness_20260502.tex
+% Author: W. Jason Tuttle (ORCID: 0009-0003-3830-0551)
+% Date: 2026-05-02
+% Status: Verified computationally (Python/NumPy/SciPy, 2026-05-02)
+%
+% Purpose: Standalone LaTeX for Section 3.3 of the Bell paper.
+%   Proves that Tuttle's Triad T1-T3, augmented by the minimum
+%   circuit depth constraint T4, uniquely selects the CNOT
+%   Weyl class (up to local unitaries) as the two-qubit
+%   realization of the Recursive Binary Fold F.
+%
+% To include in the Bell paper:
+%   \input{UFUU_Bell_T4_Uniqueness_20260502}
+%   or copy Section 3.3 verbatim into the main .tex file.
+%
+% Correction note (2026-05-02):
+%   Earlier draft incorrectly claimed ZZ at pi/4 has zero
+%   concurrence. ZZ IS a perfect entangler but requires circuit
+%   depth 3 from |00> (two single-qubit prep gates + ZZ).
+%   T4 is therefore correctly stated as minimum CIRCUIT DEPTH
+%   from product input |00>, not minimum interaction rank alone.
+%   The uniqueness result is unchanged; only the proof path differs.
+% ============================================================
+
+% ── If compiling standalone, uncomment the block below ──────
+% \documentclass[12pt]{article}
+% \usepackage{amsmath,amssymb,amsthm}
+% \usepackage{physics}
+% \usepackage{braket}
+% \usepackage{hyperref}
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}{Lemma}
+% \newtheorem{definition}{Definition}
+% \newtheorem{corollary}{Corollary}
+% \begin{document}
+% ── End standalone preamble ─────────────────────────────────
+
+\subsection{Uniqueness of the Two-Qubit Realization (T4)}
+\label{sec:T4_uniqueness}
+
+Section~\ref{sec:fold_circuit} identified
+$F_{\mathrm{circuit}} = \mathrm{CNOT} \cdot (H \otimes I)$
+as the minimal unitary realization of the abstract fold operation $F$
+in the two-qubit Hilbert space $\mathcal{H} = \mathbb{C}^2 \otimes \mathbb{C}^2$.
+We now prove that this realization is \emph{unique} by introducing a
+fourth structural constraint (T4) and showing that T1--T4 jointly select
+the CNOT Weyl class as the only admissible realization, up to local unitaries.
+
+% ── Weyl Chamber Background ──────────────────────────────────
+\subsubsection*{Background: The Weyl Chamber}
+
+Two-qubit gates in $SU(4)$ are classified up to local (single-qubit)
+unitaries by their Weyl decomposition~\cite{Zhang2003}:
+\begin{equation}
+    U = (A_1 \otimes A_2)\,
+        \exp\!\bigl[i(c_1\,XX + c_2\,YY + c_3\,ZZ)\bigr]\,
+        (A_3 \otimes A_4),
+    \label{eq:weyl_decomp}
+\end{equation}
+where $A_k \in SU(2)$, $XX = \sigma_x\otimes\sigma_x$,
+$YY = \sigma_y\otimes\sigma_y$, $ZZ = \sigma_z\otimes\sigma_z$,
+and $(c_1,c_2,c_3) \in [0,\pi/4]^3$ with $c_1 \geq c_2 \geq c_3 \geq 0$
+are the Weyl coordinates. The interaction rank $\mathrm{rank}(U) =
+\#\{k: c_k \neq 0\}$ counts the number of active interaction axes.
+Key classes and their coordinates are given in Table~\ref{tab:weyl}.
+
+\begin{table}[h]
+\centering
+\caption{Weyl coordinates and interaction rank for representative two-qubit gates.}
+\label{tab:weyl}
+\begin{tabular}{lcccc}
+\hline
+Gate class       & $c_1$    & $c_2$    & $c_3$    & Rank \\
+\hline
+Identity         & $0$      & $0$      & $0$      & 0 \\
+CNOT             & $\pi/4$  & $0$      & $0$      & 1 \\
+$\sqrt{i\mathrm{SWAP}}$ & $\pi/8$ & $\pi/8$ & $0$ & 2 \\
+$i\mathrm{SWAP}$ & $\pi/4$  & $\pi/4$  & $0$      & 2 \\
+B gate           & $\pi/4$  & $\pi/8$  & $0$      & 2 \\
+$\sqrt{\mathrm{SWAP}}$ & $\pi/8$ & $\pi/8$ & $\pi/8$ & 3 \\
+SWAP             & $\pi/4$  & $\pi/4$  & $\pi/4$  & 3 \\
+\hline
+\end{tabular}
+\end{table}
+
+% ── T4 Definition ────────────────────────────────────────────
+\subsubsection*{The Fourth Constraint: Minimum Circuit Depth from Product Input (T4)}
+
+\begin{definition}[T4 --- Minimum Circuit Depth]
+\label{def:T4}
+\textbf{(T4) Minimum circuit depth:}
+The fold operation $F$ selects, from among all unitary realizations
+satisfying T1--T3 and capable of producing maximal entanglement from
+the unresolved binary product state $\ket{00}$, the realization requiring
+the fewest elementary gates (single-qubit unitaries plus two-qubit
+entangling gates) to achieve concurrence $\mathcal{C} = 1$ starting
+from $\ket{00}$.
+\end{definition}
+
+The physical motivation is immediate. The recursive binary fold
+$U = F(U,U)$ begins each step with two independent, unresolved binary
+distinctions — represented as the product state $\ket{00}$. The
+information-maximization primitive requires that maximal entanglement
+be generated with minimum additional structure: the simplest circuit
+that accomplishes this is the one the fold selects. T4 makes this
+minimality requirement precise and measurable.
+
+% ── Main Theorem ─────────────────────────────────────────────
+\subsubsection*{Uniqueness Theorem}
+
+\begin{theorem}[T1--T4 Uniquely Select the CNOT Class]
+\label{thm:CNOT_uniqueness}
+Among all two-qubit unitary gates, T1 (non-commutativity),
+T2 (entanglement generation), T3 (partial irreversibility at
+the recursive level), and T4 (minimum circuit depth from $\ket{00}$)
+jointly select the CNOT Weyl class --- gates with Weyl coordinates
+$(\pi/4, 0, 0)$ --- as the unique admissible realization of $F$,
+up to local unitaries.
+\end{theorem}
+
+\begin{proof}
+We establish the minimum achievable circuit depth (T4), then show
+only the CNOT class achieves it while satisfying T1--T3.
+
+\medskip
+\noindent\textbf{Step 1: Lower bound on circuit depth.}
+Any circuit producing maximal entanglement from $\ket{00}$ must
+include at least one two-qubit entangling gate (since product
+unitaries preserve the product structure of $\ket{00}$, violating T2)
+and at least one single-qubit gate to create the superposition that
+the entangling gate then correlates. The minimum circuit depth from
+$\ket{00}$ to a maximally entangled state is therefore $d^* = 2$.
+
+\medskip
+\noindent\textbf{Step 2: Which rank-1 gates achieve $d^* = 2$ from $\ket{00}$?}
+A depth-2 circuit from $\ket{00}$ has the form
+$(A \otimes I) \cdot E$ or $(I \otimes A) \cdot E$ where $A \in SU(2)$
+is a single-qubit gate and $E$ is a two-qubit entangling gate.
+We require $\mathcal{C}(E\cdot(A\otimes I)\ket{00}) = 1$.
+
+For the three single-axis interaction classes at $c = \pi/4$:
+
+\begin{itemize}
+
+\item \textbf{$XX$ axis}: $\exp(i\,\frac{\pi}{4}\,XX)$ with $A = H$
+  (Hadamard) gives $\mathrm{CNOT}\cdot(H\otimes I)\ket{00} = \ket{\Phi^+}$,
+  concurrence $= 1$. Depth 2 achieved. (Numerically verified:
+  $\mathcal{C} = 1.000000$.)
+
+\item \textbf{$YY$ axis}: $\exp(i\,\frac{\pi}{4}\,YY)$ is locally
+  equivalent to $\exp(i\,\frac{\pi}{4}\,XX)$ via single-qubit $Z$
+  rotations (same Weyl class $(\pi/4,0,0)$). Achieves depth 2
+  from $\ket{00}$ with appropriate $A$.
+
+\item \textbf{$ZZ$ axis}: $\exp(i\,\frac{\pi}{4}\,ZZ)$ is diagonal
+  in the computational basis: it applies phases to $\ket{00}$,
+  $\ket{01}$, $\ket{10}$, $\ket{11}$ but does not mix them.
+  Consequently $\exp(i\,\frac{\pi}{4}\,ZZ)\cdot(A\otimes I)\ket{00}$
+  has concurrence $\mathcal{C} = 0$ for any single-qubit $A$,
+  since $A\otimes I$ maps $\ket{00}$ to a state in the
+  $\{\ket{00}, \ket{10}\}$ subspace, and $ZZ$ cannot mix
+  the two-qubit amplitudes. Producing $\mathcal{C}=1$
+  requires prior superposition on \emph{both} qubits,
+  raising the minimum depth to $d = 3$: $(H\otimes H) \cdot ZZ$.
+  (Numerically verified: $ZZ\cdot(A\otimes I)\ket{00}$ achieves
+  $\mathcal{C}=0$ for all single-qubit $A$; $(H\otimes H)\cdot ZZ$
+  achieves $\mathcal{C} \approx 1.000$ at depth 3.)
+
+\end{itemize}
+
+\medskip
+\noindent\textbf{Step 3: Rank $\geq 2$ gates.}
+All rank-$\geq 2$ gates with $c_1 = \pi/4$ are perfect entanglers
+but require at least two non-trivial single-qubit preparation gates
+to achieve $\mathcal{C}=1$ from $\ket{00}$, giving depth $\geq 3$.
+Rank-$\geq 2$ gates with $c_1 < \pi/4$ (e.g., $\sqrt{i\mathrm{SWAP}}$)
+require two applications to achieve maximal entanglement, giving
+depth $\geq 4$. Both cases are eliminated by T4.
+
+\medskip
+\noindent\textbf{Step 4: T1 compliance.}
+The $XX$/$YY$ class (CNOT Weyl class) is directional:
+$\mathrm{CNOT}(a, b) \neq \mathrm{CNOT}(b, a)$ (control and target
+are not interchangeable). Numerically: $\mathrm{CNOT}\ket{01} = \ket{01}$
+while $\mathrm{CNOT}_{\mathrm{rev}}\ket{01} = \ket{11}$. T1 satisfied.
+
+\medskip
+\noindent\textbf{Step 5: T3 compliance.}
+Individual CNOT applications are unitary (reversible). T3, however,
+applies to the \emph{accumulated recursion}: after the fold reaches
+termination depth $D$, the fixed-point state $\ket{\Psi_0}$ encodes
+an irreversible classical record (thermodynamic entropy production at
+UV scale). The CNOT class generates this irreversibility at termination
+depth consistently with T3; no additional constraint from T3 eliminates
+the CNOT class.
+
+\medskip
+\noindent\textbf{Conclusion.}
+Only the $XX$/$YY$ Weyl class at $(\pi/4, 0, 0)$ achieves
+minimum depth $d^* = 2$ from $\ket{00}$ while satisfying T1--T3.
+Since $XX$ and $YY$ at $c_1 = \pi/4$ are locally equivalent
+(same Makhlin invariants, same Weyl class), there is exactly one
+equivalence class satisfying all four constraints: the CNOT class.
+\qed
+\end{proof}
+
+% ── Corollary ─────────────────────────────────────────────────
+\begin{corollary}[Canonical Form]
+\label{cor:H_CNOT}
+The canonical minimum-depth realization of the CNOT class from
+$\ket{00}$ is $F_{\mathrm{circuit}} = \mathrm{CNOT} \cdot (H \otimes I)$:
+\begin{equation}
+    F_{\mathrm{circuit}}\ket{00}
+    = \mathrm{CNOT}\cdot\frac{\ket{0}+\ket{1}}{\sqrt{2}}\otimes\ket{0}
+    = \frac{\ket{00}+\ket{11}}{\sqrt{2}}
+    = \ket{\Phi^+}.
+    \label{eq:canonical_form}
+\end{equation}
+The Hadamard $H$ is the unique single-qubit gate mapping $\ket{0}$
+to the uniform superposition $\ket{+}$; combined with CNOT, it
+achieves $\mathcal{C} = 1$ in exactly 2 gates.
+\end{corollary}
+
+% ── Physical interpretation ────────────────────────────────────
+\subsubsection*{Physical Interpretation}
+
+Theorem~\ref{thm:CNOT_uniqueness} sharpens the claim of
+Section~\ref{sec:bell_derivation}. The Bell state $\ket{\Phi^+}$
+and the CHSH violation $\langle\mathrm{CHSH}\rangle = 2\sqrt{2}$
+are not artifacts of a convenient circuit choice. The four constraints
+T1--T4 uniquely force the CNOT Weyl class; any other realization
+either fails to generate entanglement (T2), is symmetric (T1), or
+requires more gates than the fold's information-maximization primitive
+would select (T4). The circuit $F_{\mathrm{circuit}}$ is not the
+minimal realization \emph{we chose}: it is the minimal realization
+\emph{that exists}, given the fold's structural requirements.
+
+% ── Computational verification note ───────────────────────────
+\subsubsection*{Computational Verification}
+
+All numerical claims were verified using Python (NumPy, SciPy) on
+2026-05-02. Verification script:
+\texttt{UFUU\_Bell\_T4\_verification\_20260502.py} (this folder).
+Key results:
+\begin{itemize}
+    \item $\mathcal{C}(F_{\mathrm{circuit}}\ket{00}) = 1.000000$.
+    \item $ZZ\cdot(A\otimes I)\ket{00}$: $\mathcal{C} = 0$ for all $A \in SU(2)$.
+    \item $(H\otimes H)\cdot ZZ\ket{00}$: $\mathcal{C} \approx 1.000$ (depth 3).
+    \item T1: $\mathrm{CNOT}\ket{01} \neq \mathrm{CNOT}_{\mathrm{rev}}\ket{01}$.
+    \item $XX$ and $YY$ at $\pi/4$: identical Makhlin invariants (same Weyl class).
+\end{itemize}
+
+% ── References ────────────────────────────────────────────────
+% Add to main bibliography if not already present:
+%
+% \bibitem{Zhang2003}
+%   Zhang J, Vala J, Sastry S, Whaley K B (2003).
+%   Geometric theory of nonlocal two-qubit operations.
+%   \textit{Physical Review A} \textbf{67}, 042313.
+%
+% \bibitem{Childs2003}
+%   Childs A M, Haselgrove H L, Nielsen M A (2003).
+%   Lower bounds on the complexity of simulating quantum gates.
+%   \textit{Physical Review A} \textbf{68}, 052311.
+%
+% \bibitem{Makhlin2002}
+%   Makhlin Y (2002).
+%   Nonlocal properties of two-qubit gates and mixed states,
+%   and the optimization of quantum computations.
+%   \textit{Quantum Information Processing} \textbf{1}, 243--252.
+
+% ── End standalone ─────────────────────────────────────────────
+% \end{document}
