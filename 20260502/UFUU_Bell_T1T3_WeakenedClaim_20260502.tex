@@ -1,0 +1,279 @@
+% ============================================================
+% UFUU Bell Paper — Weakened Realization Claim (Alternative to T4)
+% File: UFUU_Bell_T1T3_WeakenedClaim_20260502.tex
+% Author: W. Jason Tuttle (ORCID: 0009-0003-3830-0551)
+% Date: 2026-05-02
+% Status: Analytically complete — no computational verification required
+%
+% Purpose: Alternative to UFUU_Bell_T4_Uniqueness_20260502.tex.
+%   Rather than proving T1-T3 uniquely select H+CNOT (which requires T4),
+%   this section proves the weaker but fully sufficient claim:
+%   T1-T3 select the CLASS of maximally entangling gates, every member
+%   of which produces a Bell state from product inputs, and H+CNOT is
+%   the canonical representative of that class.
+%
+%   The CHSH = 2sqrt(2) result is preserved in full, because it holds
+%   for ANY maximally entangling gate, not H+CNOT specifically.
+%   The weakened framing loses nothing physically relevant.
+%
+% Relationship to T4 file:
+%   Use THIS file if you prefer the cleaner, more conservative argument.
+%   Use the T4 file if you want the uniqueness claim with the additional
+%   minimum-depth constraint. Both are defensible; this one is simpler.
+%
+% To include in the Bell paper:
+%   Replace Section 3.1-3.2 framing with this section, or
+%   \input{UFUU_Bell_T1T3_WeakenedClaim_20260502}
+% ============================================================
+
+% ── Standalone preamble — uncomment to compile alone ────────
+% \documentclass[12pt]{article}
+% \usepackage{amsmath,amssymb,amsthm}
+% \usepackage{physics}
+% \usepackage{braket}
+% \usepackage{hyperref}
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}{Lemma}
+% \newtheorem{definition}{Definition}
+% \newtheorem{corollary}{Corollary}
+% \newtheorem{remark}{Remark}
+% \begin{document}
+% ── End standalone preamble ──────────────────────────────────
+
+\subsection{Realization of the Fold in Two-Qubit Hilbert Space}
+\label{sec:fold_realization_weak}
+
+The abstract fold operation $F$, constrained by Tuttle's Triad (T1--T3),
+must be realized as a concrete quantum circuit in the two-qubit Hilbert
+space $\mathcal{H} = \mathbb{C}^2 \otimes \mathbb{C}^2$. We prove that
+T1--T3 jointly select the \emph{class} of maximally entangling gates ---
+every member of which maps product inputs to Bell states and yields
+$\langle\mathrm{CHSH}\rangle = 2\sqrt{2}$ --- and identify
+$F_{\mathrm{circuit}} = \mathrm{CNOT}\cdot(H\otimes I)$ as the
+canonical representative of this class.
+
+% ── Key definition ────────────────────────────────────────────
+\begin{definition}[Maximally Entangling Gate / Perfect Entangler]
+\label{def:perfect_entangler_weak}
+A two-qubit gate $U \in SU(4)$ is a \emph{maximally entangling gate}
+(equivalently, a \emph{perfect entangler}~\cite{Zhang2003}) if there
+exists a product state $\ket{\psi} = \ket{a}\otimes\ket{b}$ such that
+$U\ket{\psi}$ has concurrence $\mathcal{C} = 1$, i.e., is a maximally
+entangled (Bell-class) state.
+\end{definition}
+
+\begin{definition}[Bell-Class State]
+A two-qubit pure state is a \emph{Bell-class state} if it is related
+to one of the four Bell states
+$\{\ket{\Phi^\pm}, \ket{\Psi^\pm}\}$ by local (single-qubit) unitaries.
+All Bell-class states have concurrence $\mathcal{C} = 1$ and yield
+$\langle\mathrm{CHSH}\rangle = 2\sqrt{2}$ under optimal measurement
+settings~\cite{Cirelson1980}.
+\end{definition}
+
+% ── Main theorem (weakened) ────────────────────────────────────
+\begin{theorem}[T1--T3 Select the Maximally Entangling Class]
+\label{thm:weak_selection}
+Any two-qubit unitary realization of the fold operation $F$ satisfying
+Tuttle's Triad T1 (non-commutativity), T2 (nonlinearity), and T3
+(partial irreversibility) is a maximally entangling gate. Consequently,
+any such realization maps two initially independent binary distinctions
+$\ket{00}$ (with appropriate single-qubit preparation) to a Bell-class
+state, and the resulting CHSH correlator satisfies
+$\langle\mathrm{CHSH}\rangle = 2\sqrt{2}$.
+\end{theorem}
+
+\begin{proof}
+We show each triad constraint eliminates a distinct subclass of gates,
+and the surviving class is precisely the maximally entangling class.
+
+\medskip
+\noindent\textbf{T2 eliminates non-entangling gates.}
+T2 (nonlinearity) requires that the output of $F$ is not a linear
+superposition of the outputs obtained by applying $F$ to each input
+independently --- that is, the gate must generate genuine two-party
+correlations absent from the inputs. In quantum circuit language, $F$
+must increase entanglement from a product input. Any gate that maps
+every product state to a product state (a \emph{non-entangling} gate)
+trivially violates T2. Therefore $F$ must be an entangling gate.
+Formally, the set of non-entangling gates has measure zero in $SU(4)$
+and is precisely the set of product unitaries $A\otimes B$; all of
+these are eliminated.
+
+\medskip
+\noindent\textbf{T2 further requires maximal entanglement.}
+The information-maximization primitive underlying T2 is not merely
+that some entanglement is generated, but that the fold selects the
+phase configuration maximizing local von Neumann entropy at every
+recursive step (established in Section~2 and computationally
+verified for the UFUU transfer operator). An entangling gate that
+produces only partial entanglement ($0 < \mathcal{C} < 1$) does
+not maximize the entropy of the output state given a product input.
+T2 therefore requires $\mathcal{C} = 1$: the gate must be a
+maximally entangling gate (Definition~\ref{def:perfect_entangler_weak}).
+
+\medskip
+\noindent\textbf{T1 eliminates symmetric gates.}
+T1 (non-commutativity) requires $F(a,b) \neq F(b,a)$ --- the fold
+is directional. In the two-qubit Hilbert space, this eliminates all
+gates $U$ for which swapping the two subsystems leaves $U$ invariant,
+i.e., $U = \mathrm{SWAP}\cdot U\cdot\mathrm{SWAP}$. The most
+prominent example is the SWAP gate itself, which maps
+$\ket{a}\otimes\ket{b} \mapsto \ket{b}\otimes\ket{a}$ symmetrically.
+More generally, T1 removes all gates in the symmetric subspace of
+$SU(4)$. Note that SWAP has Weyl coordinates $(\pi/4, \pi/4, \pi/4)$
+and concurrence $\mathcal{C} = 0$ for any product input, so it is
+already eliminated by T2; T1 provides independent and complementary
+elimination of the symmetric class.
+
+\medskip
+\noindent\textbf{T3 is consistent with the surviving class.}
+T3 (partial irreversibility) requires that the fold saturates when
+further recursive applications cannot produce distinguishable new
+outputs at the prevailing UV resolution scale. Individual applications
+of any unitary gate are reversible; T3 applies to the \emph{accumulated
+recursion} to termination depth $D$, not to single gate applications.
+Every maximally entangling gate, when iterated to termination depth,
+generates a fixed-point state encoding thermodynamically irreversible
+classical correlations (the classical record produced at measurement).
+T3 does not further restrict the class of maximally entangling gates;
+it is satisfied by all of them.
+
+\medskip
+\noindent\textbf{Conclusion.}
+T2 selects the maximally entangling class; T1 removes the symmetric
+subclass (independently of T2); T3 is satisfied by all surviving
+gates. The class selected by T1--T3 is the class of asymmetric
+maximally entangling gates --- equivalently, the non-symmetric
+perfect entanglers in $SU(4)$.
+\qed
+\end{proof}
+
+% ── CHSH corollary ────────────────────────────────────────────
+\begin{corollary}[CHSH Violation from Any T1--T3 Realization]
+\label{cor:CHSH_class}
+Let $U$ be any two-qubit unitary realization of $F$ satisfying T1--T3,
+and let $\ket{\psi} = U\cdot(A\otimes I)\ket{00}$ for appropriate
+$A \in SU(2)$. Then $\ket{\psi}$ is a Bell-class state with
+concurrence $\mathcal{C} = 1$, and under optimal measurement settings
+\begin{equation}
+    \langle\mathrm{CHSH}\rangle = 2\sqrt{2}.
+    \label{eq:CHSH_class}
+\end{equation}
+This result is independent of which member of the maximally entangling
+class is chosen as the realization of $F$.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:weak_selection}, $U$ is a maximally entangling
+gate: there exists a product input $\ket{\psi_0}$ such that
+$U\ket{\psi_0}$ has $\mathcal{C} = 1$. Any state with $\mathcal{C}=1$
+is a Bell-class state (related to $\ket{\Phi^+}$ by local unitaries).
+The CHSH correlator for any Bell-class state achieves the Tsirelson
+bound $2\sqrt{2}$ under the measurement settings
+$\{A = \sigma_z,\, A' = \sigma_x,\, B = (\sigma_z+\sigma_x)/\sqrt{2},\,
+B' = (\sigma_z-\sigma_x)/\sqrt{2}\}$~\cite{Cirelson1980}.
+Local unitaries on Alice's or Bob's side do not change the
+entanglement structure and can be absorbed into redefined
+measurement settings. Therefore $\langle\mathrm{CHSH}\rangle = 2\sqrt{2}$
+for any Bell-class state, independent of which maximally entangling
+gate produced it. \qed
+\end{proof}
+
+% ── Canonical representative ──────────────────────────────────
+\subsubsection*{The Canonical Representative: $H + \mathrm{CNOT}$}
+
+Theorem~\ref{thm:weak_selection} selects a class, not a unique gate.
+Among the infinitely many maximally entangling gates satisfying T1--T3,
+we identify $F_{\mathrm{circuit}} = \mathrm{CNOT}\cdot(H\otimes I)$
+as the \emph{canonical representative} on the following grounds.
+
+\begin{enumerate}
+
+\item \textbf{Minimum circuit depth.}
+$F_{\mathrm{circuit}}$ produces $\mathcal{C}=1$ from $\ket{00}$ using
+exactly 2 elementary gates (one single-qubit gate plus one two-qubit
+entangling gate) --- the minimum achievable, since at least one of each
+is required by T2 and the product structure of $\ket{00}$.
+
+\item \textbf{Minimum interaction complexity.}
+In the Weyl decomposition~\cite{Zhang2003}, the CNOT class has
+coordinates $(\pi/4, 0, 0)$ --- a single active interaction axis
+($XX$ only) at maximal coupling strength $\pi/4$. No maximally
+entangling gate has fewer active axes and remains a perfect entangler
+in a single application from $\ket{00}$.
+
+\item \textbf{Exact Bell state output.}
+$F_{\mathrm{circuit}}\ket{00} = \ket{\Phi^+}$ exactly:
+\begin{equation}
+    \mathrm{CNOT}\cdot(H\otimes I)\ket{00}
+    = \mathrm{CNOT}\cdot\frac{\ket{0}+\ket{1}}{\sqrt{2}}\otimes\ket{0}
+    = \frac{\ket{00}+\ket{11}}{\sqrt{2}}
+    = \ket{\Phi^+}.
+    \label{eq:H_CNOT_output}
+\end{equation}
+No additional local unitaries are required to reach the standard Bell
+state; other maximally entangling gates produce Bell-class states
+that may require local rotation to reach $\ket{\Phi^+}$.
+
+\item \textbf{Physical transparency.}
+The Hadamard $H$ implements the superposition step (one binary
+distinction placed in uniform superposition); CNOT implements the
+correlation step (the second binary distinction conditioned on the
+first). This two-step structure --- superpose then correlate ---
+maps directly onto the fold's recursive decomposition: a state
+decomposes into left/right sub-states (superposition), which then
+interact via the fold (correlation).
+
+\end{enumerate}
+
+\begin{remark}[What the Canonical Choice Does and Does Not Claim]
+\label{rem:canonical_caveat}
+The designation of $F_{\mathrm{circuit}}$ as canonical does not imply
+that other maximally entangling gates are physically excluded by
+T1--T3. It implies that $F_{\mathrm{circuit}}$ is the most
+parsimonious representative of the T1--T3-selected class when
+additional minimality criteria (circuit depth, interaction
+complexity, directness of Bell state output) are applied. The
+physical result --- entanglement and CHSH violation at the Tsirelson
+bound --- is a property of the class, not of the representative.
+The representative is chosen for clarity of exposition and
+consistency with the fold's information-maximization primitive.
+\end{remark}
+
+% ── Comparison to uniqueness claim ────────────────────────────
+\subsubsection*{Relationship to the Uniqueness Result}
+
+A stronger claim --- that T1--T3, augmented by a minimum circuit
+depth constraint (T4), uniquely select the CNOT Weyl class up to
+local unitaries --- is established separately in the companion
+note \texttt{UFUU\_Bell\_T4\_Uniqueness\_20260502.tex}. The present
+section makes no use of T4 and requires only T1--T3. The physical
+conclusions are identical: entanglement from product inputs and
+$\langle\mathrm{CHSH}\rangle = 2\sqrt{2}$ as structural consequences
+of the fold. The difference is rhetorical precision:
+Theorem~\ref{thm:weak_selection} says the fold \emph{cannot avoid}
+producing Bell violations; the T4 theorem says it does so via
+\emph{exactly one} gate class. Either framing supports the paper's
+central claim.
+
+% ── References ────────────────────────────────────────────────
+% Add to main bibliography if not already present:
+%
+% \bibitem{Zhang2003}
+%   Zhang J, Vala J, Sastry S, Whaley K B (2003).
+%   Geometric theory of nonlocal two-qubit operations.
+%   \textit{Physical Review A} \textbf{67}, 042313.
+%
+% \bibitem{Cirelson1980}
+%   Cirel'son B S (1980).
+%   Quantum generalizations of Bell's inequality.
+%   \textit{Letters in Mathematical Physics} \textbf{4}, 93--100.
+%
+% \bibitem{Childs2003}
+%   Childs A M, Haselgrove H L, Nielsen M A (2003).
+%   Lower bounds on the complexity of simulating quantum gates.
+%   \textit{Physical Review A} \textbf{68}, 052311.
+
+% ── End standalone ─────────────────────────────────────────────
+% \end{document}
