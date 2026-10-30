@@ -1,0 +1,41 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.5, pytest-9.2.0, pluggy-1.7.0 -- /workspace/UFUU/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /workspace/UFUU
+configfile: pytest.ini
+collecting ... collected 11 items
+
+tests/test_one_true_answer.py::test_octave_identity_exact PASSED         [  9%]
+tests/test_one_true_answer.py::test_r_matches_documented_constant PASSED [ 18%]
+tests/test_one_true_answer.py::test_butterfly_ratio_prediction PASSED    [ 27%]
+tests/test_one_true_answer.py::test_core_equation_normalized_form PASSED [ 36%]
+tests/test_one_true_answer.py::test_symmetric_mode_gain_alignment PASSED [ 45%]
+tests/test_one_true_answer.py::test_reported_lambda_sym_constant PASSED  [ 54%]
+tests/test_one_true_answer.py::test_category_error_is_real PASSED        [ 63%]
+tests/test_one_true_answer.py::test_derivation_notebook_has_erratum PASSED [ 72%]
+tests/test_one_true_answer.py::test_brief_no_longer_marks_sympy_lambda_verified PASSED [ 81%]
+tests/test_one_true_answer.py::test_sympy_verification_script_computes_lambda_sym FAILED [ 90%]
+tests/test_one_true_answer.py::test_lambda_sym_first_principles_from_script_normalization FAILED [100%]
+
+=================================== FAILURES ===================================
+______________ test_sympy_verification_script_computes_lambda_sym ______________
+tests/test_one_true_answer.py:128: in test_sympy_verification_script_computes_lambda_sym
+    assert assigns and (prints_val or has_eigen_call), (
+E   AssertionError: fold_schrodinger_sympy_verification.py still lacks executable λ_sym computation (assignment + eigenvalue/gain path). Mentions in comments do not count. See transfer_operator.compute_lambda_sym_from_normalization.
+E   assert (None)
+__________ test_lambda_sym_first_principles_from_script_normalization __________
+tests/test_one_true_answer.py:142: in test_lambda_sym_first_principles_from_script_normalization
+    lam = compute_lambda_sym_from_normalization()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UFUU_Schrodinger/transfer_operator.py:83: in compute_lambda_sym_from_normalization
+    raise NotImplementedError(
+E   NotImplementedError: λ_sym cannot be computed from fold_schrodinger_sympy_verification.py alone: α and η are free. Supply normalized (alpha, eta) or use reported_lambda_sym(). Closing this gap is a draft-PR goal.
+
+During handling of the above exception, another exception occurred:
+tests/test_one_true_answer.py:144: in test_lambda_sym_first_principles_from_script_normalization
+    pytest.fail(str(exc))
+E   Failed: λ_sym cannot be computed from fold_schrodinger_sympy_verification.py alone: α and η are free. Supply normalized (alpha, eta) or use reported_lambda_sym(). Closing this gap is a draft-PR goal.
+=========================== short test summary info ============================
+FAILED tests/test_one_true_answer.py::test_sympy_verification_script_computes_lambda_sym
+FAILED tests/test_one_true_answer.py::test_lambda_sym_first_principles_from_script_normalization
+========================= 2 failed, 9 passed in 0.25s ==========================

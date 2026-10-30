@@ -173,3 +173,27 @@ Draft outline:
 *Status: Analytical result. Pending numerical confirmation. arXiv letter in preparation.*
 
 **Status: Open problem closed. 1.06 = 2^(1/12). No free parameters.**
+
+
+---
+
+## ERRATUM (2026-10-28, branch `research/ufuu-one-true-answer`)
+
+Step 4 previously wrote:
+
+> λ^12 ~ 1/2 (in the log-observable scaling)
+
+with λ identified as λ_sym ≈ 0.25–0.26. That identification is a **category error**.
+
+- The fluctuation contraction eigenvalue is λ_sym ≈ 0.259 (numerically reported; not computed by `fold_schrodinger_sympy_verification.py`).
+- Numerically, 0.259^12 ≈ 9.1×10^{-8} ≠ 1/2.
+- The factor that *does* satisfy μ^12 = 1/2 is **μ = 2^{-1/12} ≈ 0.943874**, which equals **1/r**, the reciprocal of the observable octave ratio.
+
+**Corrected statement of the one true answer:**
+
+The observable scaling ratio is forced by binary capacity doubling over the depth-12 octave alone:
+
+    r^{12} = 2  ⇒  r = 2^{1/12} ≈ 1.0594630943592953
+
+λ_sym is a separate Banach/transfer-operator quantity. Closing the first-principles bridge from the linearized fold (α, η normalization) to the numerical value 0.259 remains an open implementation task — see `UFUU_Schrodinger/transfer_operator.py` and `tests/test_one_true_answer.py`.
+

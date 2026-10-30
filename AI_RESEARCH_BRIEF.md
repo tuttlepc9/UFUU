@@ -1,7 +1,7 @@
 # AI_RESEARCH_BRIEF.md
 # UFUU Research Repository — Stateless Entry Point
 # Author: Jason Tuttle (tuttlepc9/UFUU)
-# Last updated: 2026-05-02
+# Last updated: 2026-10-28
 # Purpose: Enable any AI session (or new collaborator) to orient immediately,
 #          understand what is solid vs. conjectural, and identify productive next steps.
 
@@ -38,7 +38,7 @@ realized as a Hilbert-space coalgebra with binary decomposition, an information-
 maximizing symmetric eigenmode, and a depth-12 quantum-to-classical transition.
 
 This yields:
-- Dominant contraction eigenvalue: λ_sym ≈ 0.259
+- Dominant contraction eigenvalue: λ_sym ≈ 0.259  (numerically reported; not yet derived in the SymPy script)
 - Depth-12 scaling ratio: r = 2^{1/12} ≈ 1.059463  [PROVEN — see Section 3]
 - Unique fixed-point attractor: U* ≈ 1.134663       [PROVEN — Banach FPT]
 
@@ -86,7 +86,7 @@ This derivation is:
 | File / Folder | What it does | Status |
 |---|---|---|
 | `UFUU_Research_Notebook_20260430_1p06_Derivation.md` | Analytical derivation of 2^{1/12} from binary fold + info-max | **[PROVEN]** |
-| `UFUU_Schrodinger/fold_schrodinger_sympy_verification.py` | SymPy verification of transfer operator, prints λ_sym ≈ 0.259 | **[VERIFIED]** |
+| `UFUU_Schrodinger/fold_schrodinger_sympy_verification.py` | SymPy Taylor linearization + Higgs δ* check; does **not** compute λ_sym (erratum 2026-10-28) | **[PARTIAL — gap]** |
 | `UFUU_RESEARCH_JOURNAL_INDEX.md` | Master index, P1–P5 status, overall architecture map | **[DOCUMENTED]** |
 | `papers/submitted/Foundations_of_Physics_2026_04_11/` | Submitted paper (April 11 2026); not yet peer reviewed | **[SUBMITTED]** |
 | `UFUU_Overarching_Narrative_20260430.docx` | Full explanatory document tying all layers together | **[DOCUMENTED]** |
@@ -158,7 +158,9 @@ for the 2^{1/12} claim.
 6. **Unitarity / quantum interpretation.** The complex fixed point and unitarity
    behavior under the fold (P2) are still exploratory.
 
-7. **Entropy monotonicity in random baselines.** Earlier review noted that entropy
+7. **λ_sym / octave category error (flagged 2026-10-28).** The April 30 notebook briefly equated λ_sym^{12}~1/2 with λ_sym≈0.259. That is false; μ=2^{-1/12}=1/r is the consistent half-octave factor. Corrected in the 1p06 erratum. First-principles computation of λ_sym from α,η remains open.
+
+8. **Entropy monotonicity in random baselines.** Earlier review noted that entropy
    monotonicity appears in random fold baselines, which would mean it is not a
    discriminating prediction. Status of this concern: unresolved.
 
